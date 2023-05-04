@@ -1,0 +1,11 @@
+co\gov\deajvpar\gestcontractclient\fx\utility\UsedApis.class
+co\gov\deajvpar\gestcontractclient\fx\InicializarController.class
+co\gov\deajvpar\gestcontractclient\fx\PrimaryController.class
+co\gov\deajvpar\gestcontractclient\fx\utility\HttpCodeResponse.class
+co\gov\deajvpar\gestcontractclient\fx\App.class
+co\gov\deajvpar\gestcontractclient\fx\utility\MyGsonMapper.class
+co\gov\deajvpar\gestcontractclient\fx\utility\MyHttpApi.class
+co\gov\deajvpar\gestcontractclient\fx\dtos\SistemaDto.class
+co\gov\deajvpar\gestcontractclient\fx\SecondaryController.class
+co\gov\deajvpar\gestcontractclient\fx\Exceptions\HttpResponseException.class
+co\gov\deajvpar\gestcontractclient\fx\utility\MyHttpApi$1.class
