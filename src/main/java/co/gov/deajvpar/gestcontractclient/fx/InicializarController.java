@@ -6,20 +6,23 @@ package co.gov.deajvpar.gestcontractclient.fx;
 
 import co.gov.deajvpar.gestcontractclient.fx.Exceptions.HttpResponseException;
 import co.gov.deajvpar.gestcontractclient.fx.dtos.CiudadDptoDto;
-import co.gov.deajvpar.gestcontractclient.fx.dtos.UserDataDto;
+import co.gov.deajvpar.gestcontractclient.fx.dtos.UsuarioDto;
 import co.gov.deajvpar.gestcontractclient.fx.dtos.DptoDto;
 import co.gov.deajvpar.gestcontractclient.fx.dtos.InicializarDto;
+import co.gov.deajvpar.gestcontractclient.fx.dtos.SistemaDto;
+import co.gov.deajvpar.gestcontractclient.fx.dtos.TipoDocumentoDto;
 import co.gov.deajvpar.gestcontractclient.fx.utility.HttpCodeResponse;
 import co.gov.deajvpar.gestcontractclient.fx.utility.MyGsonMapper;
 import co.gov.deajvpar.gestcontractclient.fx.utility.MyHttpApi;
-import co.gov.deajvpar.gestcontractclient.fx.utility.Screen;
+import co.gov.deajvpar.gestcontractclient.fx.utility.MyScreen;
 import co.gov.deajvpar.gestcontractclient.fx.utility.StatusCode;
 import co.gov.deajvpar.gestcontractclient.fx.utility.UsedApis;
 import co.gov.deajvpar.gestcontractclient.fx.utility.Utility;
 import com.mashape.unirest.http.exceptions.UnirestException;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.io.IOException;
 import java.net.URL;
-import java.time.format.DateTimeParseException;
 import java.util.List;
 import java.util.Map;
 
@@ -28,12 +31,15 @@ import javafx.event.ActionEvent;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
+import javafx.stage.Screen;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -104,7 +110,7 @@ public class InicializarController implements Initializable {
             try {
                 this.inicializarSistema();
             } catch (IOException ex) {
-                Screen.errorMessage(ex);
+                MyScreen.errorMessage(ex);
             }
         }
     }
@@ -139,17 +145,19 @@ public class InicializarController implements Initializable {
             String response = MyHttpApi.stringResponse();
 //            System.out.println(response);
             if (MyHttpApi.statusOk()) {
-                dto = MyGsonMapper.get().fromJson(response, InicializarDto.class);
-                App.sistema = dto.getSistema();
-                Screen.confirmMessage(App.getScene().getWindow(), "Peticion de inicializacion realizada con exito");
-                App.setRoot("secondary");
+                App.sistema = MyGsonMapper.get().fromJson(response, SistemaDto.class);
+                MyScreen.showMessage(App.getScene().getWindow(), "Peticion de inicializacion realizada con exito");
+                String titulo = App.sistema.getNameAndTitle();
+                App.newStage("Login", false, titulo, MyScreen.getMaxWidth(), MyScreen.getMaxHeight());
+                                
             } else {
 
-                Screen.errorMessage(status.toString(), response);
+                MyScreen.errorMessage(status.toString(), response);
 //                  System.out.println(MyHttpApi.stringResponse());
             }
         } catch (UnirestException ex) {
-            Screen.errorMessage(ex);
+            MyScreen.errorMessage(ex);
+           //ex.printStackTrace();
         }
     }
 
@@ -171,10 +179,13 @@ public class InicializarController implements Initializable {
 
     }
 
-    private UserDataDto getDataAdmon() {
+    private UsuarioDto getDataAdmon() {
 
-        UserDataDto userDto = new UserDataDto();
-        userDto.setTipoDocumento(this.cmbTipo.getSelectionModel().getSelectedItem().toString());
+        UsuarioDto userDto = new UsuarioDto();
+        TipoDocumentoDto tipoDto= new TipoDocumentoDto();
+        tipoDto.setDescripcion(this.cmbTipo.getSelectionModel().getSelectedItem().toString());
+        //userDto.setTipoDocumento(this.cmbTipo.getSelectionModel().getSelectedItem().toString());
+        userDto.setTipoDocumento(tipoDto);
         userDto.setNoDocumento(this.txtNoDocumento.getText());
         userDto.setpNombre(this.txtPNombre.getText());
         userDto.setsNombre(this.txtSNombre.getText());
@@ -185,7 +196,7 @@ public class InicializarController implements Initializable {
         userDto.setUserName(this.txtUsuario.getText());
         
         userDto.setPassword(this.txtPassword.getText());
-
+        userDto.setUserType("ADMINISTRADOR");
         return userDto;
 
     }
@@ -195,14 +206,14 @@ public class InicializarController implements Initializable {
         boolean resultValidation = true;
         boolean empty;
 
-        empty = this.txtTitulo.getText().isEmpty();
+        empty = this.txtTitulo.getText()==null || this.txtTitulo.getText().isBlank();
         if (empty) {
             this.txtTitulo.requestFocus();
             resultValidation = false;
         }
         this.lbTitulo.setVisible(empty);
 
-        empty = this.txtNombre.getText().isEmpty();
+        empty = this.txtNombre.getText()==null || this.txtNombre.getText().isBlank();
         if (empty) {
             this.txtNombre.requestFocus();
             resultValidation = false;
@@ -216,28 +227,28 @@ public class InicializarController implements Initializable {
         }
         this.lbTipo.setVisible(empty);
 
-        empty = this.txtNoDocumento.getText().isEmpty();
+        empty = this.txtNoDocumento.getText()==null || this.txtNoDocumento.getText().isBlank();
         if (empty) {
             this.txtNoDocumento.requestFocus();
             resultValidation = false;
         }
         this.lbDocumento.setVisible(empty);
 
-        empty = this.txtPNombre.getText().isEmpty();
+        empty = this.txtPNombre.getText()==null || this.txtPNombre.getText().isBlank();
         if (empty) {
             this.txtPNombre.requestFocus();
             resultValidation = false;
         }
         this.lbPNombre.setVisible(empty);
 
-//        empty=this.txtSNombre.getText().isEmpty();
+//        empty=this.txtSNombre.getText()==null || this.txtSNombre.getText().isBlank();
 //        if(empty) {this.txtSNombre.requestFocus();
 //                resultValidation = false;
 //        }
 //        this.lbSNombre.setVisible(empty);
 //        resultValidation=!empty;
 
-        empty = this.txtPApellido.getText().isEmpty();
+        empty = this.txtPApellido.getText()==null || this.txtPApellido.getText().isBlank();
         if (empty) {
             this.txtPApellido.requestFocus();
             resultValidation = false;
@@ -264,14 +275,14 @@ public class InicializarController implements Initializable {
         }
         this.lbFecha.setVisible(empty);
 
-        empty = this.txtUsuario.getText().isEmpty();
+        empty = this.txtUsuario.getText()==null || this.txtUsuario.getText().isBlank();
         if (empty) {
             this.txtUsuario.requestFocus();
             resultValidation = false;
         }
         this.lbUser.setVisible(empty);
 
-        empty = this.txtPassword.getText().isEmpty();
+        empty = this.txtPassword.getText()==null || this.txtPassword.getText().isBlank();
         if (empty) {
             this.txtPassword.requestFocus();
             resultValidation = false;

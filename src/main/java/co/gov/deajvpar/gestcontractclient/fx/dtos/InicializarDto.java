@@ -13,9 +13,9 @@ import java.util.Map;
 public class InicializarDto {
     private SistemaDto sistema;
     private Map<String, DptoDto> dptos;
-    private UserDataDto userData;
+    private UsuarioDto userData;
 
-    public InicializarDto(SistemaDto sistema, Map<String, DptoDto> dptos, UserDataDto admon) {
+    public InicializarDto(SistemaDto sistema, Map<String, DptoDto> dptos, UsuarioDto admon) {
         this.sistema = sistema;
         this.dptos = dptos;
         this.userData = admon;
@@ -57,14 +57,14 @@ public class InicializarDto {
     /**
      * @return the admon
      */
-    public UserDataDto getAdmon() {
+    public UsuarioDto getAdmon() {
         return userData;
     }
 
     /**
      * @param admon the admon to set
      */
-    public void setAdmon(UserDataDto admon) {
+    public void setAdmon(UsuarioDto admon) {
         this.userData = admon;
     }
 

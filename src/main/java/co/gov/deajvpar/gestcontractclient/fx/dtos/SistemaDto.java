@@ -124,4 +124,9 @@ public class SistemaDto{
     }
     
     
+    public String getNameAndTitle(){
+        
+        return this.name + " - " + this.titulo;
+    }
+    
 }
