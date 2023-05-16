@@ -15,7 +15,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<HBox fx:id="PanelPrincipal" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.gov.deajvpar.gestcontractclient.fx.InicializarController">
+<HBox fx:id="PanelPrincipal" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.gov.deajvpar.gestcontractclient.fx.controller.InicializarController">
    <children>
       <Pane prefHeight="640.0" prefWidth="430.0" style="-fx-background-color: #FFFFFF;">
          <children>
