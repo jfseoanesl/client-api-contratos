@@ -52,7 +52,7 @@ public class LoginController implements Initializable {
             MyHttpApi.jsonPostRequest(UsedApis.API_LOGIN, dto);
             StatusCode status = HttpCodeResponse.get(MyHttpApi.responseStatusCode());
             String response = MyHttpApi.stringResponse();
-            System.out.println(response);
+//            System.out.println(response);
             if (MyHttpApi.statusOk()) {
                 SesionUserDto sesion = MyGsonMapper.get().fromJson(response, SesionUserDto.class);
                 SesionUsuarioSingleton.set(sesion);

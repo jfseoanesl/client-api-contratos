@@ -21,6 +21,27 @@ public interface UsedApis {
      String API_DEAJ_EDIT = API_DEAJ + "/edit";
      String API_DEAJ_DELETE = API_DEAJ + "/delete";
      
+     String API_TIPO_CONTRATO = API_HOME + "/tipoContrato";
+     String API_TIPO_CONTRATO_GET_ALL = API_TIPO_CONTRATO + "/list";
+     String API_TIPO_CONTRATO_SAVE = API_TIPO_CONTRATO + "/save";
+     String API_TIPO_CONTRATO_EDIT = API_TIPO_CONTRATO + "/edit";
+     String API_TIPO_CONTRATO_DELETE = API_TIPO_CONTRATO + "/delete";
+     
+     String API_MODALIDAD = API_HOME + "/modalidad";
+     String API_MODALIDAD_GET_ALL = API_MODALIDAD + "/list";
+     String API_MODALIDAD_SAVE = API_MODALIDAD + "/save";
+     String API_MODALIDAD_EDIT = API_MODALIDAD + "/edit";
+     String API_MODALIDAD_DELETE = API_MODALIDAD + "/delete";
+     
+     String API_SUBMODALIDAD = API_HOME + "/submodalidad";
+     String API_SUBMODALIDAD_GET_ALL = API_SUBMODALIDAD + "/list";
+     String API_SUBMODALIDAD_SAVE = API_SUBMODALIDAD + "/save";
+     String API_SUBMODALIDAD_EDIT = API_SUBMODALIDAD + "/edit";
+     String API_SUBMODALIDAD_DELETE = API_SUBMODALIDAD + "/delete";
+     
+     String API_ALERTA = API_HOME + "/alerta";
+     String API_ALERTA_SAVE = API_ALERTA + "/save";
+     
      String API_DPTO = API_HOME + "/Dpto";
      String API_DPTO_GET_ALL = API_DPTO + "/list";
      

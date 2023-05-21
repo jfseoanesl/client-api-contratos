@@ -4,13 +4,12 @@
  */
 package co.gov.deajvpar.gestcontractclient.fx.controller;
 
-import co.gov.deajvpar.gestcontractclient.fx.dtos.DireccionSeccionalDto;
-import co.gov.deajvpar.gestcontractclient.fx.dtos.DptoDto;
 import co.gov.deajvpar.gestcontractclient.fx.dtos.ModuloDto;
 import co.gov.deajvpar.gestcontractclient.fx.dtos.PrivilegioDto;
 import co.gov.deajvpar.gestcontractclient.fx.dtos.SesionUserDto;
 import co.gov.deajvpar.gestcontractclient.fx.dtos.SesionUsuarioSingleton;
-import co.gov.deajvpar.gestcontractclient.fx.dtos.table.DeajTableDto;
+import co.gov.deajvpar.gestcontractclient.fx.dtos.TipoContratoDto;
+import co.gov.deajvpar.gestcontractclient.fx.dtos.table.TipoContratoDtoTable;
 import co.gov.deajvpar.gestcontractclient.fx.utility.HttpCodeResponse;
 import co.gov.deajvpar.gestcontractclient.fx.utility.MyGsonMapper;
 import co.gov.deajvpar.gestcontractclient.fx.utility.MyHttpApi;
@@ -19,10 +18,9 @@ import co.gov.deajvpar.gestcontractclient.fx.utility.StatusCode;
 import co.gov.deajvpar.gestcontractclient.fx.utility.UsedApis;
 import com.mashape.unirest.http.exceptions.UnirestException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
+
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
@@ -35,13 +33,9 @@ import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 
 /**
@@ -49,7 +43,7 @@ import javafx.scene.layout.VBox;
  *
  * @author Jairo F
  */
-public class PanelDireccionEjecutivaController implements Initializable {
+public class PanelTipoContratosController implements Initializable {
 
     /**
      * Initializes the controller class.
@@ -61,7 +55,7 @@ public class PanelDireccionEjecutivaController implements Initializable {
     @FXML
     private Button btnCrear;
     @FXML
-    private Button btnGuardarDeaj;
+    private Button btnGuardar;
     @FXML
     private Button btnEditar;
     @FXML
@@ -70,38 +64,26 @@ public class PanelDireccionEjecutivaController implements Initializable {
     private Button btnActualizar;
 
     @FXML
-    private Label lbErrorDptos;
-    @FXML
-    private Label lbErrorNombreDeaj;
+    private Label lbErrorTipo;
 
     @FXML
-    private ComboBox cmbDptos;
-    @FXML
-    private ListView listViewDptos;
+    private TableView<TipoContratoDtoTable> tablaContratos;
 
     @FXML
-    private TableView<DeajTableDto> tablaDeaj;
-
-    @FXML
-    private TextField txtDeaj;
+    private TextField txtTipo;
     @FXML
     private TextField txtBuscar;
     @FXML
     private TextField txtId;
 
     @FXML
-    private TableColumn<DeajTableDto, String> tableColumnDeaj;
+    private TableColumn<TipoContratoDtoTable, String> tableColumnTipo;
     @FXML
-    private TableColumn<DeajTableDto, String> tableColumnDpto;
+    private TableColumn<TipoContratoDtoTable, String> tableColumnId;
 
-    @FXML
-    private TableColumn<DeajTableDto, String> tableColumnId;
-
-    private ObservableList<DeajTableDto> data;
-    private List<DptoDto> dptoList;
-    private List<DptoDto> listDptoSeleccionados;
+    private ObservableList<TipoContratoDtoTable> data;
     private SesionUserDto sesion;
-    private DireccionSeccionalDto[] deajs;
+    private TipoContratoDto[] tipoContratoList;
     private boolean create, view, delete, update;
 
     @FXML
@@ -111,42 +93,37 @@ public class PanelDireccionEjecutivaController implements Initializable {
         this.limpiarPanelCrear();
         this.selectCrearOrActualizar(true);
     }
+//
 
+//
     @FXML
     private void actionEventBotonEditar(ActionEvent e) {
-        DeajTableDto selected = this.tablaDeaj.getSelectionModel().getSelectedItem();
+        TipoContratoDtoTable selected = this.tablaContratos.getSelectionModel().getSelectedItem();
         if (selected != null) {
 
             this.limpiarPanelCrear();
             this.panelCrear.setVisible(true);
             this.panelVer.setVisible(false);
             this.selectCrearOrActualizar(false);
-            DireccionSeccionalDto dto = this.buscarDeajIntoArray(selected.getId());
-            this.txtId.setText(dto.getIdDireccion().toString());
-            this.txtDeaj.setText(dto.getDescripcionSeccional());
-            this.listDptoSeleccionados = dto.getListDptoCoordinados();
-            this.setListviewDptos();
-
+            TipoContratoDto dto = this.buscarIntoArray(selected.getId());
+            this.txtId.setText(dto.getId().toString());
+            this.txtTipo.setText(dto.getDescripcion());
         }
 
     }
+//
 
     @FXML
     private void actionEventBotonActualizar(ActionEvent e) {
         if (this.validaFormCrear()) {
-            DireccionSeccionalDto deaj = new DireccionSeccionalDto();
-            deaj.setDescripcionSeccional(this.txtDeaj.getText());
-            deaj.setEliminado(false);
-            deaj.setIdDireccion(Long.valueOf(this.txtId.getText()));
-            deaj.setListDptoCoordinados(this.listDptoSeleccionados);
-            deaj.setCreatedByUser(sesion.getUser());
+            TipoContratoDto tipoContrato = this.loadTipoContrato();
 
             try {
-                MyHttpApi.jsonPostRequest(UsedApis.API_DEAJ_EDIT, deaj);
+                MyHttpApi.jsonPostRequest(UsedApis.API_TIPO_CONTRATO_EDIT, tipoContrato);
                 String response = MyHttpApi.stringResponse();
                 StatusCode status = HttpCodeResponse.get(MyHttpApi.responseStatusCode());
                 if (MyHttpApi.statusOk()) {
-                    MyScreen.showMessage(null, status.getStatus(), "Solicitud ejecutada con exito. La direcion seccional ha sido actualizada");
+                    MyScreen.showMessage(null, status.getStatus(), "Solicitud ejecutada con exito. El tipo de contrato ha sido actualizado");
                     this.initTable();
                 } else {
                     MyScreen.errorMessage(status.toString(), response);
@@ -157,18 +134,19 @@ public class PanelDireccionEjecutivaController implements Initializable {
             this.limpiarPanelCrear();
         }
     }
+//
 
     @FXML
     private void actionEventBotonEliminar(ActionEvent e) {
         //this.limpiarPanelCrear();
-        DeajTableDto selected = this.tablaDeaj.getSelectionModel().getSelectedItem();
+        TipoContratoDtoTable selected = this.tablaContratos.getSelectionModel().getSelectedItem();
 
         if (selected != null) {
             Optional<ButtonType> result = MyScreen.confirmMessage(null, "Confirmacion", "Esta seguro de realizar la eliminacion?");
             if (result.get() == ButtonType.OK) {
                 Long id = selected.getId();
                 try {
-                    MyHttpApi.jsonPostRequest(UsedApis.API_DEAJ_DELETE, id);
+                    MyHttpApi.jsonPostRequest(UsedApis.API_TIPO_CONTRATO_DELETE, id);
                     String response = MyHttpApi.stringResponse();
                     StatusCode status = HttpCodeResponse.get(MyHttpApi.responseStatusCode());
                     if (MyHttpApi.statusOk()) {
@@ -185,21 +163,31 @@ public class PanelDireccionEjecutivaController implements Initializable {
         }
     }
 
-    @FXML
-    private void actionEventBotonGuardarDeaj(ActionEvent e) {
-        if (this.validaFormCrear()) {
-            DireccionSeccionalDto deaj = new DireccionSeccionalDto();
-            deaj.setDescripcionSeccional(this.txtDeaj.getText());
-            deaj.setEliminado(false);
-            deaj.setListDptoCoordinados(this.listDptoSeleccionados);
-            deaj.setCreatedByUser(sesion.getUser());
+    private TipoContratoDto loadTipoContrato() {
 
+        TipoContratoDto tipoContrato = new TipoContratoDto();
+        tipoContrato.setDescripcion(this.txtTipo.getText());
+        tipoContrato.setCrateByuser(sesion.getUser());
+
+        String id = this.txtId.getText();
+        if (id == null) {
+            tipoContrato.setId(null);
+        } else {
+            tipoContrato.setId(Long.valueOf(id));
+        }
+        return tipoContrato;
+    }
+
+    @FXML
+    private void actionEventBotonGuardar(ActionEvent e) {
+        if (this.validaFormCrear()) {
+            TipoContratoDto tipoContrato = this.loadTipoContrato();
             try {
-                MyHttpApi.jsonPostRequest(UsedApis.API_DEAJ_SAVE, deaj);
+                MyHttpApi.jsonPostRequest(UsedApis.API_TIPO_CONTRATO_SAVE, tipoContrato);
                 String response = MyHttpApi.stringResponse();
                 StatusCode status = HttpCodeResponse.get(MyHttpApi.responseStatusCode());
                 if (MyHttpApi.statusOk()) {
-                    MyScreen.showMessage(null, status.getStatus(), "Solicitud ejecutada con exito. La direcion seccional ha sido registrada");
+                    MyScreen.showMessage(null, status.getStatus(), "Solicitud ejecutada con exito. El tipo de contrato ha sido registrado");
                     this.initTable();
                 } else {
                     MyScreen.errorMessage(status.toString(), response);
@@ -216,26 +204,8 @@ public class PanelDireccionEjecutivaController implements Initializable {
         this.panelCrear.setVisible(false);
         this.panelVer.setVisible(true);
     }
-
-    @FXML
-    private void actionEventCmbDpto(ActionEvent e) {
-        int index = this.cmbDptos.getSelectionModel().getSelectedIndex();
-        if (index >= 0) {
-            if (!this.listDptoSeleccionados.contains(this.dptoList.get(index))) {
-                this.listDptoSeleccionados.add(this.dptoList.get(index));
-            }
-        }
-        this.setListviewDptos();
-    }
-
-    @FXML
-    private void clickListView(MouseEvent m) {
-        int index = this.listViewDptos.getSelectionModel().getSelectedIndex();
-        if (index >= 0) {
-            this.listDptoSeleccionados.remove(index);
-            this.setListviewDptos();
-        }
-    }
+//
+//   
 
     @FXML
     public void eventKeyreleaseTxtBuscar(KeyEvent e) {
@@ -247,17 +217,17 @@ public class PanelDireccionEjecutivaController implements Initializable {
         // TODO
 
         try {
+
             this.sesion = SesionUsuarioSingleton.get();
             this.setPrivilegiosModulo();
-            this.lbErrorDptos.setVisible(false);
-            this.lbErrorNombreDeaj.setVisible(false);
+
+            this.lbErrorTipo.setVisible(false);
             this.selectCrearOrActualizar(true);
+
             this.panelCrear.setVisible(false);
             this.panelVer.setVisible(true);
-            this.listDptoSeleccionados = new ArrayList();
-            this.loadDptos();
             this.initTable();
-            this.txtDeaj.setText(null);
+            this.txtTipo.setText(null);
             this.activarPrivilegiosModulo();
 
         } catch (Exception e) {
@@ -267,7 +237,7 @@ public class PanelDireccionEjecutivaController implements Initializable {
     }
 
     private void setFiltroTable() {
-        FilteredList<DeajTableDto> filteredData = new FilteredList<>(this.data, p -> true);
+        FilteredList<TipoContratoDtoTable> filteredData = new FilteredList<>(this.data, p -> true);
         this.txtBuscar.textProperty().addListener((observable, oldValue, newValue) -> {
             filteredData.setPredicate(dto -> {
                 // If filter text is empty, display all persons.
@@ -278,43 +248,40 @@ public class PanelDireccionEjecutivaController implements Initializable {
                 // Compare first name and last name of every person with filter text.
                 String lowerCaseFilter = newValue.toLowerCase();
 
-                if (dto.getNombre().toLowerCase().contains(lowerCaseFilter)) {
+                if (dto.getDescripcion().toLowerCase().contains(lowerCaseFilter)) {
                     return true; // Filter matches first name.
-                } else if (dto.getDptos().toLowerCase().contains(lowerCaseFilter)) {
+                } else if (String.valueOf(dto.getId()).toLowerCase().contains(lowerCaseFilter)) {
                     return true; // Filter matches last name.
                 }
                 return false; // Does not match.
             });
         });
 
-        SortedList<DeajTableDto> sortedData = new SortedList<>(filteredData);
+        SortedList<TipoContratoDtoTable> sortedData = new SortedList<>(filteredData);
 
-        sortedData.comparatorProperty().bind(this.tablaDeaj.comparatorProperty());
+        sortedData.comparatorProperty().bind(this.tablaContratos.comparatorProperty());
 
-        this.tablaDeaj.setItems(sortedData);
+        this.tablaContratos.setItems(sortedData);
     }
 
     private void initTable() {
 
-        this.tableColumnDeaj.setCellValueFactory(new PropertyValueFactory("nombre"));
-        this.tableColumnDpto.setCellValueFactory(new PropertyValueFactory("dptos"));
+        this.tableColumnTipo.setCellValueFactory(new PropertyValueFactory("descripcion"));
         this.tableColumnId.setCellValueFactory(new PropertyValueFactory("id"));
 
         this.data = FXCollections.observableArrayList();
 
         try {
-            MyHttpApi.jsonGetRequest(UsedApis.API_DEAJ_GET_ALL);
+            MyHttpApi.jsonGetRequest(UsedApis.API_TIPO_CONTRATO_GET_ALL);
             String response = MyHttpApi.stringResponse();
             StatusCode status = HttpCodeResponse.get(MyHttpApi.responseStatusCode());
             if (MyHttpApi.statusOk()) {
-                this.deajs = MyGsonMapper.get().fromJson(response, DireccionSeccionalDto[].class);
-                for (DireccionSeccionalDto dto : deajs) {
-                    DeajTableDto deajTable = new DeajTableDto(dto);
-                    this.data.add(deajTable);
+                this.tipoContratoList = MyGsonMapper.get().fromJson(response, TipoContratoDto[].class);
+                for (TipoContratoDto dto : this.tipoContratoList) {
+                    TipoContratoDtoTable row = new TipoContratoDtoTable(dto);
+                    this.data.add(row);
                 }
-                
-//                this.tablaDeaj.setItems(data);
-                
+//                this.tablaContratos.setItems(data);
                 if (this.delete) {
 
                     this.btnEliminar.setDisable(!(data.size() > 0));
@@ -334,48 +301,14 @@ public class PanelDireccionEjecutivaController implements Initializable {
 
     }
 
-    private void loadDptos() {
-
-        this.dptoList = new ArrayList();
-        try {
-            MyHttpApi.jsonGetRequest(UsedApis.API_DPTO_GET_ALL);
-            String response = MyHttpApi.stringResponse();
-            if (MyHttpApi.statusOk()) {
-                DptoDto[] dptos = MyGsonMapper.get().fromJson(response, DptoDto[].class);
-                this.dptoList = List.of(dptos);
-            } else {
-                StatusCode status = HttpCodeResponse.get(MyHttpApi.responseStatusCode());
-                MyScreen.errorMessage(status.toString(), response);
-            }
-        } catch (UnirestException ex) {
-
-        }
-
-        for (DptoDto d : this.dptoList) {
-            this.cmbDptos.getItems().add(d.getNombreDpto());
-        }
-
-    }
-
-    private void setListviewDptos() {
-
-        this.listViewDptos.getItems().clear();
-        for (DptoDto dto : this.listDptoSeleccionados) {
-            this.listViewDptos.getItems().add(dto.getNombreDpto());
-        }
-    }
-
     private void limpiarPanelCrear() {
-        this.listDptoSeleccionados.clear();
-        this.setListviewDptos();
 
-        this.txtDeaj.setText(null);
-        this.cmbDptos.getSelectionModel().select(-1);
+        this.txtTipo.setText(null);
+        this.txtId.setText(null);
 
-        this.lbErrorDptos.setVisible(false);
-        this.lbErrorNombreDeaj.setVisible(false);
+        this.lbErrorTipo.setVisible(false);
 
-        this.txtDeaj.requestFocus();
+        this.txtTipo.requestFocus();
     }
 
     private boolean validaFormCrear() {
@@ -383,30 +316,23 @@ public class PanelDireccionEjecutivaController implements Initializable {
         boolean resultValidation = true;
         boolean empty;
 
-        empty = this.txtDeaj.getText() == null || this.txtDeaj.getText().isBlank();
+        empty = this.txtTipo.getText() == null || this.txtTipo.getText().isBlank();
         if (empty) {
-            this.txtDeaj.requestFocus();
+            this.txtTipo.requestFocus();
             resultValidation = false;
         }
-        this.lbErrorNombreDeaj.setVisible(empty);
-
-        empty = this.listDptoSeleccionados.size() == 0;
-        if (empty) {
-            this.cmbDptos.requestFocus();
-            resultValidation = false;
-        }
-        this.lbErrorDptos.setVisible(empty);
+        this.lbErrorTipo.setVisible(empty);
 
         return resultValidation;
 
     }
 
-    private DireccionSeccionalDto buscarDeajIntoArray(Long id) {
+    private TipoContratoDto buscarIntoArray(Long id) {
 
-        for (DireccionSeccionalDto d : this.deajs) {
+        for (TipoContratoDto t : this.tipoContratoList) {
             //DireccionSeccionalDto d = this.deajs[i];
-            if (d.getIdDireccion().equals(id)) {
-                return d;
+            if (t.getId().equals(id)) {
+                return t;
             }
         }
         return null;
@@ -415,7 +341,7 @@ public class PanelDireccionEjecutivaController implements Initializable {
     private void selectCrearOrActualizar(boolean opt) {
         // true - > crear     false->actualizar
         this.btnActualizar.setDisable(opt);
-        this.btnGuardarDeaj.setDisable(!opt);
+        this.btnGuardar.setDisable(!opt);
 
     }
 
@@ -430,7 +356,7 @@ public class PanelDireccionEjecutivaController implements Initializable {
 
     public void activarPrivilegiosModulo() {
 
-        this.btnGuardarDeaj.setDisable(!this.create);
+        this.btnGuardar.setDisable(!this.create);
         this.btnCrear.setDisable(!this.create);
 
         this.btnEditar.setDisable(!this.update);
@@ -439,7 +365,7 @@ public class PanelDireccionEjecutivaController implements Initializable {
         this.btnEliminar.setDisable(!this.delete);
 
         this.txtBuscar.setDisable(!this.view);
-        this.tablaDeaj.setDisable(!this.view);
+        this.tablaContratos.setDisable(!this.view);
 
     }
 

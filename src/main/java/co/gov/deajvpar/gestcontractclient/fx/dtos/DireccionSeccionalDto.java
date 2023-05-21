@@ -17,14 +17,17 @@ public class DireccionSeccionalDto {
     private List<DptoDto> listDptoCoordinados;
     private UsuarioDto createdByUser;
     private boolean eliminado;
+    private SetupAlertaDto setupAlerta;
 
     public DireccionSeccionalDto() {
+        this.setupAlerta = new SetupAlertaDto();
     }
 
-    public DireccionSeccionalDto(String descripcionSeccional, List<DptoDto> listDptoCoordinados, UsuarioDto createdByUser) {
+    public DireccionSeccionalDto(String descripcionSeccional, List<DptoDto> listDptoCoordinados, UsuarioDto createdByUser, SetupAlertaDto setupAlerta) {
         this.descripcionSeccional = descripcionSeccional;
         this.listDptoCoordinados = listDptoCoordinados;
         this.createdByUser = createdByUser;
+        this.setupAlerta = setupAlerta;
         this.eliminado = false;
     }
 
@@ -111,5 +114,19 @@ public class DireccionSeccionalDto {
      */
     public void setEliminado(boolean eliminado) {
         this.eliminado = eliminado;
+    }
+
+    /**
+     * @return the setupAlerta
+     */
+    public SetupAlertaDto getSetupAlerta() {
+        return setupAlerta;
+    }
+
+    /**
+     * @param setupAlerta the setupAlerta to set
+     */
+    public void setSetupAlerta(SetupAlertaDto setupAlerta) {
+        this.setupAlerta = setupAlerta;
     }
 }

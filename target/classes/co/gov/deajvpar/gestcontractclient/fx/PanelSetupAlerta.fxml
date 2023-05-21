@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<StackPane alignment="TOP_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1240.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.gov.deajvpar.gestcontractclient.fx.controller.PanelSetupAlertaController">
+   <children>
+      <VBox fx:id="panelCrear" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="682.0" prefWidth="884.0" style="-fx-background-color: #E4E4E5;">
+         <children>
+            <HBox prefHeight="35.0" prefWidth="1200.0">
+               <children>
+                  <Pane prefHeight="66.0" prefWidth="1220.0">
+                     <children>
+                        <Label prefHeight="35.0" prefWidth="492.0" text="Setup alertas informes de supervision">
+                           <font>
+                              <Font name="System Bold" size="22.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </Pane>
+               </children>
+            </HBox>
+            <HBox prefHeight="0.0" prefWidth="871.0" visible="false">
+               <children>
+                  <Pane prefHeight="54.0" prefWidth="1200.0">
+                     <children>
+                        <VBox prefHeight="80.0" prefWidth="861.0">
+                           <children>
+                              <Label text="Id direccion">
+                                 <font>
+                                    <Font size="17.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="txtId" prefHeight="41.0" prefWidth="100.0" />
+                           </children>
+                        </VBox>
+                     </children>
+                  </Pane>
+               </children>
+            </HBox>
+            <HBox prefHeight="76.0" prefWidth="1200.0">
+               <VBox.margin>
+                  <Insets top="20.0" />
+               </VBox.margin>
+               <children>
+                  <Pane prefHeight="54.0" prefWidth="1200.0">
+                     <children>
+                        <VBox prefHeight="80.0" prefWidth="861.0">
+                           <children>
+                              <HBox prefHeight="8.0" prefWidth="861.0">
+                                 <children>
+                                    <Label text="Direccion Seccional">
+                                       <font>
+                                          <Font size="17.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="lbErrorDeaj" text=" (Required)" textFill="#da0d0d" visible="false">
+                                       <font>
+                                          <Font size="17.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </HBox>
+                              <ComboBox fx:id="cmbDeaj" onAction="#clickComboDeaj" prefHeight="41.0" prefWidth="877.0" />
+                           </children>
+                        </VBox>
+                     </children>
+                  </Pane>
+               </children>
+            </HBox>
+            <HBox alignment="BOTTOM_CENTER" prefHeight="60.0" prefWidth="864.0">
+               <children>
+                  <Pane prefHeight="14.0" prefWidth="861.0">
+                     <children>
+                        <VBox alignment="CENTER" prefHeight="58.0" prefWidth="861.0">
+                           <children>
+                              <HBox prefHeight="0.0" prefWidth="861.0">
+                                 <children>
+                                    <Label alignment="CENTER" prefHeight="26.0" prefWidth="134.0" style="-fx-background-color: #E4E4E5;" text="Alerta">
+                                       <font>
+                                          <Font name="System Bold" size="17.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="lbErrorDptos" alignment="CENTER" prefHeight="26.0" prefWidth="551.0" style="-fx-background-color: #E4E4E5;" text="Descripcion de la alerta" textFill="#171717">
+                                       <font>
+                                          <Font name="System Bold" size="17.0" />
+                                       </font>
+                                    </Label>
+                                    <Label alignment="CENTER" prefHeight="26.0" prefWidth="176.0" style="-fx-background-color: #E4E4E5;" text="Intervalo (No dias)">
+                                       <font>
+                                          <Font name="System Bold" size="17.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                     </children>
+                  </Pane>
+               </children>
+            </HBox>
+            <HBox prefHeight="400.0" prefWidth="864.0">
+               <children>
+                  <Pane prefHeight="184.0" prefWidth="896.0">
+                     <children>
+                        <VBox prefHeight="164.0" prefWidth="861.0" spacing="10.0">
+                           <children>
+                              <HBox prefHeight="157.0" prefWidth="861.0" spacing="20.0">
+                                 <children>
+                                    <Circle fill="#e34040ed" radius="58.0" stroke="#9e0707c4" strokeType="INSIDE" strokeWidth="3.0" />
+                                    <Label prefHeight="115.0" prefWidth="551.0" text="La alerta roja informa que la fecha de entrega del informe de supervision ya esta muy proxima o que hay retraso en la entrega.  Se encuentra en el intervalo limite establecido de [0-5] dias" textAlignment="JUSTIFY" wrapText="true">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <StackPane prefHeight="150.0" prefWidth="200.0">
+                                       <children>
+                                          <Spinner fx:id="txtRoja" onMouseClicked="#EventoClickRojo" prefHeight="55.0" prefWidth="132.0" />
+                                       </children>
+                                    </StackPane>
+                                 </children>
+                              </HBox>
+                              <Line endX="750.5" startX="-100.0" stroke="#f2f0f0" strokeWidth="2.0" />
+                              <HBox prefHeight="184.0" prefWidth="861.0" spacing="20.0">
+                                 <children>
+                                    <Circle fill="#e0ac43ed" radius="58.0" stroke="#9c3a08c4" strokeType="INSIDE" strokeWidth="3.0" />
+                                    <Label prefHeight="115.0" prefWidth="551.0" text="La alerta naranja informa que la fecha de entrega del informe de supervision esta cerca de su cumplimiento.  Se encuentra en el intervalo medio establecido a partir de un limite de [1-10] dias" textAlignment="JUSTIFY" wrapText="true">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <StackPane prefHeight="150.0" prefWidth="200.0">
+                                       <children>
+                                          <Spinner fx:id="txtNaranja" onMouseClicked="#EventoClickNaranja" prefHeight="55.0" prefWidth="132.0" />
+                                       </children>
+                                    </StackPane>
+                                 </children>
+                              </HBox>
+                              <Line endX="750.5" startX="-100.0" stroke="#f2f0f0" strokeWidth="2.0" />
+                              <HBox prefHeight="184.0" prefWidth="861.0" spacing="20.0">
+                                 <children>
+                                    <Circle fill="#25a103ed" radius="58.0" stroke="#067c22c4" strokeType="INSIDE" strokeWidth="3.0" />
+                                    <Label prefHeight="115.0" prefWidth="551.0" text="La alerta verde informa que no hay retraso con la entrega del informe de supervision. No  se encuentra en los intervalos establecidos" textAlignment="JUSTIFY" wrapText="true">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <StackPane prefHeight="150.0" prefWidth="200.0">
+                                       <children>
+                                          <Spinner fx:id="txtVerde" disable="true" prefHeight="55.0" prefWidth="132.0" />
+                                       </children>
+                                    </StackPane>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                     </children>
+                  </Pane>
+               </children>
+            </HBox>
+            <Pane prefHeight="80.0" prefWidth="864.0">
+               <children>
+                  <HBox alignment="TOP_RIGHT" layoutY="28.0" prefHeight="48.0" prefWidth="861.0" spacing="10.0">
+                     <children>
+                        <Pane prefHeight="48.0" prefWidth="722.0">
+                           <children>
+                              <HBox alignment="CENTER_LEFT" layoutX="112.0" prefHeight="48.0" prefWidth="605.0" spacing="2.0">
+                                 <children>
+                                    <FontAwesomeIcon glyphName="CALENDAR" size="40" />
+                                    <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ff2132" height="16.0" stroke="BLACK" strokeType="INSIDE" width="55.0" />
+                                    <Label fx:id="lbRojo" text=" ">
+                                       <font>
+                                          <Font size="20.0" />
+                                       </font>
+                                    </Label>
+                                    <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffa421" height="16.0" stroke="BLACK" strokeType="INSIDE" width="118.0" />
+                                    <Label fx:id="lbNaranja" text=" ">
+                                       <font>
+                                          <Font size="20.0" />
+                                       </font>
+                                    </Label>
+                                    <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#03c65b" height="16.0" stroke="BLACK" strokeType="INSIDE" width="168.0" />
+                                    <Label fx:id="lbVerde" text=" ">
+                                       <font>
+                                          <Font size="20.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </Pane>
+                        <Button fx:id="btnGuardar" mnemonicParsing="false" onAction="#actionEventBotonGuardar" prefHeight="45.0" prefWidth="139.0" style="-fx-background-color: #1c0cfc;" text="Guardar" textFill="#fcf8f8">
+                           <font>
+                              <Font name="System Bold" size="17.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </HBox>
+               </children>
+            </Pane>
+         </children>
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding>
+      </VBox>
+   </children>
+</StackPane>

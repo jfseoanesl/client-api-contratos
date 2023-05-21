@@ -23,8 +23,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
-import javax.swing.JOptionPane;
+
 
 /**
  * FXML Controller class
@@ -66,6 +65,9 @@ public class FormPrincipalController implements Initializable {
     private SesionUserDto sesionUsuario;
 
     private StackPane panelDirecciones;
+    private StackPane panelTipoContratos;
+    private StackPane panelModalidades;
+    private StackPane panelSetupAlertas;
     /**
      * Initializes the controller class.
      */
@@ -89,10 +91,39 @@ public class FormPrincipalController implements Initializable {
             int codigoMenu = this.getCodigoSubMenu(value);
             switch (codigoMenu) {
                 case 0:
-                    this.panel.getChildren().remove(this.panelDirecciones);
-                    this.panelDirecciones = new StackPane(App.loadFXML("panelDireccionEjecutiva"));
+                    //this.panel.getChildren().remove(this.panelDirecciones);
+                    this.panel.getChildren().clear();
+                    this.panelDirecciones = new StackPane(App.loadFXML("PanelDireccionEjecutiva"));
                     this.panel.getChildren().add(this.panelDirecciones);
                     this.panelDirecciones.setVisible(true);
+                    break;
+                case 1:
+                    //this.panel.getChildren().remove(this.panelTipoContratos);
+                 
+                    this.panel.getChildren().clear();
+                    this.panelTipoContratos = new StackPane(App.loadFXML("PanelTipoDeContratos"));
+                    this.panel.getChildren().add(this.panelTipoContratos);
+                    this.panelTipoContratos.setVisible(true);
+                   
+                    
+                    break;  
+                case 2:
+                    //this.panel.getChildren().remove(this.panelTipoContratos);
+                 
+                    this.panel.getChildren().clear();
+                    this.panelModalidades = new StackPane(App.loadFXML("PanelModalidadContrato"));
+                    this.panel.getChildren().add(this.panelModalidades);
+                    this.panelModalidades.setVisible(true);
+                                       
+                    break; 
+                case 3:
+                    //this.panel.getChildren().remove(this.panelTipoContratos);
+                 
+                    this.panel.getChildren().clear();
+                    this.panelSetupAlertas= new StackPane(App.loadFXML("PanelSetupAlerta"));
+                    this.panel.getChildren().add(this.panelSetupAlertas);
+                    this.panelSetupAlertas.setVisible(true);
+                    
                     break;
                 case -1:
                     break;

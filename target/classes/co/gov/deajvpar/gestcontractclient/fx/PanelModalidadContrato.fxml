@@ -1,0 +1,508 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1240.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.gov.deajvpar.gestcontractclient.fx.controller.PanelModalidadContratoController">
+   <children>
+      <Pane prefHeight="900.0" prefWidth="1240.0">
+         <children>
+            <TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1220.0" tabClosingPolicy="UNAVAILABLE">
+               <tabs>
+                  <Tab fx:id="tabModalidad" text="Modalidades de contrato">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="900.0" prefWidth="1220.0">
+                           <children>
+                              <StackPane fx:id="stackPaneModalidad" alignment="TOP_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1220.0">
+                                 <children>
+                                    <VBox fx:id="panelListModalidad" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="816.0" prefWidth="1220.0" style="-fx-background-color: #E4E4E5;">
+                                       <children>
+                                          <HBox prefHeight="35.0" prefWidth="1200.0">
+                                             <children>
+                                                <Pane prefHeight="66.0" prefWidth="1220.0">
+                                                   <children>
+                                                      <Label prefHeight="35.0" prefWidth="450.0" text="Modalidades de contratos registradas">
+                                                         <font>
+                                                            <Font name="System Bold" size="22.0" />
+                                                         </font>
+                                                      </Label>
+                                                   </children>
+                                                </Pane>
+                                             </children>
+                                          </HBox>
+                                          <HBox prefHeight="45.0" prefWidth="1200.0">
+                                             <children>
+                                                <Pane prefHeight="45.0" prefWidth="422.0">
+                                                   <children>
+                                                      <HBox alignment="CENTER_LEFT" prefHeight="45.0" prefWidth="423.0" spacing="5.0">
+                                                         <children>
+                                                            <TextField fx:id="txtBuscarModalidad" prefHeight="45.0" prefWidth="300.0" promptText="Buscar modalidad" />
+                                                            <FontAwesomeIcon fill="#1c0cfc" glyphName="SEARCH" size="45" textAlignment="CENTER" wrappingWidth="38.0" />
+                                                         </children>
+                                                      </HBox>
+                                                   </children>
+                                                </Pane>
+                                                <Pane prefHeight="45.0" prefWidth="781.0">
+                                                   <children>
+                                                      <HBox alignment="CENTER_RIGHT" prefHeight="45.0" prefWidth="780.0" spacing="10.0">
+                                                         <children>
+                                                            <Button fx:id="btnCrearModalidad" mnemonicParsing="false" onAction="#actionEventBotonCrearModalidad" prefHeight="45.0" prefWidth="139.0" style="-fx-background-color: #05993D;" text="Crear " textFill="#fcf9f9">
+                                                               <font>
+                                                                  <Font size="17.0" />
+                                                               </font>
+                                                            </Button>
+                                                            <Button fx:id="btnEditarModalidad" mnemonicParsing="false" onAction="#actionEventBotonEditarModalidad" prefHeight="45.0" prefWidth="140.0" style="-fx-background-color: FBC432;" text="Editar" textFill="#fcf9f9">
+                                                               <font>
+                                                                  <Font size="17.0" />
+                                                               </font>
+                                                            </Button>
+                                                            <Button fx:id="btnEliminarModalidad" mnemonicParsing="false" onAction="#actionEventBotonEliminarModalidad" prefHeight="45.0" prefWidth="139.0" style="-fx-background-color: #F7453D;" text="Eliminar" textFill="#fcf9f9">
+                                                               <font>
+                                                                  <Font size="17.0" />
+                                                               </font>
+                                                            </Button>
+                                                         </children>
+                                                      </HBox>
+                                                   </children>
+                                                </Pane>
+                                             </children>
+                                             <VBox.margin>
+                                                <Insets top="20.0" />
+                                             </VBox.margin>
+                                          </HBox>
+                                          <HBox prefHeight="674.0" prefWidth="1175.0">
+                                             <children>
+                                                <TableView fx:id="tablaModalidades" prefHeight="673.0" prefWidth="1200.0">
+                                                   <columns>
+                                                      <TableColumn fx:id="columnIdModalidad" prefWidth="72.0" text="Id" />
+                                                      <TableColumn fx:id="columnNombreModalidad" prefWidth="290.0" text="Nombre modalidad" />
+                                                      <TableColumn fx:id="columnDescripcionModalidad" minWidth="0.0" prefWidth="692.0" text="Descripcion modalidad" />
+                                                      <TableColumn fx:id="columnNoSubmodalidad" prefWidth="145.0" text="No Submodalidades" />
+                                                   </columns>
+                                                </TableView>
+                                             </children>
+                                             <opaqueInsets>
+                                                <Insets />
+                                             </opaqueInsets>
+                                             <VBox.margin>
+                                                <Insets top="20.0" />
+                                             </VBox.margin>
+                                          </HBox>
+                                       </children>
+                                       <padding>
+                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                       </padding>
+                                    </VBox>
+                                    <VBox fx:id="panelCrearModalidad" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="665.0" prefWidth="880.0" style="-fx-background-color: #E4E4E5;" visible="false">
+                                       <children>
+                                          <HBox prefHeight="35.0" prefWidth="1200.0">
+                                             <children>
+                                                <Pane prefHeight="66.0" prefWidth="1220.0">
+                                                   <children>
+                                                      <Label prefHeight="35.0" prefWidth="492.0" text="Registro Modalidades de Contrato">
+                                                         <font>
+                                                            <Font name="System Bold" size="22.0" />
+                                                         </font>
+                                                      </Label>
+                                                   </children>
+                                                </Pane>
+                                             </children>
+                                          </HBox>
+                                          <HBox prefHeight="0.0" prefWidth="871.0" visible="false">
+                                             <children>
+                                                <Pane prefHeight="54.0" prefWidth="1200.0">
+                                                   <children>
+                                                      <VBox prefHeight="80.0" prefWidth="861.0">
+                                                         <children>
+                                                            <Label text="Id modalidad">
+                                                               <font>
+                                                                  <Font size="17.0" />
+                                                               </font>
+                                                            </Label>
+                                                            <TextField fx:id="txtIdModalidad" prefHeight="41.0" prefWidth="100.0" />
+                                                         </children>
+                                                      </VBox>
+                                                   </children>
+                                                </Pane>
+                                             </children>
+                                          </HBox>
+                                          <HBox prefHeight="190.0" prefWidth="871.0">
+                                             <children>
+                                                <Pane prefHeight="223.0" prefWidth="871.0">
+                                                   <children>
+                                                      <VBox prefHeight="205.0" prefWidth="861.0">
+                                                         <children>
+                                                            <HBox prefHeight="8.0" prefWidth="861.0">
+                                                               <children>
+                                                                  <Label text="Nombre modalidad">
+                                                                     <font>
+                                                                        <Font size="17.0" />
+                                                                     </font>
+                                                                  </Label>
+                                                                  <Label fx:id="lbErrorNombreModalidad" text=" (Required)" textFill="#da0d0d" visible="false">
+                                                                     <font>
+                                                                        <Font size="17.0" />
+                                                                     </font>
+                                                                  </Label>
+                                                               </children>
+                                                            </HBox>
+                                                            <TextField fx:id="txtNombreModalidad" prefHeight="38.0" prefWidth="861.0" />
+                                                            <HBox prefHeight="0.0" prefWidth="861.0">
+                                                               <children>
+                                                                  <Label text="Descripcion modalidad">
+                                                                     <font>
+                                                                        <Font size="17.0" />
+                                                                     </font>
+                                                                  </Label>
+                                                                  <Label fx:id="lbErrorDescripcionModalidad" text=" (Required)" textFill="#da0d0d" visible="false">
+                                                                     <font>
+                                                                        <Font size="17.0" />
+                                                                     </font>
+                                                                  </Label>
+                                                               </children>
+                                                            </HBox>
+                                                            <TextArea fx:id="txtDescripcionModalidad" prefHeight="103.0" prefWidth="861.0" />
+                                                         </children>
+                                                      </VBox>
+                                                   </children>
+                                                </Pane>
+                                             </children>
+                                          </HBox>
+                                          <HBox prefHeight="345.0" prefWidth="871.0">
+                                             <VBox.margin>
+                                                <Insets top="20.0" />
+                                             </VBox.margin>
+                                             <children>
+                                                <TitledPane alignment="CENTER" animated="false" collapsible="false" prefHeight="319.0" prefWidth="864.0" style="-fx-background-color: #E4E4E5;" text="Submodalidades">
+                                                   <content>
+                                                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                                         <children>
+                                                            <VBox prefHeight="372.0" prefWidth="861.0">
+                                                               <children>
+                                                                  <HBox prefHeight="29.0" prefWidth="861.0">
+                                                                     <children>
+                                                                        <Label text="Nombre submodalidad">
+                                                                           <font>
+                                                                              <Font size="17.0" />
+                                                                           </font>
+                                                                        </Label>
+                                                                        <Label fx:id="lbErrorNombreSubmodalidad" text=" (Required)" textFill="#da0d0d" visible="false">
+                                                                           <font>
+                                                                              <Font size="17.0" />
+                                                                           </font>
+                                                                        </Label>
+                                                                     </children>
+                                                                  </HBox>
+                                                                  <HBox prefHeight="34.0" prefWidth="861.0" spacing="10.0">
+                                                                     <children>
+                                                                        <TextField fx:id="txtDescripcionSubmodalidad" prefHeight="41.0" prefWidth="850.0" />
+                                                                        <Button fx:id="btnAddSubmodalidad" mnemonicParsing="false" onAction="#actionEventBotonAddSubmodalidad" prefHeight="38.0" prefWidth="219.0" style="-fx-background-color: #1c0cfc;" text="Agregar" textFill="#fcf9f9">
+                                                                           <font>
+                                                                              <Font size="17.0" />
+                                                                           </font>
+                                                                        </Button>
+                                                                     </children>
+                                                                  </HBox>
+                                                                  <HBox prefHeight="52.0" prefWidth="861.0">
+                                                                     <children>
+                                                                        <Label prefHeight="54.0" prefWidth="212.0" text="Submodalidades registradas">
+                                                                           <font>
+                                                                              <Font size="17.0" />
+                                                                           </font>
+                                                                        </Label>
+                                                                     </children>
+                                                                  </HBox>
+                                                                  <ListView fx:id="listViewSubmodalidades" onMouseClicked="#EventoClickListSubModalidades" prefHeight="177.0" prefWidth="861.0" />
+                                                               </children>
+                                                            </VBox>
+                                                         </children>
+                                                         <padding>
+                                                            <Insets left="10.0" right="10.0" />
+                                                         </padding>
+                                                      </AnchorPane>
+                                                   </content>
+                                                   <font>
+                                                      <Font name="System Bold" size="18.0" />
+                                                   </font>
+                                                </TitledPane>
+                                             </children>
+                                          </HBox>
+                                          <Pane prefHeight="56.0" prefWidth="871.0">
+                                             <children>
+                                                <HBox alignment="TOP_RIGHT" prefHeight="45.0" prefWidth="861.0" spacing="10.0">
+                                                   <children>
+                                                      <Button fx:id="btnGuardarModalidad" mnemonicParsing="false" onAction="#actionEventBotonGuardarModalidad" prefHeight="45.0" prefWidth="139.0" style="-fx-background-color: #05993D;" text="Guardar" textFill="#fcf9f9">
+                                                         <font>
+                                                            <Font size="17.0" />
+                                                         </font>
+                                                      </Button>
+                                                      <Button fx:id="btnActualizarModalidad" mnemonicParsing="false" onAction="#actionEventBotonActualizarModalidad" prefHeight="45.0" prefWidth="140.0" style="-fx-background-color: #FBC432;" text="Actualizar" textFill="#fcf9f9">
+                                                         <font>
+                                                            <Font size="17.0" />
+                                                         </font>
+                                                      </Button>
+                                                      <Button fx:id="btnVolverModalidad" mnemonicParsing="false" onAction="#actionEventBtnVolverModalidad" prefHeight="45.0" prefWidth="139.0" style="-fx-background-color: #F7453D;" text="Cancelar" textFill="#fcf9f9">
+                                                         <font>
+                                                            <Font size="17.0" />
+                                                         </font>
+                                                      </Button>
+                                                   </children>
+                                                </HBox>
+                                             </children>
+                                          </Pane>
+                                       </children>
+                                       <padding>
+                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                       </padding>
+                                    </VBox>
+                                 </children>
+                              </StackPane>
+                           </children>
+                        </AnchorPane>
+                     </content>
+                  </Tab>
+                  <Tab fx:id="tabSubmodalidad" text="Submodalidades de contratos">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="900.0" prefWidth="1220.0">
+                           <children>
+                              <StackPane fx:id="stackPaneSubmodalidad" alignment="TOP_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1220.0">
+                                 <children>
+                                    <VBox fx:id="panelListSubmodalidad" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="816.0" prefWidth="1220.0" style="-fx-background-color: #E4E4E5;">
+                                       <children>
+                                          <HBox prefHeight="35.0" prefWidth="1200.0">
+                                             <children>
+                                                <Pane prefHeight="66.0" prefWidth="1220.0">
+                                                   <children>
+                                                      <Label prefHeight="35.0" prefWidth="471.0" text="Submodalidades de contrato registradas">
+                                                         <font>
+                                                            <Font name="System Bold" size="22.0" />
+                                                         </font>
+                                                      </Label>
+                                                   </children>
+                                                </Pane>
+                                             </children>
+                                          </HBox>
+                                          <HBox prefHeight="45.0" prefWidth="1200.0">
+                                             <children>
+                                                <Pane prefHeight="45.0" prefWidth="422.0">
+                                                   <children>
+                                                      <HBox alignment="CENTER_LEFT" prefHeight="45.0" prefWidth="423.0" spacing="5.0">
+                                                         <children>
+                                                            <TextField fx:id="txtBuscarSubmodalidad" prefHeight="45.0" prefWidth="300.0" promptText="Buscar submodalidad" />
+                                                            <FontAwesomeIcon fill="#1c0cfc" glyphName="SEARCH" size="45" textAlignment="CENTER" wrappingWidth="38.0" />
+                                                         </children>
+                                                      </HBox>
+                                                   </children>
+                                                </Pane>
+                                                <Pane prefHeight="45.0" prefWidth="781.0">
+                                                   <children>
+                                                      <HBox alignment="CENTER_RIGHT" prefHeight="45.0" prefWidth="780.0" spacing="10.0">
+                                                         <children>
+                                                            <Button fx:id="btnCrearSubModalidad" mnemonicParsing="false" onAction="#actionEventBotonCrearSubModalidad" prefHeight="45.0" prefWidth="139.0" style="-fx-background-color: #05993D;" text="Crear " textFill="#fcf9f9">
+                                                               <font>
+                                                                  <Font size="17.0" />
+                                                               </font>
+                                                            </Button>
+                                                            <Button fx:id="btnEditarSubModalidad" mnemonicParsing="false" onAction="#actionEventBotonEditarSubModalidad" prefHeight="45.0" prefWidth="140.0" style="-fx-background-color: FBC432;" text="Editar" textFill="#fcf9f9">
+                                                               <font>
+                                                                  <Font size="17.0" />
+                                                               </font>
+                                                            </Button>
+                                                            <Button fx:id="btnEliminarSubModalidad" mnemonicParsing="false" onAction="#actionEventBotonEliminarSubModalidad" prefHeight="45.0" prefWidth="139.0" style="-fx-background-color: #F7453D;" text="Eliminar" textFill="#fcf9f9">
+                                                               <font>
+                                                                  <Font size="17.0" />
+                                                               </font>
+                                                            </Button>
+                                                         </children>
+                                                      </HBox>
+                                                   </children>
+                                                </Pane>
+                                             </children>
+                                             <VBox.margin>
+                                                <Insets top="20.0" />
+                                             </VBox.margin>
+                                          </HBox>
+                                          <HBox prefHeight="674.0" prefWidth="1191.0">
+                                             <children>
+                                                <TableView fx:id="tablaSubmodalidades" prefHeight="673.0" prefWidth="1200.0">
+                                                   <columns>
+                                                      <TableColumn fx:id="columnIdSub" prefWidth="100.0" text="Id" />
+                                                      <TableColumn fx:id="columnNombreSub" prefWidth="452.0" text="Nombre Submodalidad" />
+                                                      <TableColumn fx:id="columnDescripSub" minWidth="0.0" prefWidth="647.0" text="Descripcion Submodalidad" />
+                                                   </columns>
+                                                </TableView>
+                                             </children>
+                                             <opaqueInsets>
+                                                <Insets />
+                                             </opaqueInsets>
+                                             <VBox.margin>
+                                                <Insets top="20.0" />
+                                             </VBox.margin>
+                                          </HBox>
+                                       </children>
+                                       <padding>
+                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                       </padding>
+                                    </VBox>
+                                    <VBox fx:id="panelCrearSubmodalidad" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="506.0" prefWidth="891.0" style="-fx-background-color: #E4E4E5;" visible="false">
+                                       <children>
+                                          <HBox prefHeight="35.0" prefWidth="1200.0">
+                                             <children>
+                                                <Pane prefHeight="66.0" prefWidth="1220.0">
+                                                   <children>
+                                                      <Label prefHeight="35.0" prefWidth="492.0" text="Registro submodalidades de contrato">
+                                                         <font>
+                                                            <Font name="System Bold" size="22.0" />
+                                                         </font>
+                                                      </Label>
+                                                   </children>
+                                                </Pane>
+                                             </children>
+                                          </HBox>
+                                          <HBox prefHeight="0.0" prefWidth="871.0" visible="false">
+                                             <children>
+                                                <Pane prefHeight="54.0" prefWidth="1200.0">
+                                                   <children>
+                                                      <VBox prefHeight="80.0" prefWidth="861.0">
+                                                         <children>
+                                                            <Label text="Id direccion">
+                                                               <font>
+                                                                  <Font size="17.0" />
+                                                               </font>
+                                                            </Label>
+                                                            <TextField fx:id="txtIdSubmodalidad" prefHeight="41.0" prefWidth="100.0" />
+                                                         </children>
+                                                      </VBox>
+                                                   </children>
+                                                </Pane>
+                                             </children>
+                                          </HBox>
+                                          <HBox prefHeight="265.0" prefWidth="871.0">
+                                             <VBox.margin>
+                                                <Insets top="20.0" />
+                                             </VBox.margin>
+                                             <children>
+                                                <Pane prefHeight="54.0" prefWidth="1200.0">
+                                                   <children>
+                                                      <VBox prefHeight="256.0" prefWidth="861.0">
+                                                         <children>
+                                                            <HBox prefHeight="8.0" prefWidth="861.0">
+                                                               <children>
+                                                                  <Label text="Nombre submodalidad">
+                                                                     <font>
+                                                                        <Font size="17.0" />
+                                                                     </font>
+                                                                  </Label>
+                                                                  <Label fx:id="lbErrorNombreSubModalidadFichaSub" text=" (Required)" textFill="#da0d0d" visible="false">
+                                                                     <font>
+                                                                        <Font size="17.0" />
+                                                                     </font>
+                                                                  </Label>
+                                                               </children>
+                                                            </HBox>
+                                                            <TextField fx:id="txtNombreSubModalidaFichaSub" prefHeight="41.0" prefWidth="100.0" />
+                                                            <HBox prefHeight="8.0" prefWidth="861.0">
+                                                               <children>
+                                                                  <Label text="Descripcion submodalidad">
+                                                                     <font>
+                                                                        <Font size="17.0" />
+                                                                     </font>
+                                                                  </Label>
+                                                                  <Label fx:id="lbErrorDescripcionSubModalidadFichaSub" text=" (Required)" textFill="#da0d0d" visible="false">
+                                                                     <font>
+                                                                        <Font size="17.0" />
+                                                                     </font>
+                                                                  </Label>
+                                                               </children>
+                                                            </HBox>
+                                                            <TextArea fx:id="txtDescripcionSubModalidaFichaSub" prefHeight="133.0" prefWidth="861.0" />
+                                                         </children>
+                                                      </VBox>
+                                                   </children>
+                                                </Pane>
+                                             </children>
+                                          </HBox>
+                                          <HBox prefHeight="103.0" prefWidth="871.0">
+                                             <children>
+                                                <Pane prefHeight="76.0" prefWidth="861.0">
+                                                   <children>
+                                                      <VBox prefHeight="102.0" prefWidth="861.0">
+                                                         <children>
+                                                            <HBox prefHeight="0.0" prefWidth="861.0">
+                                                               <children>
+                                                                  <Label text="Modalidad de contrato">
+                                                                     <font>
+                                                                        <Font size="17.0" />
+                                                                     </font>
+                                                                  </Label>
+                                                                  <Label fx:id="lbErrorModalidadFichaSub" text=" (Required)" textFill="#da0d0d" visible="false">
+                                                                     <font>
+                                                                        <Font size="17.0" />
+                                                                     </font>
+                                                                  </Label>
+                                                               </children>
+                                                            </HBox>
+                                                            <ComboBox fx:id="cmbModalidadFichaSub" prefHeight="41.0" prefWidth="921.0" />
+                                                         </children>
+                                                      </VBox>
+                                                   </children>
+                                                </Pane>
+                                             </children>
+                                          </HBox>
+                                          <Pane prefHeight="56.0" prefWidth="871.0">
+                                             <children>
+                                                <HBox alignment="TOP_RIGHT" prefHeight="45.0" prefWidth="861.0" spacing="10.0">
+                                                   <children>
+                                                      <Button fx:id="btnGuardarSubModalidad" mnemonicParsing="false" onAction="#actionEventBotonGuardarSubModalidad" prefHeight="45.0" prefWidth="139.0" style="-fx-background-color: #05993D;" text="Guardar" textFill="#fcf9f9">
+                                                         <font>
+                                                            <Font size="17.0" />
+                                                         </font>
+                                                      </Button>
+                                                      <Button fx:id="btnActualizarSubModalidad" mnemonicParsing="false" onAction="#actionEventBotonActualizarSubModalidad" prefHeight="45.0" prefWidth="140.0" style="-fx-background-color: #FBC432;" text="Actualizar" textFill="#fcf9f9">
+                                                         <font>
+                                                            <Font size="17.0" />
+                                                         </font>
+                                                      </Button>
+                                                      <Button fx:id="btnVolverSubModalidad" mnemonicParsing="false" onAction="#actionEventBtnVolverSubModalidad" prefHeight="45.0" prefWidth="139.0" style="-fx-background-color: #F7453D;" text="Cancelar" textFill="#fcf9f9">
+                                                         <font>
+                                                            <Font size="17.0" />
+                                                         </font>
+                                                      </Button>
+                                                   </children>
+                                                </HBox>
+                                             </children>
+                                          </Pane>
+                                       </children>
+                                       <padding>
+                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                       </padding>
+                                    </VBox>
+                                 </children>
+                              </StackPane>
+                           </children>
+                        </AnchorPane>
+                     </content>
+                  </Tab>
+               </tabs>
+            </TabPane>
+         </children>
+      </Pane>
+   </children>
+</StackPane>
