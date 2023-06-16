@@ -14,67 +14,78 @@
 
 <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.gov.deajvpar.gestcontractclient.fx.controller.FormPrincipalController">
    <children>
-      <Pane prefHeight="900.0" prefWidth="351.0" style="-fx-background-color: #FFFFFF;">
+      <VBox prefHeight="900.0" prefWidth="380.0">
          <children>
-            <VBox prefHeight="900.0" prefWidth="351.0" spacing="20.0">
+            <Pane prefHeight="900.0" prefWidth="336.0" style="-fx-background-color: #FFFFFF;">
                <children>
-                  <Pane prefHeight="119.0" prefWidth="351.0" style="-fx-background-color: #E5E2E6;">
+                  <VBox prefHeight="977.0" prefWidth="380.0" spacing="10.0">
                      <children>
-                        <HBox prefHeight="119.0" prefWidth="351.0">
+                        <Pane prefHeight="113.0" prefWidth="365.0" style="-fx-background-color: #E5E2E6;">
                            <children>
-                              <Pane prefHeight="119.0" prefWidth="135.0">
+                              <HBox prefHeight="113.0" prefWidth="365.0">
                                  <children>
-                                    <ImageView fitHeight="110.0" fitWidth="117.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../images/pngwing4.com.png" />
-                                       </image>
-                                    </ImageView>
+                                    <Pane prefHeight="102.0" prefWidth="119.0">
+                                       <children>
+                                          <ImageView fitHeight="110.0" fitWidth="110.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../images/pngwing4.com.png" />
+                                             </image>
+                                          </ImageView>
+                                       </children>
+                                    </Pane>
+                                    <VBox prefHeight="113.0" prefWidth="251.0">
+                                       <children>
+                                          <Label fx:id="lbNombre" alignment="BOTTOM_LEFT" prefHeight="57.0" prefWidth="234.0" text="Jairo Seoanes Leon">
+                                             <font>
+                                                <Font name="System Bold" size="22.0" />
+                                             </font>
+                                          </Label>
+                                          <Label fx:id="lbTipo" alignment="TOP_LEFT" prefHeight="26.0" prefWidth="231.0" text="Administrador">
+                                             <font>
+                                                <Font size="17.0" />
+                                             </font>
+                                          </Label>
+                                          <Label fx:id="lbRol" prefHeight="17.0" prefWidth="216.0" text="Administrador" />
+                                       </children>
+                                    </VBox>
                                  </children>
-                              </Pane>
-                              <VBox prefHeight="119.0" prefWidth="235.0">
-                                 <children>
-                                    <Label fx:id="lbNombre" alignment="BOTTOM_LEFT" prefHeight="57.0" prefWidth="233.0" text="Jairo Seoanes Leon">
-                                       <font>
-                                          <Font name="System Bold" size="22.0" />
-                                       </font>
-                                    </Label>
-                                    <Label fx:id="lbTipo" alignment="TOP_LEFT" prefHeight="25.0" prefWidth="226.0" text="Administrador">
-                                       <font>
-                                          <Font size="17.0" />
-                                       </font>
-                                    </Label>
-                                    <Label fx:id="lbRol" prefHeight="17.0" prefWidth="234.0" text="Administrador" />
-                                 </children>
-                              </VBox>
+                              </HBox>
                            </children>
-                        </HBox>
+                        </Pane>
+                        <VBox prefHeight="777.0" prefWidth="365.0" VBox.vgrow="ALWAYS">
+                           <children>
+                              <StackPane prefHeight="863.0" prefWidth="380.0" style="-fx-background-color: #FFFFFF;">
+                                 <children>
+                                    <ScrollPane prefHeight="767.0" prefWidth="365.0" style="-fx-background-color: #E5E2E6;">
+                                       <content>
+                                          <TreeView fx:id="menuRoot" onMouseClicked="#eventClickMenu" prefHeight="854.0" prefWidth="365.0" style="-fx-background-color: #E5E2E6;" />
+                                       </content>
+                                    </ScrollPane>
+                                 </children>
+                              </StackPane>
+                           </children>
+                        </VBox>
                      </children>
-                  </Pane>
-                  <StackPane prefHeight="766.0" prefWidth="351.0">
-                     <children>
-                        <ScrollPane prefHeight="666.0" prefWidth="351.0">
-                           <content>
-                              <TreeView fx:id="menuRoot" onMouseClicked="#eventClickMenu" prefHeight="750.0" prefWidth="351.0" />
-                           </content>
-                        </ScrollPane>
-                     </children>
+                  </VBox>
+               </children>
+            </Pane>
+         </children>
+      </VBox>
+      <VBox prefHeight="900.0" prefWidth="1031.0" style="-fx-background-color: #E5E2E6;" HBox.hgrow="ALWAYS">
+         <children>
+            <Pane prefHeight="900.0" prefWidth="1240.0" style="-fx-background-color: #374968;" VBox.vgrow="ALWAYS">
+               <children>
+                  <StackPane fx:id="panel" alignment="TOP_LEFT" layoutX="2.0">
+                     <padding>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </padding>
                   </StackPane>
                </children>
-            </VBox>
-         </children>
-      </Pane>
-      <Pane prefHeight="900.0" prefWidth="1240.0" style="-fx-background-color: #374968;">
-         <children>
-            <StackPane fx:id="panel" prefHeight="900.0" prefWidth="1240.0">
                <padding>
-                  <Insets bottom="10.0" left="10.0" top="10.0" />
-               </padding></StackPane>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </padding>
+            </Pane>
          </children>
-         <HBox.margin>
-            <Insets />
-         </HBox.margin>
-         <padding>
-            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-         </padding></Pane>
+      </VBox>
    </children>
 </HBox>

@@ -20,13 +20,13 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1240.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.gov.deajvpar.gestcontractclient.fx.controller.PanelModalidadContratoController">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.gov.deajvpar.gestcontractclient.fx.controller.PanelModalidadContratoController">
    <children>
       <Pane prefHeight="900.0" prefWidth="1240.0">
          <children>
             <TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1220.0" tabClosingPolicy="UNAVAILABLE">
                <tabs>
-                  <Tab fx:id="tabModalidad" text="Modalidades de contrato">
+                  <Tab fx:id="tabModalidad" onSelectionChanged="#eventTabModalidad" text="Modalidades de contrato">
                      <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="900.0" prefWidth="1220.0">
                            <children>
@@ -278,7 +278,7 @@
                         </AnchorPane>
                      </content>
                   </Tab>
-                  <Tab fx:id="tabSubmodalidad" text="Submodalidades de contratos">
+                  <Tab fx:id="tabSubmodalidad" onSelectionChanged="#eventTabSubModalidad" text="Submodalidades de contratos">
                      <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="900.0" prefWidth="1220.0">
                            <children>

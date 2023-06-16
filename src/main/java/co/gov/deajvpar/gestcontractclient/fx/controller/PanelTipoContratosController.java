@@ -4,37 +4,22 @@
  */
 package co.gov.deajvpar.gestcontractclient.fx.controller;
 
-import co.gov.deajvpar.gestcontractclient.fx.dtos.ModuloDto;
-import co.gov.deajvpar.gestcontractclient.fx.dtos.PrivilegioDto;
-import co.gov.deajvpar.gestcontractclient.fx.dtos.SesionUserDto;
-import co.gov.deajvpar.gestcontractclient.fx.dtos.SesionUsuarioSingleton;
-import co.gov.deajvpar.gestcontractclient.fx.dtos.TipoContratoDto;
+import co.gov.deajvpar.gestcontractclient.fx.Exceptions.HttpResponseException;
+import co.gov.deajvpar.gestcontractclient.fx.dtos.*;
 import co.gov.deajvpar.gestcontractclient.fx.dtos.table.TipoContratoDtoTable;
-import co.gov.deajvpar.gestcontractclient.fx.utility.HttpCodeResponse;
-import co.gov.deajvpar.gestcontractclient.fx.utility.MyGsonMapper;
-import co.gov.deajvpar.gestcontractclient.fx.utility.MyHttpApi;
-import co.gov.deajvpar.gestcontractclient.fx.utility.MyScreen;
-import co.gov.deajvpar.gestcontractclient.fx.utility.StatusCode;
-import co.gov.deajvpar.gestcontractclient.fx.utility.UsedApis;
-import com.mashape.unirest.http.exceptions.UnirestException;
+import co.gov.deajvpar.gestcontractclient.fx.logic.GestionTipoContrato;
+import co.gov.deajvpar.gestcontractclient.fx.utility.*;
 import java.net.URL;
-import java.util.Optional;
-import java.util.ResourceBundle;
+import java.util.*;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.collections.transformation.FilteredList;
-import javafx.collections.transformation.SortedList;
+import javafx.collections.transformation.*;
 import javafx.event.ActionEvent;
-import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.VBox;
 
@@ -43,98 +28,57 @@ import javafx.scene.layout.VBox;
  *
  * @author Jairo F
  */
-public class PanelTipoContratosController implements Initializable {
+public class PanelTipoContratosController implements Initializable, IFormController {
 
     /**
      * Initializes the controller class.
      */
     @FXML
-    private VBox panelCrear;
+    private VBox panelCrear, panelVer;
     @FXML
-    private VBox panelVer;
-    @FXML
-    private Button btnCrear;
-    @FXML
-    private Button btnGuardar;
-    @FXML
-    private Button btnEditar;
-    @FXML
-    private Button btnEliminar;
-    @FXML
-    private Button btnActualizar;
-
+    private Button btnCrear, btnGuardar, btnEditar, btnEliminar, btnActualizar;
     @FXML
     private Label lbErrorTipo;
-
     @FXML
     private TableView<TipoContratoDtoTable> tablaContratos;
+    @FXML
+    private TextField txtTipo, txtBuscar, txtId;
+    @FXML
 
-    @FXML
-    private TextField txtTipo;
-    @FXML
-    private TextField txtBuscar;
-    @FXML
-    private TextField txtId;
-
-    @FXML
-    private TableColumn<TipoContratoDtoTable, String> tableColumnTipo;
-    @FXML
-    private TableColumn<TipoContratoDtoTable, String> tableColumnId;
-
+    private TableColumn<TipoContratoDtoTable, String> tableColumnTipo, tableColumnId;
     private ObservableList<TipoContratoDtoTable> data;
-    private SesionUserDto sesion;
-    private TipoContratoDto[] tipoContratoList;
-    private boolean create, view, delete, update;
+
+    private GestionTipoContrato logicContrato = new GestionTipoContrato();
 
     @FXML
     private void actionEventBotonCrear(ActionEvent e) {
-        this.panelCrear.setVisible(true);
-        this.panelVer.setVisible(false);
-        this.limpiarPanelCrear();
-        this.selectCrearOrActualizar(true);
+        this.activarDesactivarPaneles(true);
+        this.limpiarFormulario();
+        this.activarDesactivarOpciones(true);
     }
-//
 
-//
     @FXML
     private void actionEventBotonEditar(ActionEvent e) {
         TipoContratoDtoTable selected = this.tablaContratos.getSelectionModel().getSelectedItem();
         if (selected != null) {
 
-            this.limpiarPanelCrear();
-            this.panelCrear.setVisible(true);
-            this.panelVer.setVisible(false);
-            this.selectCrearOrActualizar(false);
-            TipoContratoDto dto = this.buscarIntoArray(selected.getId());
+            this.activarDesactivarPaneles(true);
+            this.limpiarFormulario();
+            this.activarDesactivarOpciones(false);
+            TipoContratoDto dto = this.logicContrato.getObjectTipoContract(selected.getId());
             this.txtId.setText(dto.getId().toString());
             this.txtTipo.setText(dto.getDescripcion());
         }
 
     }
-//
 
     @FXML
     private void actionEventBotonActualizar(ActionEvent e) {
-        if (this.validaFormCrear()) {
-            TipoContratoDto tipoContrato = this.loadTipoContrato();
-
-            try {
-                MyHttpApi.jsonPostRequest(UsedApis.API_TIPO_CONTRATO_EDIT, tipoContrato);
-                String response = MyHttpApi.stringResponse();
-                StatusCode status = HttpCodeResponse.get(MyHttpApi.responseStatusCode());
-                if (MyHttpApi.statusOk()) {
-                    MyScreen.showMessage(null, status.getStatus(), "Solicitud ejecutada con exito. El tipo de contrato ha sido actualizado");
-                    this.initTable();
-                } else {
-                    MyScreen.errorMessage(status.toString(), response);
-                }
-            } catch (UnirestException ex) {
-                MyScreen.errorMessage(ex);
-            }
-            this.limpiarPanelCrear();
+        if (this.validarEnvioFormulario()) {
+            TipoContratoDto tipoContrato = this.leerDatosTipoContrato();
+            this.actualizarTipoContrato(tipoContrato);
         }
     }
-//
 
     @FXML
     private void actionEventBotonEliminar(ActionEvent e) {
@@ -144,73 +88,40 @@ public class PanelTipoContratosController implements Initializable {
         if (selected != null) {
             Optional<ButtonType> result = MyScreen.confirmMessage(null, "Confirmacion", "Esta seguro de realizar la eliminacion?");
             if (result.get() == ButtonType.OK) {
-                Long id = selected.getId();
-                try {
-                    MyHttpApi.jsonPostRequest(UsedApis.API_TIPO_CONTRATO_DELETE, id);
-                    String response = MyHttpApi.stringResponse();
-                    StatusCode status = HttpCodeResponse.get(MyHttpApi.responseStatusCode());
-                    if (MyHttpApi.statusOk()) {
-                        this.initTable();
-                        MyScreen.showMessage(null, status.getStatus(), "Solicitud ejecutada con exito. Registro eliminado correctamente");
-
-                    } else {
-                        MyScreen.errorMessage(status.toString(), response);
-                    }
-                } catch (UnirestException ex) {
-                    MyScreen.errorMessage(ex);
-                }
+                TipoContratoDto dto = new TipoContratoDto();
+                dto.setId(selected.getId());
+                this.eliminarTipoContrato(dto);
             }
         }
     }
 
-    private TipoContratoDto loadTipoContrato() {
+    private TipoContratoDto leerDatosTipoContrato() {
 
         TipoContratoDto tipoContrato = new TipoContratoDto();
         tipoContrato.setDescripcion(this.txtTipo.getText());
-        tipoContrato.setCrateByuser(sesion.getUser());
+        tipoContrato.setCrateByuser(this.logicContrato.getSesionUser());
 
-        String id = this.txtId.getText();
-        if (id == null) {
+        if (this.txtId.getText() == null) {
             tipoContrato.setId(null);
         } else {
-            tipoContrato.setId(Long.valueOf(id));
+            tipoContrato.setId(Long.valueOf(this.txtId.getText()));
         }
         return tipoContrato;
     }
 
     @FXML
     private void actionEventBotonGuardar(ActionEvent e) {
-        if (this.validaFormCrear()) {
-            TipoContratoDto tipoContrato = this.loadTipoContrato();
-            try {
-                MyHttpApi.jsonPostRequest(UsedApis.API_TIPO_CONTRATO_SAVE, tipoContrato);
-                String response = MyHttpApi.stringResponse();
-                StatusCode status = HttpCodeResponse.get(MyHttpApi.responseStatusCode());
-                if (MyHttpApi.statusOk()) {
-                    MyScreen.showMessage(null, status.getStatus(), "Solicitud ejecutada con exito. El tipo de contrato ha sido registrado");
-                    this.initTable();
-                } else {
-                    MyScreen.errorMessage(status.toString(), response);
-                }
-            } catch (UnirestException ex) {
-                MyScreen.errorMessage(ex);
-            }
-            this.limpiarPanelCrear();
+        if (this.validarEnvioFormulario()) {
+            TipoContratoDto tipoContrato = this.leerDatosTipoContrato();
+            this.actualizarTipoContrato(tipoContrato);
         }
     }
 
     @FXML
     private void actionEventBtnVolver(ActionEvent e) {
-        this.panelCrear.setVisible(false);
-        this.panelVer.setVisible(true);
+        this.activarDesactivarPaneles(false);
     }
-//
-//   
 
-    @FXML
-    public void eventKeyreleaseTxtBuscar(KeyEvent e) {
-        String texto = this.txtBuscar.getText();
-    }
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -218,20 +129,44 @@ public class PanelTipoContratosController implements Initializable {
 
         try {
 
-            this.sesion = SesionUsuarioSingleton.get();
-            this.setPrivilegiosModulo();
-
             this.lbErrorTipo.setVisible(false);
-            this.selectCrearOrActualizar(true);
+            this.activarDesactivarOpciones(true);
+            this.activarDesactivarPaneles(false);
 
-            this.panelCrear.setVisible(false);
-            this.panelVer.setVisible(true);
             this.initTable();
             this.txtTipo.setText(null);
             this.activarPrivilegiosModulo();
 
         } catch (Exception e) {
             e.printStackTrace();
+        }
+
+    }
+
+    private void actualizarTipoContrato(TipoContratoDto dto) {
+
+        try {
+            this.logicContrato.save(dto);
+            MyScreen.exitMessage();
+            this.initTable();
+            this.limpiarFormulario();
+
+        } catch (HttpResponseException ex) {
+            MyScreen.errorMessage(ex.getCausa(), ex.getMessage());
+        }
+
+    }
+
+    private void eliminarTipoContrato(TipoContratoDto dto) {
+
+        try {
+            this.logicContrato.delete(dto);
+            MyScreen.exitMessage();
+            this.initTable();
+            this.limpiarFormulario();
+
+        } catch (HttpResponseException ex) {
+            MyScreen.errorMessage(ex.getCausa(), ex.getMessage());
         }
 
     }
@@ -258,9 +193,7 @@ public class PanelTipoContratosController implements Initializable {
         });
 
         SortedList<TipoContratoDtoTable> sortedData = new SortedList<>(filteredData);
-
         sortedData.comparatorProperty().bind(this.tablaContratos.comparatorProperty());
-
         this.tablaContratos.setItems(sortedData);
     }
 
@@ -268,105 +201,81 @@ public class PanelTipoContratosController implements Initializable {
 
         this.tableColumnTipo.setCellValueFactory(new PropertyValueFactory("descripcion"));
         this.tableColumnId.setCellValueFactory(new PropertyValueFactory("id"));
-
         this.data = FXCollections.observableArrayList();
 
         try {
-            MyHttpApi.jsonGetRequest(UsedApis.API_TIPO_CONTRATO_GET_ALL);
-            String response = MyHttpApi.stringResponse();
-            StatusCode status = HttpCodeResponse.get(MyHttpApi.responseStatusCode());
-            if (MyHttpApi.statusOk()) {
-                this.tipoContratoList = MyGsonMapper.get().fromJson(response, TipoContratoDto[].class);
-                for (TipoContratoDto dto : this.tipoContratoList) {
-                    TipoContratoDtoTable row = new TipoContratoDtoTable(dto);
-                    this.data.add(row);
-                }
-//                this.tablaContratos.setItems(data);
-                if (this.delete) {
-
-                    this.btnEliminar.setDisable(!(data.size() > 0));
-
-                } else {
-                    this.btnEliminar.setDisable(true);
-                }
-                if (this.view) {
-                    this.setFiltroTable();
-                }
-            } else {
-                MyScreen.errorMessage(status.toString(), response);
+            TipoContratoDto[] list = this.logicContrato.getAll();
+            for (TipoContratoDto dto : list) {
+                TipoContratoDtoTable row = new TipoContratoDtoTable(dto);
+                this.data.add(row);
             }
-        } catch (UnirestException ex) {
-            MyScreen.errorMessage(ex);
+            if (this.logicContrato.isDelete()) {
+
+                this.btnEliminar.setDisable(!(data.size() > 0));
+
+            } else {
+                this.btnEliminar.setDisable(true);
+            }
+            if (this.logicContrato.isView()) {
+                this.setFiltroTable();
+            }
+
+        } catch (HttpResponseException ex) {
+            MyScreen.errorMessage(ex.getCausa(), ex.getMessage());
         }
 
     }
 
-    private void limpiarPanelCrear() {
 
+
+    @Override
+    public void activarPrivilegiosModulo() {
+        
+        boolean create = this.logicContrato.isCreate();
+        boolean update = this.logicContrato.isUpdate();
+        boolean view = this.logicContrato.isView();
+        boolean delete = this.logicContrato.isDelete();
+        
+        this.btnGuardar.setDisable(!create);
+        this.btnCrear.setDisable(!create);
+
+        this.btnEditar.setDisable(!update);
+        this.btnActualizar.setDisable(!update);
+
+        this.btnEliminar.setDisable(!delete);
+
+        this.txtBuscar.setDisable(!view);
+        this.tablaContratos.setDisable(!view);
+
+    }
+
+    @Override
+    public boolean validarEnvioFormulario() {
+        boolean resultValidation = true;
+        if (!Utility.validateEmptyComponentTextField(this.txtTipo, this.lbErrorTipo)) {
+            resultValidation = false;
+        }
+        return resultValidation;
+    }
+
+    @Override
+    public void activarDesactivarOpciones(boolean opt) {
+        this.btnActualizar.setDisable(opt);
+        this.btnGuardar.setDisable(!opt);
+    }
+
+    @Override
+    public void limpiarFormulario() {
         this.txtTipo.setText(null);
         this.txtId.setText(null);
-
         this.lbErrorTipo.setVisible(false);
-
         this.txtTipo.requestFocus();
     }
 
-    private boolean validaFormCrear() {
-
-        boolean resultValidation = true;
-        boolean empty;
-
-        empty = this.txtTipo.getText() == null || this.txtTipo.getText().isBlank();
-        if (empty) {
-            this.txtTipo.requestFocus();
-            resultValidation = false;
-        }
-        this.lbErrorTipo.setVisible(empty);
-
-        return resultValidation;
-
-    }
-
-    private TipoContratoDto buscarIntoArray(Long id) {
-
-        for (TipoContratoDto t : this.tipoContratoList) {
-            //DireccionSeccionalDto d = this.deajs[i];
-            if (t.getId().equals(id)) {
-                return t;
-            }
-        }
-        return null;
-    }
-
-    private void selectCrearOrActualizar(boolean opt) {
-        // true - > crear     false->actualizar
-        this.btnActualizar.setDisable(opt);
-        this.btnGuardar.setDisable(!opt);
-
-    }
-
-    private void setPrivilegiosModulo() {
-
-        this.create = this.sesion.checkPrivilegioModulo(ModuloDto.CONFIGURACION, PrivilegioDto.CREAR);
-        this.update = this.sesion.checkPrivilegioModulo(ModuloDto.CONFIGURACION, PrivilegioDto.ACTUALIZAR);
-        this.view = this.sesion.checkPrivilegioModulo(ModuloDto.CONFIGURACION, PrivilegioDto.CONSULTAR);
-        this.delete = this.sesion.checkPrivilegioModulo(ModuloDto.CONFIGURACION, PrivilegioDto.ELIMINAR);
-
-    }
-
-    public void activarPrivilegiosModulo() {
-
-        this.btnGuardar.setDisable(!this.create);
-        this.btnCrear.setDisable(!this.create);
-
-        this.btnEditar.setDisable(!this.update);
-        this.btnActualizar.setDisable(!this.update);
-
-        this.btnEliminar.setDisable(!this.delete);
-
-        this.txtBuscar.setDisable(!this.view);
-        this.tablaContratos.setDisable(!this.view);
-
+    @Override
+    public void activarDesactivarPaneles(boolean opt) {
+        this.panelCrear.setVisible(opt);
+        this.panelVer.setVisible(!opt);
     }
 
 }

@@ -9,13 +9,13 @@ package co.gov.deajvpar.gestcontractclient.fx.dtos;
  * @author Jairo F
  */
 public enum ModuloDto {
-    ALL("ALL",0),
-    CONFIGURACION("CONFIGURACION",1),
-    USUARIOS("USUARIOS",2),
-    CONTRATOS("CONTRATOS",3),
-    SUPERVISION("SUPERVISION",4),
-    SUPERVISOR("SUPERVISOR",5),
-    DASHBOARD("DASHBOARD",6);
+   // ALL("ALL",0),
+    CONFIGURACION("CONFIGURACION",0),
+    USUARIOS("USUARIOS",1),
+    CONTRATOS("CONTRATOS",2),
+    SUPERVISION("SUPERVISION",3),
+    SUPERVISOR("SUPERVISOR",4),
+    DASHBOARD("DASHBOARD",5);
     
     private String name;
     private int value;
@@ -57,11 +57,12 @@ public enum ModuloDto {
         
         switch(name){
             case "CONFIGURACION": return ModuloDto.CONFIGURACION;
-            case "ALL": return ModuloDto.ALL;
+//            case "ALL": return ModuloDto.ALL;
             case "CONTRATOS": return ModuloDto.CONTRATOS;
             case "DASHBOARD": return ModuloDto.DASHBOARD;
             case "SUPERVISION": return ModuloDto.SUPERVISION;
             case "SUPERVISOR": return ModuloDto.SUPERVISOR;
+            case "USUARIOS": return ModuloDto.USUARIOS;
             default: return null;
         }
     }

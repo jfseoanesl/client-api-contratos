@@ -4,44 +4,21 @@
  */
 package co.gov.deajvpar.gestcontractclient.fx.controller;
 
-import co.gov.deajvpar.gestcontractclient.fx.dtos.DireccionSeccionalDto;
-import co.gov.deajvpar.gestcontractclient.fx.dtos.DptoDto;
-import co.gov.deajvpar.gestcontractclient.fx.dtos.ModuloDto;
-import co.gov.deajvpar.gestcontractclient.fx.dtos.PrivilegioDto;
-import co.gov.deajvpar.gestcontractclient.fx.dtos.SesionUserDto;
-import co.gov.deajvpar.gestcontractclient.fx.dtos.SesionUsuarioSingleton;
+import co.gov.deajvpar.gestcontractclient.fx.Exceptions.HttpResponseException;
+import co.gov.deajvpar.gestcontractclient.fx.dtos.*;
 import co.gov.deajvpar.gestcontractclient.fx.dtos.table.DeajTableDto;
-import co.gov.deajvpar.gestcontractclient.fx.utility.HttpCodeResponse;
-import co.gov.deajvpar.gestcontractclient.fx.utility.MyGsonMapper;
-import co.gov.deajvpar.gestcontractclient.fx.utility.MyHttpApi;
-import co.gov.deajvpar.gestcontractclient.fx.utility.MyScreen;
-import co.gov.deajvpar.gestcontractclient.fx.utility.StatusCode;
-import co.gov.deajvpar.gestcontractclient.fx.utility.UsedApis;
-import com.mashape.unirest.http.exceptions.UnirestException;
+import co.gov.deajvpar.gestcontractclient.fx.logic.GestionDeaj;
+import co.gov.deajvpar.gestcontractclient.fx.utility.*;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.ResourceBundle;
+import java.util.*;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.collections.transformation.FilteredList;
-import javafx.collections.transformation.SortedList;
+import javafx.collections.*;
+import javafx.collections.transformation.*;
 import javafx.event.ActionEvent;
-import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseEvent;
+import javafx.scene.input.*;
 import javafx.scene.layout.VBox;
 
 /**
@@ -49,67 +26,37 @@ import javafx.scene.layout.VBox;
  *
  * @author Jairo F
  */
-public class PanelDireccionEjecutivaController implements Initializable {
+public class PanelDireccionEjecutivaController implements Initializable, IFormController {
 
     /**
      * Initializes the controller class.
      */
     @FXML
-    private VBox panelCrear;
+    private VBox panelCrear, panelVer;
     @FXML
-    private VBox panelVer;
+    private Button btnCrear, btnGuardarDeaj, btnEditar, btnEliminar, btnActualizar;
     @FXML
-    private Button btnCrear;
-    @FXML
-    private Button btnGuardarDeaj;
-    @FXML
-    private Button btnEditar;
-    @FXML
-    private Button btnEliminar;
-    @FXML
-    private Button btnActualizar;
-
-    @FXML
-    private Label lbErrorDptos;
-    @FXML
-    private Label lbErrorNombreDeaj;
-
+    private Label lbErrorDptos, lbErrorNombreDeaj;
     @FXML
     private ComboBox cmbDptos;
     @FXML
     private ListView listViewDptos;
-
     @FXML
     private TableView<DeajTableDto> tablaDeaj;
-
     @FXML
-    private TextField txtDeaj;
+    private TextField txtDeaj, txtBuscar, txtId;
     @FXML
-    private TextField txtBuscar;
-    @FXML
-    private TextField txtId;
-
-    @FXML
-    private TableColumn<DeajTableDto, String> tableColumnDeaj;
-    @FXML
-    private TableColumn<DeajTableDto, String> tableColumnDpto;
-
-    @FXML
-    private TableColumn<DeajTableDto, String> tableColumnId;
+    private TableColumn<DeajTableDto, String> tableColumnDeaj, tableColumnDpto, tableColumnId;
 
     private ObservableList<DeajTableDto> data;
-    private List<DptoDto> dptoList;
-    private List<DptoDto> listDptoSeleccionados;
-    private SesionUserDto sesion;
-    private DireccionSeccionalDto[] deajs;
-    private boolean create, view, delete, update;
+   
+    private GestionDeaj logica;
 
     @FXML
     private void actionEventBotonCrear(ActionEvent e) {
-        this.panelCrear.setVisible(true);
-        this.panelVer.setVisible(false);
-        this.limpiarPanelCrear();
-        this.selectCrearOrActualizar(true);
+        this.activarDesactivarPaneles(true);
+        this.limpiarFormulario();
+        this.activarDesactivarOpciones(true);
     }
 
     @FXML
@@ -117,14 +64,13 @@ public class PanelDireccionEjecutivaController implements Initializable {
         DeajTableDto selected = this.tablaDeaj.getSelectionModel().getSelectedItem();
         if (selected != null) {
 
-            this.limpiarPanelCrear();
-            this.panelCrear.setVisible(true);
-            this.panelVer.setVisible(false);
-            this.selectCrearOrActualizar(false);
-            DireccionSeccionalDto dto = this.buscarDeajIntoArray(selected.getId());
+            this.limpiarFormulario();
+            this.activarDesactivarPaneles(true);
+           this.activarDesactivarOpciones(false);
+            DireccionSeccionalDto dto = this.logica.getDeaj(selected.getId());
             this.txtId.setText(dto.getIdDireccion().toString());
             this.txtDeaj.setText(dto.getDescripcionSeccional());
-            this.listDptoSeleccionados = dto.getListDptoCoordinados();
+            this.logica.setListDptoSelected(dto.getListDptoCoordinados());
             this.setListviewDptos();
 
         }
@@ -133,53 +79,35 @@ public class PanelDireccionEjecutivaController implements Initializable {
 
     @FXML
     private void actionEventBotonActualizar(ActionEvent e) {
-        if (this.validaFormCrear()) {
-            DireccionSeccionalDto deaj = new DireccionSeccionalDto();
-            deaj.setDescripcionSeccional(this.txtDeaj.getText());
-            deaj.setEliminado(false);
-            deaj.setIdDireccion(Long.valueOf(this.txtId.getText()));
-            deaj.setListDptoCoordinados(this.listDptoSeleccionados);
-            deaj.setCreatedByUser(sesion.getUser());
-
+        if (this.validarEnvioFormulario()) {
+            DireccionSeccionalDto deaj = this.logica.getNewDeaj(this.txtId.getText(), this.txtDeaj.getText());
             try {
-                MyHttpApi.jsonPostRequest(UsedApis.API_DEAJ_EDIT, deaj);
-                String response = MyHttpApi.stringResponse();
-                StatusCode status = HttpCodeResponse.get(MyHttpApi.responseStatusCode());
-                if (MyHttpApi.statusOk()) {
-                    MyScreen.showMessage(null, status.getStatus(), "Solicitud ejecutada con exito. La direcion seccional ha sido actualizada");
-                    this.initTable();
-                } else {
-                    MyScreen.errorMessage(status.toString(), response);
-                }
-            } catch (UnirestException ex) {
-                MyScreen.errorMessage(ex);
+                this.logica.edit(deaj);
+                MyScreen.exitMessage();
+                this.initTable();
+
+            } catch (HttpResponseException ex) {
+                MyScreen.errorMessage(ex.getCausa(), ex.getMessage());
             }
-            this.limpiarPanelCrear();
+
         }
     }
 
     @FXML
     private void actionEventBotonEliminar(ActionEvent e) {
-        //this.limpiarPanelCrear();
         DeajTableDto selected = this.tablaDeaj.getSelectionModel().getSelectedItem();
 
         if (selected != null) {
             Optional<ButtonType> result = MyScreen.confirmMessage(null, "Confirmacion", "Esta seguro de realizar la eliminacion?");
             if (result.get() == ButtonType.OK) {
                 Long id = selected.getId();
+                DireccionSeccionalDto dto = new DireccionSeccionalDto(id);
                 try {
-                    MyHttpApi.jsonPostRequest(UsedApis.API_DEAJ_DELETE, id);
-                    String response = MyHttpApi.stringResponse();
-                    StatusCode status = HttpCodeResponse.get(MyHttpApi.responseStatusCode());
-                    if (MyHttpApi.statusOk()) {
-                        this.initTable();
-                        MyScreen.showMessage(null, status.getStatus(), "Solicitud ejecutada con exito. Registro eliminado correctamente");
+                    this.logica.delete(dto);
+                    MyScreen.exitMessage();
 
-                    } else {
-                        MyScreen.errorMessage(status.toString(), response);
-                    }
-                } catch (UnirestException ex) {
-                    MyScreen.errorMessage(ex);
+                } catch (HttpResponseException ex) {
+                    MyScreen.errorMessage(ex.getCausa(), ex.getMessage());
                 }
             }
         }
@@ -187,43 +115,30 @@ public class PanelDireccionEjecutivaController implements Initializable {
 
     @FXML
     private void actionEventBotonGuardarDeaj(ActionEvent e) {
-        if (this.validaFormCrear()) {
-            DireccionSeccionalDto deaj = new DireccionSeccionalDto();
-            deaj.setDescripcionSeccional(this.txtDeaj.getText());
-            deaj.setEliminado(false);
-            deaj.setListDptoCoordinados(this.listDptoSeleccionados);
-            deaj.setCreatedByUser(sesion.getUser());
-
+        if (this.validarEnvioFormulario()) {
+            DireccionSeccionalDto deaj = this.logica.getNewDeaj(this.txtDeaj.getText());
             try {
-                MyHttpApi.jsonPostRequest(UsedApis.API_DEAJ_SAVE, deaj);
-                String response = MyHttpApi.stringResponse();
-                StatusCode status = HttpCodeResponse.get(MyHttpApi.responseStatusCode());
-                if (MyHttpApi.statusOk()) {
-                    MyScreen.showMessage(null, status.getStatus(), "Solicitud ejecutada con exito. La direcion seccional ha sido registrada");
-                    this.initTable();
-                } else {
-                    MyScreen.errorMessage(status.toString(), response);
-                }
-            } catch (UnirestException ex) {
-                MyScreen.errorMessage(ex);
+                this.logica.save(deaj);
+                MyScreen.exitMessage();
+                this.initTable();
+                this.limpiarFormulario();
+            } catch (HttpResponseException ex) {
+                MyScreen.errorMessage(ex.getCausa(), ex.getMessage());
             }
-            this.limpiarPanelCrear();
         }
     }
 
     @FXML
     private void actionEventBtnVolver(ActionEvent e) {
-        this.panelCrear.setVisible(false);
-        this.panelVer.setVisible(true);
+
+        this.activarDesactivarPaneles(false);
     }
 
     @FXML
     private void actionEventCmbDpto(ActionEvent e) {
         int index = this.cmbDptos.getSelectionModel().getSelectedIndex();
         if (index >= 0) {
-            if (!this.listDptoSeleccionados.contains(this.dptoList.get(index))) {
-                this.listDptoSeleccionados.add(this.dptoList.get(index));
-            }
+            this.logica.addDptoSelected(index);
         }
         this.setListviewDptos();
     }
@@ -232,14 +147,9 @@ public class PanelDireccionEjecutivaController implements Initializable {
     private void clickListView(MouseEvent m) {
         int index = this.listViewDptos.getSelectionModel().getSelectedIndex();
         if (index >= 0) {
-            this.listDptoSeleccionados.remove(index);
+            this.logica.removeDtpoSelected(index);
             this.setListviewDptos();
         }
-    }
-
-    @FXML
-    public void eventKeyreleaseTxtBuscar(KeyEvent e) {
-        String texto = this.txtBuscar.getText();
     }
 
     @Override
@@ -247,21 +157,19 @@ public class PanelDireccionEjecutivaController implements Initializable {
         // TODO
 
         try {
-            this.sesion = SesionUsuarioSingleton.get();
-            this.setPrivilegiosModulo();
+            this.logica = new GestionDeaj();
             this.lbErrorDptos.setVisible(false);
             this.lbErrorNombreDeaj.setVisible(false);
-            this.selectCrearOrActualizar(true);
-            this.panelCrear.setVisible(false);
-            this.panelVer.setVisible(true);
-            this.listDptoSeleccionados = new ArrayList();
-            this.loadDptos();
+            this.activarDesactivarOpciones(true);
+            this.activarDesactivarPaneles(false);
+            this.loadComboDptos();
             this.initTable();
             this.txtDeaj.setText(null);
             this.activarPrivilegiosModulo();
 
         } catch (Exception e) {
             e.printStackTrace();
+            MyScreen.errorMessage(e);
         }
 
     }
@@ -299,59 +207,37 @@ public class PanelDireccionEjecutivaController implements Initializable {
         this.tableColumnDeaj.setCellValueFactory(new PropertyValueFactory("nombre"));
         this.tableColumnDpto.setCellValueFactory(new PropertyValueFactory("dptos"));
         this.tableColumnId.setCellValueFactory(new PropertyValueFactory("id"));
-
+        
         this.data = FXCollections.observableArrayList();
-
         try {
-            MyHttpApi.jsonGetRequest(UsedApis.API_DEAJ_GET_ALL);
-            String response = MyHttpApi.stringResponse();
-            StatusCode status = HttpCodeResponse.get(MyHttpApi.responseStatusCode());
-            if (MyHttpApi.statusOk()) {
-                this.deajs = MyGsonMapper.get().fromJson(response, DireccionSeccionalDto[].class);
-                for (DireccionSeccionalDto dto : deajs) {
-                    DeajTableDto deajTable = new DeajTableDto(dto);
-                    this.data.add(deajTable);
-                }
-                
-//                this.tablaDeaj.setItems(data);
-                
-                if (this.delete) {
+            DireccionSeccionalDto[] deajs = this.logica.getAll();
 
-                    this.btnEliminar.setDisable(!(data.size() > 0));
-
-                } else {
-                    this.btnEliminar.setDisable(true);
-                }
-                if (this.view) {
-                    this.setFiltroTable();
-                }
-            } else {
-                MyScreen.errorMessage(status.toString(), response);
+            for (DireccionSeccionalDto dto : deajs) {
+                DeajTableDto deajTable = new DeajTableDto(dto);
+                this.data.add(deajTable);
             }
-        } catch (UnirestException ex) {
-            MyScreen.errorMessage(ex);
+            
+            if (this.logica.isDelete()) {
+
+                this.btnEliminar.setDisable(!(data.size() > 0));
+
+            } else {
+                this.btnEliminar.setDisable(true);
+            }
+            if (this.logica.isView()) {
+                this.setFiltroTable();
+            }
+
+        } catch (HttpResponseException ex) {
+            MyScreen.errorMessage(ex.getCausa(), ex.getMessage());
         }
 
     }
 
-    private void loadDptos() {
+    private void loadComboDptos() {
 
-        this.dptoList = new ArrayList();
-        try {
-            MyHttpApi.jsonGetRequest(UsedApis.API_DPTO_GET_ALL);
-            String response = MyHttpApi.stringResponse();
-            if (MyHttpApi.statusOk()) {
-                DptoDto[] dptos = MyGsonMapper.get().fromJson(response, DptoDto[].class);
-                this.dptoList = List.of(dptos);
-            } else {
-                StatusCode status = HttpCodeResponse.get(MyHttpApi.responseStatusCode());
-                MyScreen.errorMessage(status.toString(), response);
-            }
-        } catch (UnirestException ex) {
-
-        }
-
-        for (DptoDto d : this.dptoList) {
+        List<DptoDto> dptoList = this.logica.getDptoList();
+        for (DptoDto d : dptoList) {
             this.cmbDptos.getItems().add(d.getNombreDpto());
         }
 
@@ -360,13 +246,62 @@ public class PanelDireccionEjecutivaController implements Initializable {
     private void setListviewDptos() {
 
         this.listViewDptos.getItems().clear();
-        for (DptoDto dto : this.listDptoSeleccionados) {
+        for (DptoDto dto : this.logica.getListDptoSelected()) {
             this.listViewDptos.getItems().add(dto.getNombreDpto());
         }
     }
 
-    private void limpiarPanelCrear() {
-        this.listDptoSeleccionados.clear();
+   
+
+    
+
+    @Override
+    public void activarPrivilegiosModulo() {
+
+        this.btnGuardarDeaj.setDisable(!this.logica.isCreate());
+        this.btnCrear.setDisable(!this.logica.isCreate());
+
+        this.btnEditar.setDisable(!this.logica.isUpdate());
+        this.btnActualizar.setDisable(!this.logica.isUpdate());
+
+        this.btnEliminar.setDisable(!this.logica.isDelete());
+
+        this.txtBuscar.setDisable(!this.logica.isView());
+        this.tablaDeaj.setDisable(!this.logica.isView());
+
+    }
+
+    @Override
+    public boolean validarEnvioFormulario() {
+        boolean resultValidation = true;
+        boolean empty;
+
+        empty = this.txtDeaj.getText() == null || this.txtDeaj.getText().isBlank();
+        if (empty) {
+            this.txtDeaj.requestFocus();
+            resultValidation = false;
+        }
+        this.lbErrorNombreDeaj.setVisible(empty);
+
+        empty = this.logica.getListDptoSelected().size() == 0;
+        if (empty) {
+            this.cmbDptos.requestFocus();
+            resultValidation = false;
+        }
+        this.lbErrorDptos.setVisible(empty);
+
+        return resultValidation;
+    }
+
+    @Override
+    public void activarDesactivarOpciones(boolean opt) {
+        this.btnActualizar.setDisable(opt);
+        this.btnGuardarDeaj.setDisable(!opt);
+    }
+
+    @Override
+    public void limpiarFormulario() {
+       this.logica.getListDptoSelected().clear();
         this.setListviewDptos();
 
         this.txtDeaj.setText(null);
@@ -378,69 +313,10 @@ public class PanelDireccionEjecutivaController implements Initializable {
         this.txtDeaj.requestFocus();
     }
 
-    private boolean validaFormCrear() {
-
-        boolean resultValidation = true;
-        boolean empty;
-
-        empty = this.txtDeaj.getText() == null || this.txtDeaj.getText().isBlank();
-        if (empty) {
-            this.txtDeaj.requestFocus();
-            resultValidation = false;
-        }
-        this.lbErrorNombreDeaj.setVisible(empty);
-
-        empty = this.listDptoSeleccionados.size() == 0;
-        if (empty) {
-            this.cmbDptos.requestFocus();
-            resultValidation = false;
-        }
-        this.lbErrorDptos.setVisible(empty);
-
-        return resultValidation;
-
-    }
-
-    private DireccionSeccionalDto buscarDeajIntoArray(Long id) {
-
-        for (DireccionSeccionalDto d : this.deajs) {
-            //DireccionSeccionalDto d = this.deajs[i];
-            if (d.getIdDireccion().equals(id)) {
-                return d;
-            }
-        }
-        return null;
-    }
-
-    private void selectCrearOrActualizar(boolean opt) {
-        // true - > crear     false->actualizar
-        this.btnActualizar.setDisable(opt);
-        this.btnGuardarDeaj.setDisable(!opt);
-
-    }
-
-    private void setPrivilegiosModulo() {
-
-        this.create = this.sesion.checkPrivilegioModulo(ModuloDto.CONFIGURACION, PrivilegioDto.CREAR);
-        this.update = this.sesion.checkPrivilegioModulo(ModuloDto.CONFIGURACION, PrivilegioDto.ACTUALIZAR);
-        this.view = this.sesion.checkPrivilegioModulo(ModuloDto.CONFIGURACION, PrivilegioDto.CONSULTAR);
-        this.delete = this.sesion.checkPrivilegioModulo(ModuloDto.CONFIGURACION, PrivilegioDto.ELIMINAR);
-
-    }
-
-    public void activarPrivilegiosModulo() {
-
-        this.btnGuardarDeaj.setDisable(!this.create);
-        this.btnCrear.setDisable(!this.create);
-
-        this.btnEditar.setDisable(!this.update);
-        this.btnActualizar.setDisable(!this.update);
-
-        this.btnEliminar.setDisable(!this.delete);
-
-        this.txtBuscar.setDisable(!this.view);
-        this.tablaDeaj.setDisable(!this.view);
-
+    @Override
+    public void activarDesactivarPaneles(boolean opt) {
+        this.panelCrear.setVisible(opt);
+        this.panelVer.setVisible(!opt);
     }
 
 }

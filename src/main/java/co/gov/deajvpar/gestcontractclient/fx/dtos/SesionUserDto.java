@@ -20,6 +20,8 @@ public class SesionUserDto {
     private DireccionSeccionalDto userDeaj;
     private LocalDate fechaLogin;
     private boolean estado;
+    private ModuloDto moduloActive;
+    private boolean create, view, delete, update;
 
     public SesionUserDto(UsuarioDto user, String userType, String userRol, List<PermisoUserDto> userPermisos, DireccionSeccionalDto userDeaj, LocalDate fechaLogin, boolean estado) {
         this.user = user;
@@ -147,14 +149,82 @@ public class SesionUserDto {
         }
         return success;
     }
-    
-    public boolean checkPrivilegioModulo(ModuloDto modulo, PrivilegioDto privilegio) {
+
+    public boolean checkPrivilegioModulo( PrivilegioDto privilegio) {
         boolean success = false;
-        for (PermisoUserDto p : this.userPermisos) {
-            success=p.checkPrivilegioModulo(modulo, privilegio);
-        }
+        if (this.checkPermisoModulo(this.moduloActive.toString())) {
+            
+            PermisoUserDto p = this.getPermisoModulo();
+            success = p.checkPrivilegioModulo( privilegio);
+        } 
+       
         return success;
     }
+    
+    public PermisoUserDto getPermisoModulo(){
+        for (PermisoUserDto p : this.userPermisos) {
+            if (p.checkPermisoModulo(this.moduloActive.toString())) {
+                return p;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * @return the moduloActive
+     */
+    public ModuloDto getModuloActive() {
+        return moduloActive;
+    }
+
+    /**
+     * @param moduloActive the moduloActive to set
+     */
+    public void setModuloActive(ModuloDto moduloActive) {
+        this.moduloActive = moduloActive;
+    }
+    
+    public void setPrivilegiosModulo() {
+
+        this.create = this.checkPrivilegioModulo(PrivilegioDto.CREAR);
+        this.update = this.checkPrivilegioModulo(PrivilegioDto.ACTUALIZAR);
+        this.view = this.checkPrivilegioModulo(PrivilegioDto.CONSULTAR);
+        this.delete = this.checkPrivilegioModulo(PrivilegioDto.ELIMINAR);
+
+    }
+
+    /**
+     * @return the create
+     */
+    public boolean isCreate() {
+        return create;
+    }
+
+    /**
+     * @return the view
+     */
+    public boolean isView() {
+        return view;
+    }
+
+    /**
+     * @return the delete
+     */
+    public boolean isDelete() {
+        return delete;
+    }
+
+    /**
+     * @return the update
+     */
+    public boolean isUpdate() {
+        return update;
+    }
+    
+    public String getAllNameUser(){
+       return  this.user.getpNombre() + " " + this.user.getpApellido() + " " + this.user.getsApellido();
+    }
+    
     
 
 }

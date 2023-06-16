@@ -4,12 +4,20 @@
  */
 package co.gov.deajvpar.gestcontractclient.fx.utility;
 
+import at.favre.lib.crypto.bcrypt.BCrypt;
 import co.gov.deajvpar.gestcontractclient.fx.dtos.CiudadDto;
 import co.gov.deajvpar.gestcontractclient.fx.dtos.CiudadDptoDto;
 import co.gov.deajvpar.gestcontractclient.fx.dtos.DptoDto;
+import co.gov.deajvpar.gestcontractclient.fx.dtos.UserDto;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 
 /**
  *
@@ -36,6 +44,85 @@ public class Utility {
        return dptos;
     }
     
+    
+    public static boolean validateEmptyComponentCombo(ComboBox list, Label error) {
+
+        int index = list.getSelectionModel().getSelectedIndex();
+        boolean empty = list.getSelectionModel().getSelectedIndex() == -1;
+        if (empty) {
+            list.requestFocus();
+        }
+        error.setVisible(empty);
+        return !empty;
+
+    }
+    
+    public static boolean validateEmptyComponentTextArea(TextArea text, Label error) {
+
+        boolean empty = text.getText() == null || text.getText().isBlank();
+        if (empty) {
+            text.requestFocus();
+        }
+        error.setVisible(empty);
+        return !empty;
+
+    }
+    
+    public static boolean validateEmptyComponentTextField(TextField text, Label error) {
+
+        boolean empty = text.getText() == null || text.getText().isBlank();
+
+        if (empty) {
+            text.requestFocus();
+        }
+        error.setVisible(empty);
+        return !empty;
+
+    }
+    
+    public static boolean validateEmptyComponentPasswordField(PasswordField text, Label error) {
+
+        boolean empty = text.getText() == null || text.getText().isBlank();
+
+        if (empty) {
+            text.requestFocus();
+        }
+        error.setVisible(empty);
+        return !empty;
+
+    }
+    
+    public static boolean validateEmptyComponentDatePicker(DatePicker dp, Label error) {
+
+        boolean empty = dp.getValue()==null;
+
+        if (empty) {
+            dp.requestFocus();
+        }
+        error.setVisible(empty);
+        return !empty;
+
+    }
+    
+    public static boolean validateEmptyComponentTextField(TextField text) {
+
+        boolean empty = text.getText() == null || text.getText().isBlank();
+
+        if (empty) {
+            text.requestFocus();
+        }
+        return !empty;
+
+    }
+    
+    public static void encryptPassword(UserDto dto){
+        dto.setPassword(BCrypt.withDefaults().hashToString(12, dto.getPassword().toCharArray()));
+    }
+    
+    public static String encryptPassword(String clave){
+       return BCrypt.withDefaults().hashToString(12, clave.toCharArray());
+      // return clave;
+    }
     
     
 }

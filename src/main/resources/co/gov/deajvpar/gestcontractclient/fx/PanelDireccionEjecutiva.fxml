@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<StackPane alignment="TOP_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1240.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.gov.deajvpar.gestcontractclient.fx.controller.PanelDireccionEjecutivaController">
+<StackPane alignment="TOP_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.gov.deajvpar.gestcontractclient.fx.controller.PanelDireccionEjecutivaController">
    <children>
       <VBox fx:id="panelVer" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="816.0" prefWidth="1220.0" style="-fx-background-color: #E4E4E5;">
          <children>
@@ -38,7 +38,7 @@
                      <children>
                         <HBox alignment="CENTER_LEFT" prefHeight="45.0" prefWidth="423.0" spacing="5.0">
                            <children>
-                              <TextField fx:id="txtBuscar" onKeyReleased="#eventKeyreleaseTxtBuscar" prefHeight="45.0" prefWidth="300.0" promptText="Buscar seccional" />
+                              <TextField fx:id="txtBuscar" prefHeight="45.0" prefWidth="300.0" promptText="Buscar seccional" />
                               <FontAwesomeIcon fill="#1c0cfc" glyphName="SEARCH" size="45" textAlignment="CENTER" wrappingWidth="38.0" />
                            </children>
                         </HBox>

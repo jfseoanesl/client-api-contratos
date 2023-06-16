@@ -9,7 +9,7 @@ package co.gov.deajvpar.gestcontractclient.fx.dtos;
  * @author Jairo F
  */
 public class PermisoUserDto {
-
+    private Long id;
     private String modulo;
     private boolean c;
     private boolean u;
@@ -98,21 +98,27 @@ public class PermisoUserDto {
     }
 
     public boolean checkPermisoModulo(String modulo) {
-        return this.modulo.equalsIgnoreCase("ALL") || this.modulo.equalsIgnoreCase(modulo);
+        return this.modulo.equalsIgnoreCase(modulo);
 
     }
-    
-    public boolean checkPrivilegioModulo(ModuloDto modulo, PrivilegioDto privilegio){
+
+    public boolean checkPrivilegioModulo(PrivilegioDto privilegio) {
         boolean succes = false;
-        if(this.checkPermisoModulo(modulo.getName())){
-            switch(privilegio){
-                
-                case CREAR: succes = this.c; break;
-                case ACTUALIZAR: succes = this.u;break;
-                case CONSULTAR: succes = this.r;break;
-                case ELIMINAR: succes = this.d;break;
-            
-            }
+        switch (privilegio) {
+
+            case CREAR:
+                succes = this.c;
+                break;
+            case ACTUALIZAR:
+                succes = this.u;
+                break;
+            case CONSULTAR:
+                succes = this.r;
+                break;
+            case ELIMINAR:
+                succes = this.d;
+                break;
+
         }
         return succes;
     }
@@ -122,6 +128,36 @@ public class PermisoUserDto {
         return "PermisoUserDto{" + "modulo=" + modulo + ", c=" + c + ", u=" + u + ", d=" + d + ", r=" + r + '}';
     }
 
-    
+    public String getPrivilegiosModulo() {
+        String privilegios = "";
+        if (this.r) {
+            privilegios = " R";
+        }
+        if (this.c) {
+            privilegios += " C";
+        }
+        if (this.u) {
+            privilegios += " U";
+        }
+        if (this.d) {
+            privilegios += " D";
+        }
+
+        return privilegios;
+    }
+
+    /**
+     * @return the id
+     */
+    public Long getId() {
+        return id;
+    }
+
+    /**
+     * @param id the id to set
+     */
+    public void setId(Long id) {
+        this.id = id;
+    }
 
 }

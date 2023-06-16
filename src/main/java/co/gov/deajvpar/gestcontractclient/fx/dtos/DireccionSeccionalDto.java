@@ -19,6 +19,10 @@ public class DireccionSeccionalDto {
     private boolean eliminado;
     private SetupAlertaDto setupAlerta;
 
+    public DireccionSeccionalDto(Long id) {
+        this.id = id;
+    }
+
     public DireccionSeccionalDto() {
         this.setupAlerta = new SetupAlertaDto();
     }

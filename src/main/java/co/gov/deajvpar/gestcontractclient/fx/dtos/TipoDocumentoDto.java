@@ -10,7 +10,7 @@ package co.gov.deajvpar.gestcontractclient.fx.dtos;
  */
 public class TipoDocumentoDto {
     
-    private Long idTipoDocumento;
+    private Long id;
     private String tipo;
     private String descripcion;
     private TipoPersona tipoPersona;
@@ -27,7 +27,7 @@ public class TipoDocumentoDto {
     }
 
     public TipoDocumentoDto(Long idTipoDocumento, String tipo, String descripcion, TipoPersona tipoPersona, boolean eliminado) {
-        this.idTipoDocumento = idTipoDocumento;
+        this.id = idTipoDocumento;
         this.tipo = tipo;
         this.descripcion = descripcion;
         this.tipoPersona = tipoPersona;
@@ -35,17 +35,17 @@ public class TipoDocumentoDto {
     }
 
     /**
-     * @return the idTipoDocumento
+     * @return the id
      */
-    public Long getIdTipoDocumento() {
-        return idTipoDocumento;
+    public Long getId() {
+        return id;
     }
 
     /**
-     * @param idTipoDocumento the idTipoDocumento to set
+     * @param id the id to set
      */
-    public void setIdTipoDocumento(Long idTipoDocumento) {
-        this.idTipoDocumento = idTipoDocumento;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     /**
@@ -104,10 +104,6 @@ public class TipoDocumentoDto {
         this.eliminado = eliminado;
     }
 
-    @Override
-    public String toString() {
-        return "TipoDocumentoDto{" + "idTipoDocumento=" + idTipoDocumento + ", tipo=" + tipo + ", descripcion=" + descripcion + ", tipoPersona=" + tipoPersona + ", eliminado=" + eliminado + '}';
-    }
     
     
 }

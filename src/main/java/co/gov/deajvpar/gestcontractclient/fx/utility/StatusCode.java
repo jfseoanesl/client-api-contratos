@@ -11,6 +11,8 @@ package co.gov.deajvpar.gestcontractclient.fx.utility;
 public class StatusCode {
      private int code;
      private String status;
+     private String descripcion;
+     private String response;
 
     public StatusCode() {
     }
@@ -18,6 +20,19 @@ public class StatusCode {
     public StatusCode(int code, String status) {
         this.code = code;
         this.status = status;
+    }
+
+    public StatusCode(int code, String status, String descripcion) {
+        this.code = code;
+        this.status = status;
+        this.descripcion = descripcion;
+    }
+
+    public StatusCode(int code, String status, String descripcion, String response) {
+        this.code = code;
+        this.status = status;
+        this.descripcion = descripcion;
+        this.response = response;
     }
 
     /**
@@ -53,5 +68,35 @@ public class StatusCode {
         return "Status Code( "+code+" ) - " + status;
     }
     
-    
+    public boolean statusOk(){
+        return this.code==200;
+    }
+
+    /**
+     * @return the descripcion
+     */
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    /**
+     * @param descripcion the descripcion to set
+     */
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    /**
+     * @return the response
+     */
+    public String getResponse() {
+        return response;
+    }
+
+    /**
+     * @param response the response to set
+     */
+    public void setResponse(String response) {
+        this.response = response;
+    }
 }

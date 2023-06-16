@@ -65,9 +65,10 @@ public class App extends Application {
     
     
     private static void home(Stage stage) throws UnirestException, IOException {
-        MyHttpApi.jsonGetRequest(UsedApis.API_HOME);
+        MyHttpApi.jsonGetRequest(UsedApis.API_HOME+"/");
         String response = MyHttpApi.stringResponse();
         StatusCode status = HttpCodeResponse.get(MyHttpApi.responseStatusCode());
+        System.out.println(response);
         if (MyHttpApi.statusOk()) {
             sistema = MyGsonMapper.get().fromJson(response, SistemaDto.class);
             String titulo;

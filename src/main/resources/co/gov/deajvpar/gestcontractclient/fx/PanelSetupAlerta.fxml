@@ -18,7 +18,7 @@
 
 <StackPane alignment="TOP_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1240.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.gov.deajvpar.gestcontractclient.fx.controller.PanelSetupAlertaController">
    <children>
-      <VBox fx:id="panelCrear" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="682.0" prefWidth="884.0" style="-fx-background-color: #E4E4E5;">
+      <VBox fx:id="panelCrear" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="558.0" prefWidth="889.0" style="-fx-background-color: #E4E4E5;">
          <children>
             <HBox prefHeight="35.0" prefWidth="1200.0">
                <children>
@@ -112,21 +112,21 @@
                   </Pane>
                </children>
             </HBox>
-            <HBox prefHeight="400.0" prefWidth="864.0">
+            <HBox prefHeight="258.0" prefWidth="864.0">
                <children>
-                  <Pane prefHeight="184.0" prefWidth="896.0">
+                  <Pane prefHeight="300.0" prefWidth="864.0">
                      <children>
                         <VBox prefHeight="164.0" prefWidth="861.0" spacing="10.0">
                            <children>
                               <HBox prefHeight="157.0" prefWidth="861.0" spacing="20.0">
                                  <children>
-                                    <Circle fill="#e34040ed" radius="58.0" stroke="#9e0707c4" strokeType="INSIDE" strokeWidth="3.0" />
-                                    <Label prefHeight="115.0" prefWidth="551.0" text="La alerta roja informa que la fecha de entrega del informe de supervision ya esta muy proxima o que hay retraso en la entrega.  Se encuentra en el intervalo limite establecido de [0-5] dias" textAlignment="JUSTIFY" wrapText="true">
+                                    <Circle fill="#e34040ed" radius="32.0" stroke="#9e0707c4" strokeType="INSIDE" strokeWidth="3.0" />
+                                    <Label prefHeight="64.0" prefWidth="608.0" text="La alerta roja informa que la fecha de entrega del informe de supervision ya esta muy proxima o que hay retraso en la entrega.  Se encuentra en el intervalo limite establecido de [0-5] dias" textAlignment="JUSTIFY" wrapText="true">
                                        <font>
-                                          <Font size="18.0" />
+                                          <Font size="15.0" />
                                        </font>
                                     </Label>
-                                    <StackPane prefHeight="150.0" prefWidth="200.0">
+                                    <StackPane prefHeight="64.0" prefWidth="160.0">
                                        <children>
                                           <Spinner fx:id="txtRoja" onMouseClicked="#EventoClickRojo" prefHeight="55.0" prefWidth="132.0" />
                                        </children>
@@ -136,10 +136,10 @@
                               <Line endX="750.5" startX="-100.0" stroke="#f2f0f0" strokeWidth="2.0" />
                               <HBox prefHeight="184.0" prefWidth="861.0" spacing="20.0">
                                  <children>
-                                    <Circle fill="#e0ac43ed" radius="58.0" stroke="#9c3a08c4" strokeType="INSIDE" strokeWidth="3.0" />
-                                    <Label prefHeight="115.0" prefWidth="551.0" text="La alerta naranja informa que la fecha de entrega del informe de supervision esta cerca de su cumplimiento.  Se encuentra en el intervalo medio establecido a partir de un limite de [1-10] dias" textAlignment="JUSTIFY" wrapText="true">
+                                    <Circle fill="#e0ac43ed" radius="32.0" stroke="#9c3a08c4" strokeType="INSIDE" strokeWidth="3.0" />
+                                    <Label prefHeight="64.0" prefWidth="652.0" text="La alerta naranja informa que la fecha de entrega del informe de supervision esta cerca de su cumplimiento.  Se encuentra en el intervalo medio establecido a partir de un limite de [1-10] dias" textAlignment="JUSTIFY" wrapText="true">
                                        <font>
-                                          <Font size="18.0" />
+                                          <Font size="15.0" />
                                        </font>
                                     </Label>
                                     <StackPane prefHeight="150.0" prefWidth="200.0">
@@ -152,10 +152,10 @@
                               <Line endX="750.5" startX="-100.0" stroke="#f2f0f0" strokeWidth="2.0" />
                               <HBox prefHeight="184.0" prefWidth="861.0" spacing="20.0">
                                  <children>
-                                    <Circle fill="#25a103ed" radius="58.0" stroke="#067c22c4" strokeType="INSIDE" strokeWidth="3.0" />
-                                    <Label prefHeight="115.0" prefWidth="551.0" text="La alerta verde informa que no hay retraso con la entrega del informe de supervision. No  se encuentra en los intervalos establecidos" textAlignment="JUSTIFY" wrapText="true">
+                                    <Circle fill="#25a103ed" radius="32.0" stroke="#067c22c4" strokeType="INSIDE" strokeWidth="3.0" />
+                                    <Label prefHeight="64.0" prefWidth="654.0" text="La alerta verde informa que no hay retraso con la entrega del informe de supervision. No  se encuentra en los intervalos establecidos" textAlignment="JUSTIFY" wrapText="true">
                                        <font>
-                                          <Font size="18.0" />
+                                          <Font size="15.0" />
                                        </font>
                                     </Label>
                                     <StackPane prefHeight="150.0" prefWidth="200.0">

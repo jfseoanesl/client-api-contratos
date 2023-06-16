@@ -12,7 +12,8 @@ import co.gov.deajvpar.gestcontractclient.fx.utility.StatusCode;
  * @author Jairo F
  */
 public class HttpResponseException extends RuntimeException {
-
+    private String causa;
+    
     public HttpResponseException() {
         this("Excepcion: Respuesta a solicitud HTTP es Null");
     }
@@ -22,8 +23,25 @@ public class HttpResponseException extends RuntimeException {
     }
     
     public HttpResponseException(StatusCode code) {
-        super(code.toString());
+        super(code.getDescripcion());
+        this.causa = code.getStatus();
     }
+
+    /**
+     * @return the causa
+     */
+    public String getCausa() {
+        return causa;
+    }
+
+    /**
+     * @param causa the causa to set
+     */
+    public void setCausa(String causa) {
+        this.causa = causa;
+    }
+    
+
     
     
     

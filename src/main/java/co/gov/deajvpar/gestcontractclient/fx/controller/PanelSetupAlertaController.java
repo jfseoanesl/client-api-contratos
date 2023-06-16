@@ -5,31 +5,16 @@
 package co.gov.deajvpar.gestcontractclient.fx.controller;
 
 import co.gov.deajvpar.gestcontractclient.fx.Exceptions.HttpResponseException;
-import co.gov.deajvpar.gestcontractclient.fx.dtos.DireccionSeccionalDto;
-import co.gov.deajvpar.gestcontractclient.fx.dtos.ModuloDto;
-import co.gov.deajvpar.gestcontractclient.fx.dtos.PrivilegioDto;
-import co.gov.deajvpar.gestcontractclient.fx.dtos.SesionUserDto;
-import co.gov.deajvpar.gestcontractclient.fx.dtos.SesionUsuarioSingleton;
-import co.gov.deajvpar.gestcontractclient.fx.dtos.SetupAlertaDto;
-import co.gov.deajvpar.gestcontractclient.fx.utility.HttpCodeResponse;
-import co.gov.deajvpar.gestcontractclient.fx.utility.MyGsonMapper;
-import co.gov.deajvpar.gestcontractclient.fx.utility.MyHttpApi;
-import co.gov.deajvpar.gestcontractclient.fx.utility.MyScreen;
-import co.gov.deajvpar.gestcontractclient.fx.utility.StatusCode;
-import co.gov.deajvpar.gestcontractclient.fx.utility.UsedApis;
-import com.mashape.unirest.http.exceptions.UnirestException;
+import co.gov.deajvpar.gestcontractclient.fx.dtos.*;
+import co.gov.deajvpar.gestcontractclient.fx.logic.GestionDeaj;
+import co.gov.deajvpar.gestcontractclient.fx.logic.GestionSetupAlerta;
+import co.gov.deajvpar.gestcontractclient.fx.utility.*;
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.Spinner;
-import javafx.scene.control.SpinnerValueFactory;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 
 /**
@@ -37,7 +22,7 @@ import javafx.scene.input.MouseEvent;
  *
  * @author Jairo F
  */
-public class PanelSetupAlertaController implements Initializable {
+public class PanelSetupAlertaController implements Initializable, IFormController {
 
     /**
      * Initializes the controller class.
@@ -51,9 +36,9 @@ public class PanelSetupAlertaController implements Initializable {
     @FXML
     private ComboBox cmbDeaj;
 
-    private SesionUserDto sesion;
-    private boolean create, update, view, delete;
-    private DireccionSeccionalDto Deajs[], deajSelected;
+    private final GestionSetupAlerta logicAlerta = new GestionSetupAlerta();
+    private final GestionDeaj logicDeaj = new GestionDeaj();
+    private DireccionSeccionalDto deajSelected;
 
     @FXML
     private void actionEventBotonGuardar(ActionEvent e) {
@@ -62,19 +47,10 @@ public class PanelSetupAlertaController implements Initializable {
             this.deajSelected.getSetupAlerta().setDiasNaranja(this.txtNaranja.getValue());
             this.deajSelected.getSetupAlerta().setDiasVerde(this.txtVerde.getValue());
             try {
-                MyHttpApi.jsonPostRequest(UsedApis.API_ALERTA_SAVE, this.deajSelected.getSetupAlerta());
-                String response = MyHttpApi.stringResponse();
-                StatusCode status = HttpCodeResponse.get(MyHttpApi.responseStatusCode());
-                if (MyHttpApi.statusOk()) {
-                    SetupAlertaDto dto = MyGsonMapper.get().fromJson(response, SetupAlertaDto.class);
-                    this.deajSelected.setSetupAlerta(dto);
-                    MyScreen.showMessage(null, status.getStatus(), "Solicitud ejecutada con exito. El Setup de alarmas de contrato ha sido actualizado");
-                } else {
-                    MyScreen.errorMessage(status.toString(), response);
-                    throw new HttpResponseException();
-                }
-            } catch (UnirestException ex) {
-                MyScreen.errorMessage(ex);
+                this.logicAlerta.save(this.deajSelected.getSetupAlerta());
+                MyScreen.exitMessage();
+            } catch (HttpResponseException ex) {
+                MyScreen.errorMessage(ex.getCausa(), ex.getMessage());
             }
         }
     }
@@ -88,16 +64,12 @@ public class PanelSetupAlertaController implements Initializable {
     public void EventoClickNaranja(MouseEvent e) {
         this.loadGraficoAlerta();
     }
-//    @FXML
-//    public void EventoClickVerde(MouseEvent e){
-//        this.loadGraficoAlerta();
-//    }
 
     @FXML
     private void clickComboDeaj(ActionEvent a) {
         int index = this.cmbDeaj.getSelectionModel().getSelectedIndex();
         if (index >= 0) {
-            this.deajSelected = this.Deajs[index];
+            this.deajSelected = this.logicDeaj.getAll()[index];
             this.loadSetupSemaforo();
         }
         this.activarBotonGuardar();
@@ -114,41 +86,20 @@ public class PanelSetupAlertaController implements Initializable {
         this.txtNaranja.setValueFactory(valueFactoryNaranja);
         this.txtVerde.setValueFactory(valueFactoryVerde);
 
-        this.sesion = SesionUsuarioSingleton.get();
-        this.setPrivilegiosModulo();
         this.loadComboDeaj();
         this.loadSetupSemaforo();
-        this.activarPrivilegiosModulo();
         this.activarBotonGuardar();
-        
-    }
-
-    private void setPrivilegiosModulo() {
-
-        this.create = this.sesion.checkPrivilegioModulo(ModuloDto.CONFIGURACION, PrivilegioDto.CREAR);
-        this.update = this.sesion.checkPrivilegioModulo(ModuloDto.CONFIGURACION, PrivilegioDto.ACTUALIZAR);
-        this.view = this.sesion.checkPrivilegioModulo(ModuloDto.CONFIGURACION, PrivilegioDto.CONSULTAR);
-        this.delete = this.sesion.checkPrivilegioModulo(ModuloDto.CONFIGURACION, PrivilegioDto.ELIMINAR);
-
-    }
-
-    public void activarPrivilegiosModulo() {
-
-        this.btnGuardar.setDisable(!this.create && !this.update);
-        this.txtRoja.setDisable(!this.create && !this.update);
-        this.txtNaranja.setDisable(!this.create && !this.update);
-        this.txtVerde.setDisable(true);
 
     }
 
     private void loadComboDeaj() {
 
         try {
-            this.Deajs = this.loadDeaj();
+            DireccionSeccionalDto[] deajs = this.logicDeaj.getAll();
             this.cmbDeaj.getItems().clear();
-            if (this.sesion.getUserDeaj() == null) {
-                if (this.Deajs != null) {
-                    for (DireccionSeccionalDto dto : this.Deajs) {
+            if (this.logicAlerta.getUserDeaj() == null) {
+                if (deajs != null) {
+                    for (DireccionSeccionalDto dto : deajs) {
                         this.cmbDeaj.getItems().add(dto.getDescripcionSeccional());
                     }
 
@@ -156,16 +107,16 @@ public class PanelSetupAlertaController implements Initializable {
                 this.cmbDeaj.setDisable(false);
 
             } else {
-                DireccionSeccionalDto deaj = this.sesion.getUserDeaj();
+                DireccionSeccionalDto deaj = this.logicAlerta.getUserDeaj();
                 this.cmbDeaj.getItems().add(deaj.getDescripcionSeccional());
-                this.deajSelected = this.sesion.getUserDeaj();
+                this.deajSelected = deaj;
                 this.cmbDeaj.getSelectionModel().select(0);
                 this.cmbDeaj.setDisable(true);
 
             }
 
-        } catch (UnirestException ex) {
-            MyScreen.errorMessage(ex);
+        } catch (HttpResponseException ex) {
+            MyScreen.errorMessage(ex.getCausa(), ex.getMessage());
         }
     }
 
@@ -197,25 +148,41 @@ public class PanelSetupAlertaController implements Initializable {
         }
     }
 
-    private DireccionSeccionalDto[] loadDeaj() throws UnirestException {
-
-        MyHttpApi.jsonGetRequest(UsedApis.API_DEAJ_GET_ALL);
-        String response = MyHttpApi.stringResponse();
-        StatusCode status = HttpCodeResponse.get(MyHttpApi.responseStatusCode());
-        if (MyHttpApi.statusOk()) {
-            DireccionSeccionalDto[] dtos = MyGsonMapper.get().fromJson(response, DireccionSeccionalDto[].class);
-            return dtos;
-        } else {
-            MyScreen.errorMessage(status.toString(), response);
-            throw new HttpResponseException();
+    public void activarBotonGuardar() {
+        if (this.logicAlerta.isCreate() || this.logicAlerta.isUpdate()) {
+            this.btnGuardar.setDisable(this.cmbDeaj.getSelectionModel().getSelectedIndex() == -1);
         }
+    }
+
+    @Override
+    public boolean validarEnvioFormulario() {
+        return true;
+    }
+
+    @Override
+    public void activarDesactivarOpciones(boolean opt) {
 
     }
 
-    public void activarBotonGuardar() {
-        if (this.create || this.update) {
-            this.btnGuardar.setDisable(this.cmbDeaj.getSelectionModel().getSelectedIndex() == -1);
-        }
+    @Override
+    public void activarPrivilegiosModulo() {
+        boolean create, update;
+        create = this.logicAlerta.isCreate();
+        update = this.logicAlerta.isUpdate();
+        this.btnGuardar.setDisable(!create && !update);
+        this.txtRoja.setDisable(!create && !update);
+        this.txtNaranja.setDisable(!create && !update);
+        this.txtVerde.setDisable(true);
+    }
+
+    @Override
+    public void limpiarFormulario() {
+
+    }
+
+    @Override
+    public void activarDesactivarPaneles(boolean opt) {
+
     }
 
 }

@@ -59,16 +59,34 @@ public class MyHttpApi {
         //System.out.println(apiResponse.getStatus());
 
     }
+    
+    public static StatusCode jsonGetRequest2(String api) throws UnirestException {
+        apiResponse = Unirest.get(api).asJson();
+        StatusCode status = HttpCodeResponse.get(apiResponse);
+        return status;
+
+    }
 
     public static void jsonGetRequest(String api, Map<String, Object> field) throws UnirestException {
         apiResponse = Unirest.get(api).queryString(field).asJson();
 
     }
+    
+    
 
     public static void jsonPostRequest(String api, Object obj) throws UnirestException {
         Map<String, String> headers = new HashMap<>();
         headers.put("Content-Type", "application/json");
         apiResponse = Unirest.post(api).headers(headers).body(obj).asJson();
+    }
+    
+    public static StatusCode jsonPostRequest2(String api, Object obj) throws UnirestException{
+        Map<String, String> headers = new HashMap<>();
+        headers.put("Content-Type", "application/json");
+        apiResponse = Unirest.post(api).headers(headers).body(obj).asJson();
+        StatusCode status = HttpCodeResponse.get(apiResponse);
+        return status;
+        
     }
 
     public static void jsonPostRequest(String api, String obj) throws UnirestException {

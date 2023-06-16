@@ -19,6 +19,7 @@ import javax.swing.JOptionPane;
 public class MyScreen {
     
     private static Rectangle2D bounds;
+    private static StatusCode status;
     
     public static void errorMessage( String msg){
         //JOptionPane.showMessageDialog(null, msg, "Mensaje de error", JOptionPane.ERROR_MESSAGE);
@@ -55,6 +56,15 @@ public class MyScreen {
         alert.showAndWait();
     }
     
+    public static void exitMessage(){
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle(status.getStatus());
+        alert.setHeaderText(null);
+        alert.setContentText(status.getDescripcion());
+        alert.initOwner(null);
+        alert.showAndWait();
+    }
+    
     public static Optional<ButtonType> confirmMessage(Window w, String titulo, String msg){
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle(titulo);
@@ -68,10 +78,10 @@ public class MyScreen {
     
     
     public static Rectangle2D getBound(){
-        if(bounds==null){
-            bounds = Screen.getPrimary().getVisualBounds();
+        if(getBounds()==null){
+            setBounds(Screen.getPrimary().getVisualBounds());
         }
-        return bounds;
+        return getBounds();
     }
     
     public static double getMaxWidth(){
@@ -81,5 +91,35 @@ public class MyScreen {
     public static double getMaxHeight(){
         return getBound().getHeight();
     }
+    
+    /**
+     * @return the bounds
+     */
+    public static Rectangle2D getBounds() {
+        return bounds;
+    }
+
+    /**
+     * @param aBounds the bounds to set
+     */
+    public static void setBounds(Rectangle2D aBounds) {
+        bounds = aBounds;
+    }
+
+    /**
+     * @return the status
+     */
+    public static StatusCode getStatus() {
+        return status;
+    }
+
+    /**
+     * @param aStatus the status to set
+     */
+    public static void setStatus(StatusCode aStatus) {
+        status = aStatus;
+    }
+    
+    
     
 }
