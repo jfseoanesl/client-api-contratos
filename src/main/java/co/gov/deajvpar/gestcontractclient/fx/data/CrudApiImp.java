@@ -24,6 +24,7 @@ public class CrudApiImp<T> {
         T dto;
         try {
             StatusCode status = MyHttpApi.jsonPostRequest2(api, obj);
+            System.out.println(status.getResponse());
             if (!status.statusOk()) {
                 throw new HttpResponseException(status);
             }

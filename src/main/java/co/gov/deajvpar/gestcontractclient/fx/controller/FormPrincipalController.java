@@ -6,13 +6,16 @@ package co.gov.deajvpar.gestcontractclient.fx.controller;
 import co.gov.deajvpar.gestcontractclient.fx.dtos.SesionUsuarioSingleton;
 import co.gov.deajvpar.gestcontractclient.fx.logic.GestionFormPrincipal;
 import co.gov.deajvpar.gestcontractclient.fx.utility.MyScreen;
+import co.gov.deajvpar.gestcontractclient.fx.utility.Utility;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 
 /**
@@ -26,23 +29,39 @@ public class FormPrincipalController implements Initializable {
      * Initializes the controller class.
      */
     @FXML
-    private StackPane panel;
-
+    public StackPane panel;
+    @FXML
+    private HBox panelHbox;
     @FXML
     private TreeView<String> menuRoot;
     @FXML
-    private Label lbNombre;
+    private Label lbNombre, lbSalir;
     @FXML
     private Label lbTipo;
     @FXML
     private Label lbRol;
+    
+    @FXML
+    private ImageView imgSalir;
+    
 
     private GestionFormPrincipal logicaForm = new GestionFormPrincipal();
+    
+    @FXML
+    public void evenSalirImg(MouseEvent e){
+        Utility.salir();
+    }
+    
+    @FXML
+    public void evenSalirLabel(MouseEvent e){
+        Utility.salir();
+    }
 
     @FXML
     public void eventClickMenu(MouseEvent e) throws IOException {
 
         if (e.getClickCount() == 2) {
+            
             TreeItem<String> selected = this.menuRoot.getSelectionModel().getSelectedItem();
             if (selected != null) {
                 String value = selected.getValue();
@@ -67,7 +86,7 @@ public class FormPrincipalController implements Initializable {
         try {
 
             this.logicaForm.openMenuSelected(null, this.panel);
-
+          
             this.panelUsuario();
             this.menuRoot.setRoot(this.logicaForm.generateTreeMenuUser());
 

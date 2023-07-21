@@ -7,29 +7,19 @@ package co.gov.deajvpar.gestcontractclient.fx.controller;
 import co.gov.deajvpar.gestcontractclient.fx.App;
 import co.gov.deajvpar.gestcontractclient.fx.Exceptions.HttpResponseException;
 import co.gov.deajvpar.gestcontractclient.fx.dtos.LoginDto;
-import co.gov.deajvpar.gestcontractclient.fx.dtos.SesionUserDto;
-import co.gov.deajvpar.gestcontractclient.fx.dtos.SesionUsuarioSingleton;
 import co.gov.deajvpar.gestcontractclient.fx.logic.GestionLogin;
-import co.gov.deajvpar.gestcontractclient.fx.logic.GestionUsuarios;
-import co.gov.deajvpar.gestcontractclient.fx.utility.HttpCodeResponse;
-import co.gov.deajvpar.gestcontractclient.fx.utility.MyGsonMapper;
-import co.gov.deajvpar.gestcontractclient.fx.utility.MyHttpApi;
 import co.gov.deajvpar.gestcontractclient.fx.utility.MyScreen;
-import co.gov.deajvpar.gestcontractclient.fx.utility.StatusCode;
-import co.gov.deajvpar.gestcontractclient.fx.utility.UsedApis;
 import co.gov.deajvpar.gestcontractclient.fx.utility.Utility;
-import com.mashape.unirest.http.exceptions.UnirestException;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 
 /**
@@ -43,15 +33,25 @@ public class LoginController implements Initializable {
     @FXML
     private PasswordField txtPassword;
     @FXML
-    private Label lbError;
+    private Label lbError, lbSalir;
     @FXML
     private Button btnIngresar;
     @FXML
     private Pane imageViewPane;
     @FXML
-    private ImageView imageView;
+    private ImageView imageView, imgSalir;
 
     private GestionLogin logiclogin = new GestionLogin();
+    
+    @FXML
+    public void evenSalirImg(MouseEvent e){
+        Utility.salir();
+    }
+    
+    @FXML
+    public void evenSalirLabel(MouseEvent e){
+        Utility.salir();
+    }
 
     @FXML
     private void actionButtonIngresar(ActionEvent e) {

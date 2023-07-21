@@ -6,8 +6,6 @@
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Tab?>
-<?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
@@ -20,498 +18,483 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.gov.deajvpar.gestcontractclient.fx.controller.PanelRolesController">
+
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.gov.deajvpar.gestcontractclient.fx.controller.PanelRolesController">
    <children>
-      <Pane prefHeight="900.0" prefWidth="1240.0">
+      <StackPane fx:id="stackPaneRoles" alignment="TOP_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1233.0">
          <children>
-            <TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1220.0" tabClosingPolicy="UNAVAILABLE">
-               <tabs>
-                  <Tab fx:id="tabRoles" text="Roles de usuario">
-                     <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="900.0" prefWidth="1220.0">
+            <VBox fx:id="panelListRoles" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="816.0" prefWidth="1236.0" style="-fx-background-color: #E4E4E5;">
+               <children>
+                  <HBox prefHeight="35.0" prefWidth="1200.0">
+                     <children>
+                        <Pane prefHeight="66.0" prefWidth="1220.0">
                            <children>
-                              <StackPane fx:id="stackPaneRoles" alignment="TOP_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1220.0">
+                              <Label prefHeight="35.0" prefWidth="450.0" text="Roles de usuarios registrados">
+                                 <font>
+                                    <Font name="System Bold" size="22.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </Pane>
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="45.0" prefWidth="1200.0">
+                     <children>
+                        <Pane prefHeight="45.0" prefWidth="422.0">
+                           <children>
+                              <HBox alignment="CENTER_LEFT" prefHeight="45.0" prefWidth="423.0" spacing="5.0">
                                  <children>
-                                    <VBox fx:id="panelListRoles" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="816.0" prefWidth="1220.0" style="-fx-background-color: #E4E4E5;" visible="false">
+                                    <ComboBox fx:id="cmbFiltroTipoUsuario" onAction="#actionEventCmbFiltroTipoUsuario" prefHeight="45.0" prefWidth="346.0" promptText="Tipo de usuario" />
+                                    <FontAwesomeIcon fill="#1c0cfc" glyphName="SEARCH" size="45" textAlignment="CENTER" wrappingWidth="38.0" />
+                                 </children>
+                              </HBox>
+                           </children>
+                        </Pane>
+                        <Pane prefHeight="45.0" prefWidth="781.0">
+                           <children>
+                              <HBox alignment="CENTER_RIGHT" prefHeight="45.0" prefWidth="780.0" spacing="10.0">
+                                 <children>
+                                    <Button fx:id="btnCrearRol" mnemonicParsing="false" onAction="#actionEventBotonCrearRol" prefHeight="45.0" prefWidth="139.0" style="-fx-background-color: #05993D;" text="Crear " textFill="#fcf9f9">
+                                       <font>
+                                          <Font size="17.0" />
+                                       </font>
+                                    </Button>
+                                    <Button fx:id="btnEditarRol" mnemonicParsing="false" onAction="#actionEventBotonEditarRol" prefHeight="45.0" prefWidth="140.0" style="-fx-background-color: FBC432;" text="Editar" textFill="#fcf9f9">
+                                       <font>
+                                          <Font size="17.0" />
+                                       </font>
+                                    </Button>
+                                    <Button fx:id="btnEliminarRol" mnemonicParsing="false" onAction="#actionEventBotonEliminarRol" prefHeight="45.0" prefWidth="139.0" style="-fx-background-color: #F7453D;" text="Eliminar" textFill="#fcf9f9">
+                                       <font>
+                                          <Font size="17.0" />
+                                       </font>
+                                    </Button>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </Pane>
+                     </children>
+                     <VBox.margin>
+                        <Insets top="20.0" />
+                     </VBox.margin>
+                  </HBox>
+                  <HBox prefHeight="674.0" prefWidth="1175.0">
+                     <children>
+                        <TableView fx:id="tablaRoles" prefHeight="673.0" prefWidth="1200.0">
+                           <columns>
+                              <TableColumn fx:id="columnIdRol" prefWidth="81.0" text="Id" />
+                              <TableColumn fx:id="columnNombreRol" minWidth="0.0" prefWidth="385.0" text="Nombre rol" />
+                              <TableColumn fx:id="columnConfiguracion" minWidth="0.0" prefWidth="122.0" text="Configuracion" />
+                              <TableColumn fx:id="columnUsuarios" minWidth="0.0" prefWidth="122.0" text="Usuarios" />
+                              <TableColumn fx:id="columnContratos" prefWidth="122.0" text="Contratos" />
+                              <TableColumn fx:id="columnSupervision" minWidth="0.0" prefWidth="122.0" text="Supervision" />
+                              <TableColumn fx:id="columnSupervisor" prefWidth="122.0" text="Supervisor" />
+                              <TableColumn fx:id="columnDashboard" prefWidth="122.0" text="Dashboard" />
+                           </columns>
+                        </TableView>
+                     </children>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <VBox.margin>
+                        <Insets top="20.0" />
+                     </VBox.margin>
+                  </HBox>
+               </children>
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+            </VBox>
+            <VBox fx:id="panelCrearRol" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" pickOnBounds="false" prefHeight="665.0" prefWidth="896.0" style="-fx-background-color: #E4E4E5; -fx-border-color: #C4C5C7;" visible="false">
+               <children>
+                  <HBox prefHeight="35.0" prefWidth="1200.0">
+                     <children>
+                        <Pane prefHeight="66.0" prefWidth="1220.0">
+                           <children>
+                              <Label prefHeight="35.0" prefWidth="492.0" text="Registro roles de usuario">
+                                 <font>
+                                    <Font name="System Bold" size="22.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </Pane>
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="0.0" prefWidth="874.0" visible="false">
+                     <children>
+                        <Pane prefHeight="28.0" prefWidth="874.0">
+                           <children>
+                              <VBox prefHeight="80.0" prefWidth="861.0">
+                                 <children>
+                                    <Label text="Id modalidad">
+                                       <font>
+                                          <Font size="17.0" />
+                                       </font>
+                                    </Label>
+                                    <TextField fx:id="txtIdRol" prefHeight="41.0" prefWidth="119.0" />
+                                 </children>
+                              </VBox>
+                           </children>
+                        </Pane>
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="146.0" prefWidth="860.0">
+                     <children>
+                        <Pane prefHeight="155.0" prefWidth="860.0">
+                           <children>
+                              <VBox prefHeight="153.0" prefWidth="861.0">
+                                 <children>
+                                    <HBox prefHeight="8.0" prefWidth="861.0">
                                        <children>
-                                          <HBox prefHeight="35.0" prefWidth="1200.0">
-                                             <children>
-                                                <Pane prefHeight="66.0" prefWidth="1220.0">
-                                                   <children>
-                                                      <Label prefHeight="35.0" prefWidth="450.0" text="Roles de usuarios registrados">
-                                                         <font>
-                                                            <Font name="System Bold" size="22.0" />
-                                                         </font>
-                                                      </Label>
-                                                   </children>
-                                                </Pane>
-                                             </children>
-                                          </HBox>
-                                          <HBox prefHeight="45.0" prefWidth="1200.0">
-                                             <children>
-                                                <Pane prefHeight="45.0" prefWidth="422.0">
-                                                   <children>
-                                                      <HBox alignment="CENTER_LEFT" prefHeight="45.0" prefWidth="423.0" spacing="5.0">
-                                                         <children>
-                                                            <ComboBox fx:id="cmbFiltroTipoUsuario" onAction="#actionEventCmbFiltroTipoUsuario" prefHeight="45.0" prefWidth="346.0" promptText="Tipo de usuario" />
-                                                            <FontAwesomeIcon fill="#1c0cfc" glyphName="SEARCH" size="45" textAlignment="CENTER" wrappingWidth="38.0" />
-                                                         </children>
-                                                      </HBox>
-                                                   </children>
-                                                </Pane>
-                                                <Pane prefHeight="45.0" prefWidth="781.0">
-                                                   <children>
-                                                      <HBox alignment="CENTER_RIGHT" prefHeight="45.0" prefWidth="780.0" spacing="10.0">
-                                                         <children>
-                                                            <Button fx:id="btnCrearRol" mnemonicParsing="false" onAction="#actionEventBotonCrearRol" prefHeight="45.0" prefWidth="139.0" style="-fx-background-color: #05993D;" text="Crear " textFill="#fcf9f9">
-                                                               <font>
-                                                                  <Font size="17.0" />
-                                                               </font>
-                                                            </Button>
-                                                            <Button fx:id="btnEditarRol" mnemonicParsing="false" onAction="#actionEventBotonEditarRol" prefHeight="45.0" prefWidth="140.0" style="-fx-background-color: FBC432;" text="Editar" textFill="#fcf9f9">
-                                                               <font>
-                                                                  <Font size="17.0" />
-                                                               </font>
-                                                            </Button>
-                                                            <Button fx:id="btnEliminarRol" mnemonicParsing="false" onAction="#actionEventBotonEliminarRol" prefHeight="45.0" prefWidth="139.0" style="-fx-background-color: #F7453D;" text="Eliminar" textFill="#fcf9f9">
-                                                               <font>
-                                                                  <Font size="17.0" />
-                                                               </font>
-                                                            </Button>
-                                                         </children>
-                                                      </HBox>
-                                                   </children>
-                                                </Pane>
-                                             </children>
-                                             <VBox.margin>
-                                                <Insets top="20.0" />
-                                             </VBox.margin>
-                                          </HBox>
-                                          <HBox prefHeight="674.0" prefWidth="1175.0">
-                                             <children>
-                                                <TableView fx:id="tablaRoles" prefHeight="673.0" prefWidth="1200.0">
-                                                   <columns>
-                                                      <TableColumn fx:id="columnIdRol" prefWidth="81.0" text="Id" />
-                                                      <TableColumn fx:id="columnNombreRol" minWidth="0.0" prefWidth="385.0" text="Nombre rol" />
-                                                      <TableColumn fx:id="columnConfiguracion" minWidth="0.0" prefWidth="122.0" text="Configuracion" />
-                                                      <TableColumn fx:id="columnUsuarios" minWidth="0.0" prefWidth="122.0" text="Usuarios" />
-                                                      <TableColumn fx:id="columnContratos" prefWidth="122.0" text="Contratos" />
-                                                      <TableColumn fx:id="columnSupervision" minWidth="0.0" prefWidth="122.0" text="Supervision" />
-                                                      <TableColumn fx:id="columnSupervisor" prefWidth="122.0" text="Supervisor" />
-                                                      <TableColumn fx:id="columnDashboard" prefWidth="122.0" text="Dashboard" />
-                                                   </columns>
-                                                </TableView>
-                                             </children>
-                                             <opaqueInsets>
-                                                <Insets />
-                                             </opaqueInsets>
-                                             <VBox.margin>
-                                                <Insets top="20.0" />
-                                             </VBox.margin>
-                                          </HBox>
+                                          <Label text="Nombre rol">
+                                             <font>
+                                                <Font size="17.0" />
+                                             </font>
+                                          </Label>
+                                          <Label fx:id="lbErrorNombreRol" text=" (Required)" textFill="#da0d0d" visible="false">
+                                             <font>
+                                                <Font size="17.0" />
+                                             </font>
+                                          </Label>
                                        </children>
-                                       <padding>
-                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                       </padding>
-                                    </VBox>
-                                    <VBox fx:id="panelCrearRol" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" pickOnBounds="false" prefHeight="665.0" prefWidth="896.0" style="-fx-background-color: #E4E4E5; -fx-border-color: #C4C5C7;">
+                                    </HBox>
+                                    <TextField fx:id="txtNombreRol" prefHeight="38.0" prefWidth="861.0" />
+                                    <HBox prefHeight="0.0" prefWidth="861.0">
                                        <children>
-                                          <HBox prefHeight="35.0" prefWidth="1200.0">
+                                          <Label text="Tipo de usuario">
+                                             <font>
+                                                <Font size="17.0" />
+                                             </font>
+                                          </Label>
+                                          <Label fx:id="lbErrorTipoUsuario" text=" (Required)" textFill="#da0d0d" visible="false">
+                                             <font>
+                                                <Font size="17.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </HBox>
+                                    <ComboBox fx:id="cmbTipoUsuario" prefHeight="38.0" prefWidth="388.0" />
+                                 </children>
+                              </VBox>
+                           </children>
+                        </Pane>
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="373.0" prefWidth="860.0">
+                     <VBox.margin>
+                        <Insets top="20.0" />
+                     </VBox.margin>
+                     <children>
+                        <TitledPane alignment="CENTER" animated="false" collapsible="false" prefHeight="346.0" prefWidth="860.0" style="-fx-background-color: #E4E4E5;" text="Permisos asignados al rol">
+                           <content>
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="322.0" prefWidth="858.0">
+                                 <children>
+                                    <VBox prefHeight="312.0" prefWidth="861.0">
+                                       <children>
+                                          <HBox alignment="CENTER_LEFT" prefHeight="45.0" prefWidth="861.0">
                                              <children>
-                                                <Pane prefHeight="66.0" prefWidth="1220.0">
+                                                <ToggleButton fx:id="onConfig" mnemonicParsing="false" onAction="#onConfiguracion" prefHeight="29.0" prefWidth="50.0" text="on" />
+                                                <ToggleButton fx:id="offConfig" mnemonicParsing="false" onAction="#offConfiguracion" prefHeight="29.0" prefWidth="50.0" selected="true" text="off" />
+                                                <Pane prefHeight="45.0" prefWidth="279.0">
                                                    <children>
-                                                      <Label prefHeight="35.0" prefWidth="492.0" text="Registro roles de usuario">
+                                                      <Label fx:id="lbConfiguracion" layoutX="14.0" layoutY="9.0" prefHeight="14.0" prefWidth="319.0" text="Modulo configuracion">
                                                          <font>
-                                                            <Font name="System Bold" size="22.0" />
+                                                            <Font size="19.0" />
                                                          </font>
                                                       </Label>
                                                    </children>
+                                                   <HBox.margin>
+                                                      <Insets left="20.0" />
+                                                   </HBox.margin>
                                                 </Pane>
-                                             </children>
-                                          </HBox>
-                                          <HBox prefHeight="0.0" prefWidth="874.0" visible="false">
-                                             <children>
-                                                <Pane prefHeight="28.0" prefWidth="874.0">
+                                                <HBox alignment="CENTER_RIGHT" prefHeight="45.0" prefWidth="482.0" spacing="20.0">
                                                    <children>
-                                                      <VBox prefHeight="80.0" prefWidth="861.0">
-                                                         <children>
-                                                            <Label text="Id modalidad">
-                                                               <font>
-                                                                  <Font size="17.0" />
-                                                               </font>
-                                                            </Label>
-                                                            <TextField fx:id="txtIdRol" prefHeight="41.0" prefWidth="119.0" />
-                                                         </children>
-                                                      </VBox>
-                                                   </children>
-                                                </Pane>
-                                             </children>
-                                          </HBox>
-                                          <HBox prefHeight="146.0" prefWidth="860.0">
-                                             <children>
-                                                <Pane prefHeight="155.0" prefWidth="860.0">
-                                                   <children>
-                                                      <VBox prefHeight="153.0" prefWidth="861.0">
-                                                         <children>
-                                                            <HBox prefHeight="8.0" prefWidth="861.0">
-                                                               <children>
-                                                                  <Label text="Nombre rol">
-                                                                     <font>
-                                                                        <Font size="17.0" />
-                                                                     </font>
-                                                                  </Label>
-                                                                  <Label fx:id="lbErrorNombreRol" text=" (Required)" textFill="#da0d0d" visible="false">
-                                                                     <font>
-                                                                        <Font size="17.0" />
-                                                                     </font>
-                                                                  </Label>
-                                                               </children>
-                                                            </HBox>
-                                                            <TextField fx:id="txtNombreRol" prefHeight="38.0" prefWidth="861.0" />
-                                                            <HBox prefHeight="0.0" prefWidth="861.0">
-                                                               <children>
-                                                                  <Label text="Tipo de usuario">
-                                                                     <font>
-                                                                        <Font size="17.0" />
-                                                                     </font>
-                                                                  </Label>
-                                                                  <Label fx:id="lbErrorTipoUsuario" text=" (Required)" textFill="#da0d0d" visible="false">
-                                                                     <font>
-                                                                        <Font size="17.0" />
-                                                                     </font>
-                                                                  </Label>
-                                                               </children>
-                                                            </HBox>
-                                                            <ComboBox fx:id="cmbTipoUsuario" prefHeight="38.0" prefWidth="388.0" />
-                                                         </children>
-                                                      </VBox>
-                                                   </children>
-                                                </Pane>
-                                             </children>
-                                          </HBox>
-                                          <HBox prefHeight="373.0" prefWidth="860.0">
-                                             <VBox.margin>
-                                                <Insets top="20.0" />
-                                             </VBox.margin>
-                                             <children>
-                                                <TitledPane alignment="CENTER" animated="false" collapsible="false" prefHeight="346.0" prefWidth="860.0" style="-fx-background-color: #E4E4E5;" text="Permisos asignados al rol">
-                                                   <content>
-                                                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="322.0" prefWidth="858.0">
-                                                         <children>
-                                                            <VBox prefHeight="312.0" prefWidth="861.0">
-                                                               <children>
-                                                                  <HBox alignment="CENTER_LEFT" prefHeight="45.0" prefWidth="861.0">
-                                                                     <children>
-                                                                        <ToggleButton fx:id="onConfig" mnemonicParsing="false" onAction="#onConfiguracion" prefHeight="29.0" prefWidth="50.0" text="on" />
-                                                                        <ToggleButton fx:id="offConfig" mnemonicParsing="false" onAction="#offConfiguracion" prefHeight="29.0" prefWidth="50.0" selected="true" text="off" />
-                                                                        <Pane prefHeight="45.0" prefWidth="279.0">
-                                                                           <children>
-                                                                              <Label fx:id="lbConfiguracion" layoutX="14.0" layoutY="9.0" prefHeight="14.0" prefWidth="319.0" text="Modulo configuracion">
-                                                                                 <font>
-                                                                                    <Font size="19.0" />
-                                                                                 </font>
-                                                                              </Label>
-                                                                           </children>
-                                                                           <HBox.margin>
-                                                                              <Insets left="20.0" />
-                                                                           </HBox.margin>
-                                                                        </Pane>
-                                                                        <HBox alignment="CENTER_RIGHT" prefHeight="45.0" prefWidth="482.0" spacing="20.0">
-                                                                           <children>
-                                                                              <TextField fx:id="txtIdConfiguracion" prefHeight="29.0" prefWidth="57.0" visible="false" />
-                                                                              <CheckBox fx:id="rConfig" mnemonicParsing="false" selected="true" text="Leer">
-                                                                                 <font>
-                                                                                    <Font size="17.0" />
-                                                                                 </font>
-                                                                              </CheckBox>
-                                                                              <CheckBox fx:id="cConfig" mnemonicParsing="false" text="Crear">
-                                                                                 <font>
-                                                                                    <Font size="17.0" />
-                                                                                 </font>
-                                                                              </CheckBox>
-                                                                              <CheckBox fx:id="uConfig" mnemonicParsing="false" text="Editar">
-                                                                                 <font>
-                                                                                    <Font size="17.0" />
-                                                                                 </font>
-                                                                              </CheckBox>
-                                                                              <CheckBox fx:id="dConfig" mnemonicParsing="false" text="Eliminar">
-                                                                                 <font>
-                                                                                    <Font size="17.0" />
-                                                                                 </font>
-                                                                              </CheckBox>
-                                                                           </children>
-                                                                        </HBox>
-                                                                     </children>
-                                                                  </HBox>
-                                                                  <HBox alignment="CENTER_LEFT" prefHeight="45.0" prefWidth="861.0">
-                                                                     <children>
-                                                                        <ToggleButton fx:id="onUsuarios" mnemonicParsing="false" onAction="#onUsuarios" prefHeight="29.0" prefWidth="50.0" text="on" />
-                                                                        <ToggleButton fx:id="offUsuarios" mnemonicParsing="false" onAction="#offUsuarios" prefHeight="29.0" prefWidth="50.0" selected="true" text="off" />
-                                                                        <Pane prefHeight="45.0" prefWidth="279.0">
-                                                                           <children>
-                                                                              <Label fx:id="lbUsuarios" layoutX="14.0" layoutY="9.0" prefHeight="14.0" prefWidth="319.0" text="Modulo usuarios">
-                                                                                 <font>
-                                                                                    <Font size="19.0" />
-                                                                                 </font>
-                                                                              </Label>
-                                                                           </children>
-                                                                           <HBox.margin>
-                                                                              <Insets left="20.0" />
-                                                                           </HBox.margin>
-                                                                        </Pane>
-                                                                        <HBox alignment="CENTER_RIGHT" prefHeight="45.0" prefWidth="482.0" spacing="20.0">
-                                                                           <children>
-                                                                              <TextField fx:id="txtIdUsuarios" prefHeight="29.0" prefWidth="57.0" visible="false" />
-                                                                              <CheckBox fx:id="rUsuarios" mnemonicParsing="false" selected="true" text="Leer">
-                                                                                 <font>
-                                                                                    <Font size="17.0" />
-                                                                                 </font>
-                                                                              </CheckBox>
-                                                                              <CheckBox fx:id="cUsuarios" mnemonicParsing="false" text="Crear">
-                                                                                 <font>
-                                                                                    <Font size="17.0" />
-                                                                                 </font>
-                                                                              </CheckBox>
-                                                                              <CheckBox fx:id="uUsuarios" mnemonicParsing="false" text="Editar">
-                                                                                 <font>
-                                                                                    <Font size="17.0" />
-                                                                                 </font>
-                                                                              </CheckBox>
-                                                                              <CheckBox fx:id="dUsuarios" mnemonicParsing="false" text="Eliminar">
-                                                                                 <font>
-                                                                                    <Font size="17.0" />
-                                                                                 </font>
-                                                                              </CheckBox>
-                                                                           </children>
-                                                                        </HBox>
-                                                                     </children>
-                                                                  </HBox>
-                                                                  <HBox alignment="CENTER_LEFT" prefHeight="45.0" prefWidth="861.0">
-                                                                     <children>
-                                                                        <ToggleButton fx:id="onContratos" mnemonicParsing="false" onAction="#onContratos" prefHeight="29.0" prefWidth="50.0" selected="true" text="on" />
-                                                                        <ToggleButton fx:id="offContratos" mnemonicParsing="false" onAction="#offContratos" prefHeight="29.0" prefWidth="50.0" text="off" />
-                                                                        <Pane prefHeight="45.0" prefWidth="279.0">
-                                                                           <children>
-                                                                              <Label fx:id="lbContratos" layoutX="14.0" layoutY="9.0" prefHeight="14.0" prefWidth="319.0" text="Modulo contratos">
-                                                                                 <font>
-                                                                                    <Font size="19.0" />
-                                                                                 </font>
-                                                                              </Label>
-                                                                           </children>
-                                                                           <HBox.margin>
-                                                                              <Insets left="20.0" />
-                                                                           </HBox.margin>
-                                                                        </Pane>
-                                                                        <HBox alignment="CENTER_RIGHT" prefHeight="45.0" prefWidth="482.0" spacing="20.0">
-                                                                           <children>
-                                                                              <TextField fx:id="txtIdContratos" prefHeight="29.0" prefWidth="57.0" visible="false" />
-                                                                              <CheckBox fx:id="rContratos" mnemonicParsing="false" selected="true" text="Leer">
-                                                                                 <font>
-                                                                                    <Font size="17.0" />
-                                                                                 </font>
-                                                                              </CheckBox>
-                                                                              <CheckBox fx:id="cContratos" mnemonicParsing="false" text="Crear">
-                                                                                 <font>
-                                                                                    <Font size="17.0" />
-                                                                                 </font>
-                                                                              </CheckBox>
-                                                                              <CheckBox fx:id="uContratos" mnemonicParsing="false" text="Editar">
-                                                                                 <font>
-                                                                                    <Font size="17.0" />
-                                                                                 </font>
-                                                                              </CheckBox>
-                                                                              <CheckBox fx:id="dContratos" mnemonicParsing="false" text="Eliminar">
-                                                                                 <font>
-                                                                                    <Font size="17.0" />
-                                                                                 </font>
-                                                                              </CheckBox>
-                                                                           </children>
-                                                                        </HBox>
-                                                                     </children>
-                                                                  </HBox>
-                                                                  <HBox alignment="CENTER_LEFT" prefHeight="45.0" prefWidth="861.0">
-                                                                     <children>
-                                                                        <ToggleButton fx:id="onSupervision" mnemonicParsing="false" onAction="#onSupervision" prefHeight="29.0" prefWidth="50.0" selected="true" text="on" />
-                                                                        <ToggleButton fx:id="offSupervision" mnemonicParsing="false" onAction="#offSupervision" prefHeight="29.0" prefWidth="50.0" text="off" />
-                                                                        <Pane prefHeight="45.0" prefWidth="279.0">
-                                                                           <children>
-                                                                              <Label fx:id="lbSupervision" layoutX="14.0" layoutY="9.0" prefHeight="14.0" prefWidth="319.0" text="Modulo supervision">
-                                                                                 <font>
-                                                                                    <Font size="19.0" />
-                                                                                 </font>
-                                                                              </Label>
-                                                                           </children>
-                                                                           <HBox.margin>
-                                                                              <Insets left="20.0" />
-                                                                           </HBox.margin>
-                                                                        </Pane>
-                                                                        <HBox alignment="CENTER_RIGHT" prefHeight="45.0" prefWidth="482.0" spacing="20.0">
-                                                                           <children>
-                                                                              <TextField fx:id="txtIdSupervision" prefHeight="29.0" prefWidth="57.0" visible="false" />
-                                                                              <CheckBox fx:id="rSupervision" mnemonicParsing="false" selected="true" text="Leer">
-                                                                                 <font>
-                                                                                    <Font size="17.0" />
-                                                                                 </font>
-                                                                              </CheckBox>
-                                                                              <CheckBox fx:id="cSupervision" mnemonicParsing="false" text="Crear">
-                                                                                 <font>
-                                                                                    <Font size="17.0" />
-                                                                                 </font>
-                                                                              </CheckBox>
-                                                                              <CheckBox fx:id="uSupervision" mnemonicParsing="false" text="Editar">
-                                                                                 <font>
-                                                                                    <Font size="17.0" />
-                                                                                 </font>
-                                                                              </CheckBox>
-                                                                              <CheckBox fx:id="dSupervision" mnemonicParsing="false" text="Eliminar">
-                                                                                 <font>
-                                                                                    <Font size="17.0" />
-                                                                                 </font>
-                                                                              </CheckBox>
-                                                                           </children>
-                                                                        </HBox>
-                                                                     </children>
-                                                                  </HBox>
-                                                                  <HBox alignment="CENTER_LEFT" prefHeight="45.0" prefWidth="861.0">
-                                                                     <children>
-                                                                        <ToggleButton fx:id="onSupervisor" mnemonicParsing="false" onAction="#onSupervisor" prefHeight="29.0" prefWidth="50.0" text="on" />
-                                                                        <ToggleButton fx:id="offSupervisor" mnemonicParsing="false" onAction="#offSupervisor" prefHeight="29.0" prefWidth="50.0" selected="true" text="off" />
-                                                                        <Pane prefHeight="45.0" prefWidth="279.0">
-                                                                           <children>
-                                                                              <Label fx:id="lbSupervisor" layoutX="14.0" layoutY="9.0" prefHeight="14.0" prefWidth="319.0" text="Modulo supervisor">
-                                                                                 <font>
-                                                                                    <Font size="19.0" />
-                                                                                 </font>
-                                                                              </Label>
-                                                                           </children>
-                                                                           <HBox.margin>
-                                                                              <Insets left="20.0" />
-                                                                           </HBox.margin>
-                                                                        </Pane>
-                                                                        <HBox alignment="CENTER_RIGHT" prefHeight="45.0" prefWidth="482.0" spacing="20.0">
-                                                                           <children>
-                                                                              <TextField fx:id="txtIdSupervisor" prefHeight="29.0" prefWidth="57.0" visible="false" />
-                                                                              <CheckBox fx:id="rSupervisor" mnemonicParsing="false" selected="true" text="Leer">
-                                                                                 <font>
-                                                                                    <Font size="17.0" />
-                                                                                 </font>
-                                                                              </CheckBox>
-                                                                              <CheckBox fx:id="cSupervisor" mnemonicParsing="false" text="Crear">
-                                                                                 <font>
-                                                                                    <Font size="17.0" />
-                                                                                 </font>
-                                                                              </CheckBox>
-                                                                              <CheckBox fx:id="uSupervisor" mnemonicParsing="false" text="Editar">
-                                                                                 <font>
-                                                                                    <Font size="17.0" />
-                                                                                 </font>
-                                                                              </CheckBox>
-                                                                              <CheckBox fx:id="dSupervisor" mnemonicParsing="false" text="Eliminar">
-                                                                                 <font>
-                                                                                    <Font size="17.0" />
-                                                                                 </font>
-                                                                              </CheckBox>
-                                                                           </children>
-                                                                        </HBox>
-                                                                     </children>
-                                                                  </HBox>
-                                                                  <HBox alignment="CENTER_LEFT" prefHeight="45.0" prefWidth="861.0">
-                                                                     <children>
-                                                                        <ToggleButton fx:id="onDashboard" mnemonicParsing="false" onAction="#onDashboard" prefHeight="29.0" prefWidth="50.0" selected="true" text="on" />
-                                                                        <ToggleButton fx:id="offDashboard" mnemonicParsing="false" onAction="#offDashboard" prefHeight="29.0" prefWidth="50.0" text="off" />
-                                                                        <Pane prefHeight="45.0" prefWidth="279.0">
-                                                                           <children>
-                                                                              <Label fx:id="lbDashboard" layoutX="14.0" layoutY="9.0" prefHeight="14.0" prefWidth="319.0" text="Modulo dashboard">
-                                                                                 <font>
-                                                                                    <Font size="19.0" />
-                                                                                 </font>
-                                                                              </Label>
-                                                                           </children>
-                                                                           <HBox.margin>
-                                                                              <Insets left="20.0" />
-                                                                           </HBox.margin>
-                                                                        </Pane>
-                                                                        <HBox alignment="CENTER_RIGHT" prefHeight="45.0" prefWidth="482.0" spacing="20.0">
-                                                                           <children>
-                                                                              <TextField fx:id="txtIdDashboard" prefHeight="29.0" prefWidth="57.0" visible="false" />
-                                                                              <CheckBox fx:id="rDashboard" mnemonicParsing="false" selected="true" text="Leer">
-                                                                                 <font>
-                                                                                    <Font size="17.0" />
-                                                                                 </font>
-                                                                              </CheckBox>
-                                                                              <CheckBox disable="true" mnemonicParsing="false" text="Crear" visible="false">
-                                                                                 <font>
-                                                                                    <Font size="17.0" />
-                                                                                 </font>
-                                                                              </CheckBox>
-                                                                              <CheckBox disable="true" mnemonicParsing="false" text="Editar" visible="false">
-                                                                                 <font>
-                                                                                    <Font size="17.0" />
-                                                                                 </font>
-                                                                              </CheckBox>
-                                                                              <CheckBox disable="true" mnemonicParsing="false" text="Eliminar" visible="false">
-                                                                                 <font>
-                                                                                    <Font size="17.0" />
-                                                                                 </font>
-                                                                              </CheckBox>
-                                                                           </children>
-                                                                        </HBox>
-                                                                     </children>
-                                                                  </HBox>
-                                                               </children>
-                                                               <padding>
-                                                                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                                               </padding>
-                                                            </VBox>
-                                                         </children>
-                                                         <padding>
-                                                            <Insets left="10.0" right="10.0" />
-                                                         </padding>
-                                                      </AnchorPane>
-                                                   </content>
-                                                   <font>
-                                                      <Font name="System Bold" size="18.0" />
-                                                   </font>
-                                                </TitledPane>
-                                             </children>
-                                          </HBox>
-                                          <Pane prefHeight="56.0" prefWidth="871.0">
-                                             <children>
-                                                <HBox alignment="TOP_RIGHT" prefHeight="45.0" prefWidth="861.0" spacing="10.0">
-                                                   <children>
-                                                      <Button fx:id="btnGuardarRol" mnemonicParsing="false" onAction="#actionEventBtnGuardarRol" prefHeight="45.0" prefWidth="139.0" style="-fx-background-color: #05993D;" text="Guardar" textFill="#fcf9f9">
+                                                      <TextField fx:id="txtIdConfiguracion" prefHeight="29.0" prefWidth="57.0" visible="false" />
+                                                      <CheckBox fx:id="rConfig" mnemonicParsing="false" selected="true" text="Leer">
                                                          <font>
                                                             <Font size="17.0" />
                                                          </font>
-                                                      </Button>
-                                                      <Button fx:id="btnActualizarRol" mnemonicParsing="false" onAction="#actionEventBtnActualizarRol" prefHeight="45.0" prefWidth="140.0" style="-fx-background-color: #FBC432;" text="Actualizar" textFill="#fcf9f9">
+                                                      </CheckBox>
+                                                      <CheckBox fx:id="cConfig" mnemonicParsing="false" text="Crear">
                                                          <font>
                                                             <Font size="17.0" />
                                                          </font>
-                                                      </Button>
-                                                      <Button fx:id="btnCancelarRol" mnemonicParsing="false" onAction="#actionEventBtnCancelarRol" prefHeight="45.0" prefWidth="139.0" style="-fx-background-color: #F7453D;" text="Cancelar" textFill="#fcf9f9">
+                                                      </CheckBox>
+                                                      <CheckBox fx:id="uConfig" mnemonicParsing="false" text="Editar">
                                                          <font>
                                                             <Font size="17.0" />
                                                          </font>
-                                                      </Button>
+                                                      </CheckBox>
+                                                      <CheckBox fx:id="dConfig" mnemonicParsing="false" text="Eliminar">
+                                                         <font>
+                                                            <Font size="17.0" />
+                                                         </font>
+                                                      </CheckBox>
                                                    </children>
                                                 </HBox>
                                              </children>
-                                          </Pane>
+                                          </HBox>
+                                          <HBox alignment="CENTER_LEFT" prefHeight="45.0" prefWidth="861.0">
+                                             <children>
+                                                <ToggleButton fx:id="onUsuarios" mnemonicParsing="false" onAction="#onUsuarios" prefHeight="29.0" prefWidth="50.0" text="on" />
+                                                <ToggleButton fx:id="offUsuarios" mnemonicParsing="false" onAction="#offUsuarios" prefHeight="29.0" prefWidth="50.0" selected="true" text="off" />
+                                                <Pane prefHeight="45.0" prefWidth="279.0">
+                                                   <children>
+                                                      <Label fx:id="lbUsuarios" layoutX="14.0" layoutY="9.0" prefHeight="14.0" prefWidth="319.0" text="Modulo usuarios">
+                                                         <font>
+                                                            <Font size="19.0" />
+                                                         </font>
+                                                      </Label>
+                                                   </children>
+                                                   <HBox.margin>
+                                                      <Insets left="20.0" />
+                                                   </HBox.margin>
+                                                </Pane>
+                                                <HBox alignment="CENTER_RIGHT" prefHeight="45.0" prefWidth="482.0" spacing="20.0">
+                                                   <children>
+                                                      <TextField fx:id="txtIdUsuarios" prefHeight="29.0" prefWidth="57.0" visible="false" />
+                                                      <CheckBox fx:id="rUsuarios" mnemonicParsing="false" selected="true" text="Leer">
+                                                         <font>
+                                                            <Font size="17.0" />
+                                                         </font>
+                                                      </CheckBox>
+                                                      <CheckBox fx:id="cUsuarios" mnemonicParsing="false" text="Crear">
+                                                         <font>
+                                                            <Font size="17.0" />
+                                                         </font>
+                                                      </CheckBox>
+                                                      <CheckBox fx:id="uUsuarios" mnemonicParsing="false" text="Editar">
+                                                         <font>
+                                                            <Font size="17.0" />
+                                                         </font>
+                                                      </CheckBox>
+                                                      <CheckBox fx:id="dUsuarios" mnemonicParsing="false" text="Eliminar">
+                                                         <font>
+                                                            <Font size="17.0" />
+                                                         </font>
+                                                      </CheckBox>
+                                                   </children>
+                                                </HBox>
+                                             </children>
+                                          </HBox>
+                                          <HBox alignment="CENTER_LEFT" prefHeight="45.0" prefWidth="861.0">
+                                             <children>
+                                                <ToggleButton fx:id="onContratos" mnemonicParsing="false" onAction="#onContratos" prefHeight="29.0" prefWidth="50.0" selected="true" text="on" />
+                                                <ToggleButton fx:id="offContratos" mnemonicParsing="false" onAction="#offContratos" prefHeight="29.0" prefWidth="50.0" text="off" />
+                                                <Pane prefHeight="45.0" prefWidth="279.0">
+                                                   <children>
+                                                      <Label fx:id="lbContratos" layoutX="14.0" layoutY="9.0" prefHeight="14.0" prefWidth="319.0" text="Modulo contratos">
+                                                         <font>
+                                                            <Font size="19.0" />
+                                                         </font>
+                                                      </Label>
+                                                   </children>
+                                                   <HBox.margin>
+                                                      <Insets left="20.0" />
+                                                   </HBox.margin>
+                                                </Pane>
+                                                <HBox alignment="CENTER_RIGHT" prefHeight="45.0" prefWidth="482.0" spacing="20.0">
+                                                   <children>
+                                                      <TextField fx:id="txtIdContratos" prefHeight="29.0" prefWidth="57.0" visible="false" />
+                                                      <CheckBox fx:id="rContratos" mnemonicParsing="false" selected="true" text="Leer">
+                                                         <font>
+                                                            <Font size="17.0" />
+                                                         </font>
+                                                      </CheckBox>
+                                                      <CheckBox fx:id="cContratos" mnemonicParsing="false" text="Crear">
+                                                         <font>
+                                                            <Font size="17.0" />
+                                                         </font>
+                                                      </CheckBox>
+                                                      <CheckBox fx:id="uContratos" mnemonicParsing="false" text="Editar">
+                                                         <font>
+                                                            <Font size="17.0" />
+                                                         </font>
+                                                      </CheckBox>
+                                                      <CheckBox fx:id="dContratos" mnemonicParsing="false" text="Eliminar">
+                                                         <font>
+                                                            <Font size="17.0" />
+                                                         </font>
+                                                      </CheckBox>
+                                                   </children>
+                                                </HBox>
+                                             </children>
+                                          </HBox>
+                                          <HBox alignment="CENTER_LEFT" prefHeight="45.0" prefWidth="861.0">
+                                             <children>
+                                                <ToggleButton fx:id="onSupervision" mnemonicParsing="false" onAction="#onSupervision" prefHeight="29.0" prefWidth="50.0" selected="true" text="on" />
+                                                <ToggleButton fx:id="offSupervision" mnemonicParsing="false" onAction="#offSupervision" prefHeight="29.0" prefWidth="50.0" text="off" />
+                                                <Pane prefHeight="45.0" prefWidth="279.0">
+                                                   <children>
+                                                      <Label fx:id="lbSupervision" layoutX="14.0" layoutY="9.0" prefHeight="14.0" prefWidth="319.0" text="Modulo supervision">
+                                                         <font>
+                                                            <Font size="19.0" />
+                                                         </font>
+                                                      </Label>
+                                                   </children>
+                                                   <HBox.margin>
+                                                      <Insets left="20.0" />
+                                                   </HBox.margin>
+                                                </Pane>
+                                                <HBox alignment="CENTER_RIGHT" prefHeight="45.0" prefWidth="482.0" spacing="20.0">
+                                                   <children>
+                                                      <TextField fx:id="txtIdSupervision" prefHeight="29.0" prefWidth="57.0" visible="false" />
+                                                      <CheckBox fx:id="rSupervision" mnemonicParsing="false" selected="true" text="Leer">
+                                                         <font>
+                                                            <Font size="17.0" />
+                                                         </font>
+                                                      </CheckBox>
+                                                      <CheckBox fx:id="cSupervision" mnemonicParsing="false" text="Crear">
+                                                         <font>
+                                                            <Font size="17.0" />
+                                                         </font>
+                                                      </CheckBox>
+                                                      <CheckBox fx:id="uSupervision" mnemonicParsing="false" text="Editar">
+                                                         <font>
+                                                            <Font size="17.0" />
+                                                         </font>
+                                                      </CheckBox>
+                                                      <CheckBox fx:id="dSupervision" mnemonicParsing="false" text="Eliminar">
+                                                         <font>
+                                                            <Font size="17.0" />
+                                                         </font>
+                                                      </CheckBox>
+                                                   </children>
+                                                </HBox>
+                                             </children>
+                                          </HBox>
+                                          <HBox alignment="CENTER_LEFT" prefHeight="45.0" prefWidth="861.0">
+                                             <children>
+                                                <ToggleButton fx:id="onSupervisor" mnemonicParsing="false" onAction="#onSupervisor" prefHeight="29.0" prefWidth="50.0" text="on" />
+                                                <ToggleButton fx:id="offSupervisor" mnemonicParsing="false" onAction="#offSupervisor" prefHeight="29.0" prefWidth="50.0" selected="true" text="off" />
+                                                <Pane prefHeight="45.0" prefWidth="279.0">
+                                                   <children>
+                                                      <Label fx:id="lbSupervisor" layoutX="14.0" layoutY="9.0" prefHeight="14.0" prefWidth="319.0" text="Modulo supervisor">
+                                                         <font>
+                                                            <Font size="19.0" />
+                                                         </font>
+                                                      </Label>
+                                                   </children>
+                                                   <HBox.margin>
+                                                      <Insets left="20.0" />
+                                                   </HBox.margin>
+                                                </Pane>
+                                                <HBox alignment="CENTER_RIGHT" prefHeight="45.0" prefWidth="482.0" spacing="20.0">
+                                                   <children>
+                                                      <TextField fx:id="txtIdSupervisor" prefHeight="29.0" prefWidth="57.0" visible="false" />
+                                                      <CheckBox fx:id="rSupervisor" mnemonicParsing="false" selected="true" text="Leer">
+                                                         <font>
+                                                            <Font size="17.0" />
+                                                         </font>
+                                                      </CheckBox>
+                                                      <CheckBox fx:id="cSupervisor" mnemonicParsing="false" text="Crear">
+                                                         <font>
+                                                            <Font size="17.0" />
+                                                         </font>
+                                                      </CheckBox>
+                                                      <CheckBox fx:id="uSupervisor" mnemonicParsing="false" text="Editar">
+                                                         <font>
+                                                            <Font size="17.0" />
+                                                         </font>
+                                                      </CheckBox>
+                                                      <CheckBox fx:id="dSupervisor" mnemonicParsing="false" text="Eliminar">
+                                                         <font>
+                                                            <Font size="17.0" />
+                                                         </font>
+                                                      </CheckBox>
+                                                   </children>
+                                                </HBox>
+                                             </children>
+                                          </HBox>
+                                          <HBox alignment="CENTER_LEFT" prefHeight="45.0" prefWidth="861.0">
+                                             <children>
+                                                <ToggleButton fx:id="onDashboard" mnemonicParsing="false" onAction="#onDashboard" prefHeight="29.0" prefWidth="50.0" selected="true" text="on" />
+                                                <ToggleButton fx:id="offDashboard" mnemonicParsing="false" onAction="#offDashboard" prefHeight="29.0" prefWidth="50.0" text="off" />
+                                                <Pane prefHeight="45.0" prefWidth="279.0">
+                                                   <children>
+                                                      <Label fx:id="lbDashboard" layoutX="14.0" layoutY="9.0" prefHeight="14.0" prefWidth="319.0" text="Modulo dashboard">
+                                                         <font>
+                                                            <Font size="19.0" />
+                                                         </font>
+                                                      </Label>
+                                                   </children>
+                                                   <HBox.margin>
+                                                      <Insets left="20.0" />
+                                                   </HBox.margin>
+                                                </Pane>
+                                                <HBox alignment="CENTER_RIGHT" prefHeight="45.0" prefWidth="482.0" spacing="20.0">
+                                                   <children>
+                                                      <TextField fx:id="txtIdDashboard" prefHeight="29.0" prefWidth="57.0" visible="false" />
+                                                      <CheckBox fx:id="rDashboard" mnemonicParsing="false" selected="true" text="Leer">
+                                                         <font>
+                                                            <Font size="17.0" />
+                                                         </font>
+                                                      </CheckBox>
+                                                      <CheckBox disable="true" mnemonicParsing="false" text="Crear" visible="false">
+                                                         <font>
+                                                            <Font size="17.0" />
+                                                         </font>
+                                                      </CheckBox>
+                                                      <CheckBox disable="true" mnemonicParsing="false" text="Editar" visible="false">
+                                                         <font>
+                                                            <Font size="17.0" />
+                                                         </font>
+                                                      </CheckBox>
+                                                      <CheckBox disable="true" mnemonicParsing="false" text="Eliminar" visible="false">
+                                                         <font>
+                                                            <Font size="17.0" />
+                                                         </font>
+                                                      </CheckBox>
+                                                   </children>
+                                                </HBox>
+                                             </children>
+                                          </HBox>
                                        </children>
                                        <padding>
                                           <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                                        </padding>
                                     </VBox>
                                  </children>
-                              </StackPane>
+                                 <padding>
+                                    <Insets left="10.0" right="10.0" />
+                                 </padding>
+                              </AnchorPane>
+                           </content>
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                        </TitledPane>
+                     </children>
+                  </HBox>
+                  <Pane prefHeight="56.0" prefWidth="871.0">
+                     <children>
+                        <HBox alignment="TOP_RIGHT" prefHeight="45.0" prefWidth="861.0" spacing="10.0">
+                           <children>
+                              <Button fx:id="btnGuardarRol" mnemonicParsing="false" onAction="#actionEventBtnGuardarRol" prefHeight="45.0" prefWidth="139.0" style="-fx-background-color: #05993D;" text="Guardar" textFill="#fcf9f9">
+                                 <font>
+                                    <Font size="17.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="btnActualizarRol" mnemonicParsing="false" onAction="#actionEventBtnActualizarRol" prefHeight="45.0" prefWidth="140.0" style="-fx-background-color: #FBC432;" text="Actualizar" textFill="#fcf9f9">
+                                 <font>
+                                    <Font size="17.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="btnCancelarRol" mnemonicParsing="false" onAction="#actionEventBtnCancelarRol" prefHeight="45.0" prefWidth="139.0" style="-fx-background-color: #F7453D;" text="Cancelar" textFill="#fcf9f9">
+                                 <font>
+                                    <Font size="17.0" />
+                                 </font>
+                              </Button>
                            </children>
-                        </AnchorPane>
-                     </content>
-                  </Tab>
-               </tabs>
-            </TabPane>
+                        </HBox>
+                     </children>
+                  </Pane>
+               </children>
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+            </VBox>
          </children>
-      </Pane>
+      </StackPane>
    </children>
-</StackPane>
+</HBox>

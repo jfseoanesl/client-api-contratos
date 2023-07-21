@@ -5,6 +5,7 @@
 package co.gov.deajvpar.gestcontractclient.fx.logic;
 
 import co.gov.deajvpar.gestcontractclient.fx.App;
+import co.gov.deajvpar.gestcontractclient.fx.controller.FormPrincipalController;
 import co.gov.deajvpar.gestcontractclient.fx.dtos.ModuloDto;
 import co.gov.deajvpar.gestcontractclient.fx.dtos.SesionUsuarioSingleton;
 import co.gov.deajvpar.gestcontractclient.fx.utility.MyScreen;
@@ -13,7 +14,9 @@ import javafx.scene.Node;
 import javafx.scene.control.TreeItem;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 
 /**
  *
@@ -31,7 +34,11 @@ public class GestionFormPrincipal {
     public final String FXML_FORM_MODULE_CONFIG_ALERTA = "PanelSetupAlerta";
     public final String FXML_FORM_MODULE_USUARIOS = "PanelUsuarios";
     public final String FXML_FORM_MODULE_ROLES = "PanelRoles";
-
+    public static final String FXML_FORM_MODULE_CONTRATOS = "DashBoardContratos";
+    public static final String FXML_FORM_MODULE_CONTRATOS_CREAR = "PanelCrearContratos";
+    public static final String FXML_FORM_MODULE_CONTRATOS_SUSCRIBIR = "PanelSuscribirContrato";
+    public static final String FXML_FORM_MODULE_CONTRATOS_SUPERVISOR = "PanelRegistroSupervisorContrato";
+    
     public final String menuTitlesAndIcon[][] = {
         {"Configuracion sistema", "configuracion.png", ModuloDto.CONFIGURACION.getName()},
         {"Gestion de usuarios y permisos", "usuario.png", ModuloDto.USUARIOS.getName()},
@@ -69,6 +76,20 @@ public class GestionFormPrincipal {
                 }
             }
         }
+        
+        return -1;
+    }
+    
+    public int getCodigoMenu(String title) {
+        
+        for (int i = 0; i < this.menuTitlesAndIcon.length; i++) {
+            
+                if (this.menuTitlesAndIcon[i][0].equalsIgnoreCase(title)) {
+                    return i;
+                }
+            
+        }
+        
         return -1;
     }
 
@@ -77,18 +98,20 @@ public class GestionFormPrincipal {
     }
 
     public void setModulo(ModuloDto module, StackPane root, String children) throws IOException {
+        
         root.getChildren().clear();
         if (module != null) {
             SesionUsuarioSingleton.get().setModuloActive(module);
             if (children != null) {
-                StackPane childrenPanel = new StackPane(App.loadFXML(children));
+                //StackPane childrenPanel = new StackPane(App.loadFXML(children));
+                HBox childrenPanel = new HBox(App.loadFXML(children));
                 root.getChildren().add(childrenPanel);
                 childrenPanel.setVisible(true);
             }
         }
 
     }
-
+    
     public ImageView getImageView(String path) {
 
         return new ImageView(new Image(path));
@@ -128,7 +151,7 @@ public class GestionFormPrincipal {
             int codigoMenu = this.getCodigoSubMenu(value);
             switch (codigoMenu) {
                 case 0:
-                    this.setModulo(ModuloDto.CONFIGURACION, root, this.FXML_FORM_MODULE_DEAJ);
+                   this.setModulo(ModuloDto.CONFIGURACION, root, this.FXML_FORM_MODULE_DEAJ);
                     break;
                 case 1:
                     this.setModulo(ModuloDto.CONFIGURACION, root, this.FXML_FORM_MODULE_TIPO_CONTRATO);
@@ -143,10 +166,24 @@ public class GestionFormPrincipal {
                     this.setModulo(ModuloDto.USUARIOS, root, this.FXML_FORM_MODULE_USUARIOS);
                     break;
                 case 11:
-                    this.setModulo(ModuloDto.USUARIOS, root, this.FXML_FORM_MODULE_ROLES);
+                    //this.setModulo(ModuloDto.USUARIOS, root, this.FXML_FORM_MODULE_ROLES);
+                    this.setModulo(ModuloDto.USUARIOS, root,  this.FXML_FORM_MODULE_ROLES);
+                    break;
+                case 20:
+                    this.setModulo(ModuloDto.CONTRATOS, root,  this.FXML_FORM_MODULE_CONTRATOS_CREAR);
                     break;
                 case -1:
+                    int menu = this.getCodigoMenu(value);
+                    switch(menu){
+                        case 0 -> this.setModulo(null, root, null);
+                        case 1 -> this.setModulo(null, root, null);
+                        case 2 -> this.setModulo(ModuloDto.CONTRATOS, root, this.FXML_FORM_MODULE_CONTRATOS);
+                        case 3 -> this.setModulo(null, root, null);
+                        case 4 -> this.setModulo(null, root, null);
+                        case 5 -> this.setModulo(null, root, null);
+                    }
                     break;
+
                 default:
                     // this.panelDirecciones.setVisible(false);
                     this.setModulo(null, root, null);
@@ -157,4 +194,7 @@ public class GestionFormPrincipal {
         }
 
     }
+
+    
+    
 }

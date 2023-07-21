@@ -9,6 +9,7 @@ package co.gov.deajvpar.gestcontractclient.fx.dtos;
  * @author Jairo F
  */
 public class CiudadDto {
+    private Long id;
     private String codigoCiudad;
     private String nombreCiudad;
   
@@ -48,6 +49,20 @@ public class CiudadDto {
      */
     public void setNombreCiudad(String nombreCiudad) {
         this.nombreCiudad = nombreCiudad;
+    }
+
+    /**
+     * @return the id
+     */
+    public Long getId() {
+        return id;
+    }
+
+    /**
+     * @param id the id to set
+     */
+    public void setId(Long id) {
+        this.id = id;
     }
 
     /**

@@ -21,7 +21,6 @@ public class SubModalidadDto {
 
     public SubModalidadDto() {
         this.eliminado=false;
-        this.listContratosRegistrados=new ArrayList();
     }
 
     public SubModalidadDto(String descripcionSubModalidad, String nombreSubModalidad, UsuarioDto createByUser) {
@@ -36,8 +35,7 @@ public class SubModalidadDto {
         this.id = id;
         this.descripcionSubModalidad = descripcionSubModalidad;
         this.nombreSubModalidad = nombreSubModalidad;
-        this.listContratosRegistrados = listContratosRegistrados;
-        this.createByUser = createByUser;
+         this.createByUser = createByUser;
     }
 
     /**
@@ -83,20 +81,6 @@ public class SubModalidadDto {
     }
 
     /**
-     * @return the listContratosRegistrados
-     */
-    public List<ContratoDto> getListContratosRegistrados() {
-        return listContratosRegistrados;
-    }
-
-    /**
-     * @param listContratosRegistrados the listContratosRegistrados to set
-     */
-    public void setListContratosRegistrados(List<ContratoDto> listContratosRegistrados) {
-        this.listContratosRegistrados = listContratosRegistrados;
-    }
-
-    /**
      * @return the createByUser
      */
     public UsuarioDto getCreateByUser() {
@@ -122,6 +106,25 @@ public class SubModalidadDto {
      */
     public void setEliminado(boolean eliminado) {
         this.eliminado = eliminado;
+    }
+
+    /**
+     * @return the listContratosRegistrados
+     */
+    public List<ContratoDto> getListContratosRegistrados() {
+        return listContratosRegistrados;
+    }
+
+    /**
+     * @param listContratosRegistrados the listContratosRegistrados to set
+     */
+    public void setListContratosRegistrados(List<ContratoDto> listContratosRegistrados) {
+        this.listContratosRegistrados = listContratosRegistrados;
+    }
+
+    @Override
+    public String toString() {
+        return "SubModalidadDto{" + "id=" + id + ", descripcionSubModalidad=" + descripcionSubModalidad + ", nombreSubModalidad=" + nombreSubModalidad + ", listContratosRegistrados=" + listContratosRegistrados + ", createByUser=" + createByUser + ", eliminado=" + eliminado + '}';
     }
     
     

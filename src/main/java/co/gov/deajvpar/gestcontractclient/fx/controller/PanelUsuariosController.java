@@ -66,6 +66,7 @@ public class PanelUsuariosController implements Initializable, IFormController {
 
     private ObservableList<UsuarioTableDto> dataTableUsuarios;
     private GestionUsuarios logicUsuarios = new GestionUsuarios();
+    
 
     @FXML
     private void actionEventCmbTipoUsuario(ActionEvent e) {
@@ -124,8 +125,7 @@ public class PanelUsuariosController implements Initializable, IFormController {
 
     @FXML
     private void actionEventBotonCrearUsuario(ActionEvent e) {
-        //this.activarDesactivarPaneles(false);
-        this.panelCrearUsuario.setVisible(true);
+        this.activarDesactivarPaneles(false);
         this.setDatosComboRoles();
         this.limpiarFormulario();
         this.habilitarComponentesRegistroUsuario(true);

@@ -105,7 +105,7 @@ public class PanelDireccionEjecutivaController implements Initializable, IFormCo
                 try {
                     this.logica.delete(dto);
                     MyScreen.exitMessage();
-
+                    this.initTable();
                 } catch (HttpResponseException ex) {
                     MyScreen.errorMessage(ex.getCausa(), ex.getMessage());
                 }

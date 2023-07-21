@@ -11,6 +11,7 @@ import co.gov.deajvpar.gestcontractclient.fx.dtos.SesionUserDto;
 import co.gov.deajvpar.gestcontractclient.fx.dtos.SesionUsuarioSingleton;
 import co.gov.deajvpar.gestcontractclient.fx.dtos.SubModalidadDto;
 import co.gov.deajvpar.gestcontractclient.fx.dtos.UsuarioDto;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -33,6 +34,8 @@ public class GestionModalidad implements ICrudGeneric<ModalidadDto> {
         this.apiData = new CrudApiModalidad();
         this.sesion = SesionUsuarioSingleton.get();
         this.sesion.setPrivilegiosModulo();
+        this.submodalidadListDeleteOfModalidad=new ArrayList();
+        this.submodalidadListOfNewModalidad=new ArrayList();
     }
 
     @Override
@@ -47,7 +50,7 @@ public class GestionModalidad implements ICrudGeneric<ModalidadDto> {
 
     @Override
     public ModalidadDto delete(ModalidadDto obj) {
-        return this.apiData.save(obj);
+        return this.apiData.delete(obj);
     }
 
     @Override
@@ -149,6 +152,15 @@ public class GestionModalidad implements ICrudGeneric<ModalidadDto> {
     
     public void deleteFromListSubmodalidad(List<SubModalidadDto> list, int index){
         list.remove(index);
+    }
+    
+    public List<SubModalidadDto> getListSubmodalidadesFromModalidad(Long idModalidad){
+        for(ModalidadDto m: this.getAll()){
+            if(m.getId().equals(idModalidad)){
+                return m.getListSubModalidades();
+            }
+        }
+        return new ArrayList();
     }
 
    

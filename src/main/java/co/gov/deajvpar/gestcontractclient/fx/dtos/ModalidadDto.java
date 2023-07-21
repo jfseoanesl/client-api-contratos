@@ -23,7 +23,6 @@ public class ModalidadDto {
 
     public ModalidadDto() {
         this.eliminado=false;
-        this.listContratosRegistrados=new ArrayList();
         this.listSubModalidades=new ArrayList();
     }
 
@@ -98,20 +97,6 @@ public class ModalidadDto {
     }
 
     /**
-     * @return the listContratosRegistrados
-     */
-    public List<ContratoDto> getListContratosRegistrados() {
-        return listContratosRegistrados;
-    }
-
-    /**
-     * @param listContratosRegistrados the listContratosRegistrados to set
-     */
-    public void setListContratosRegistrados(List<ContratoDto> listContratosRegistrados) {
-        this.listContratosRegistrados = listContratosRegistrados;
-    }
-
-    /**
      * @return the createByUser
      */
     public UsuarioDto getCreateByUser() {
@@ -137,6 +122,20 @@ public class ModalidadDto {
      */
     public void setEliminado(boolean eliminado) {
         this.eliminado = eliminado;
+    }
+
+    /**
+     * @return the listContratosRegistrados
+     */
+    public List<ContratoDto> getListContratosRegistrados() {
+        return listContratosRegistrados;
+    }
+
+    /**
+     * @param listContratosRegistrados the listContratosRegistrados to set
+     */
+    public void setListContratosRegistrados(List<ContratoDto> listContratosRegistrados) {
+        this.listContratosRegistrados = listContratosRegistrados;
     }
     
     

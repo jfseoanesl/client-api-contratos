@@ -1,0 +1,453 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<HBox fx:id="panelHbox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.gov.deajvpar.gestcontractclient.fx.controller.PanelContratosController">
+   <children>
+      <StackPane fx:id="stackPaneContrato" alignment="TOP_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="578.0" prefWidth="875.0">
+         <children>
+            <VBox fx:id="panelInfoGeneral" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="834.0" prefWidth="873.0" style="-fx-background-color: #E4E4E5;">
+               <children>
+                  <HBox prefHeight="44.0" prefWidth="1221.0">
+                     <children>
+                        <Pane prefHeight="66.0" prefWidth="1220.0">
+                           <children>
+                              <Label prefHeight="35.0" prefWidth="492.0" text="Registro de contratos">
+                                 <font>
+                                    <Font name="System Bold" size="22.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </Pane>
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="0.0" prefWidth="871.0" visible="false">
+                     <children>
+                        <Pane prefHeight="54.0" prefWidth="1200.0">
+                           <children>
+                              <VBox prefHeight="80.0" prefWidth="861.0">
+                                 <children>
+                                    <Label text="Id modalidad">
+                                       <font>
+                                          <Font size="17.0" />
+                                       </font>
+                                    </Label>
+                                    <TextField fx:id="txtIdUsuario" prefHeight="41.0" prefWidth="100.0" />
+                                 </children>
+                              </VBox>
+                           </children>
+                        </Pane>
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="0.0" prefWidth="1221.0">
+                     <children>
+                        <Pane prefHeight="126.0" prefWidth="860.0" />
+                     </children>
+                  </HBox>
+                  <Line endX="757.5858154296875" endY="1.5497207641601562E-6" startX="-100.0" stroke="#979393" strokeWidth="2.0" />
+                  <HBox prefHeight="690.0" prefWidth="853.0">
+                     <VBox.margin>
+                        <Insets top="20.0" />
+                     </VBox.margin>
+                     <children>
+                        <VBox prefHeight="721.0" prefWidth="840.0">
+                           <children>
+                              <HBox prefHeight="37.0" prefWidth="840.0" spacing="5.0">
+                                 <children>
+                                    <StackPane prefHeight="72.0" prefWidth="69.0">
+                                       <children>
+                                          <Circle fill="WHITE" radius="25.0" stroke="#db1f22" strokeType="INSIDE" strokeWidth="4.0" />
+                                          <Label style="-fx-background-color: #FFFFFF;" text="1" textFill="#db1f22">
+                                             <font>
+                                                <Font size="25.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </StackPane>
+                                    <StackPane prefHeight="72.0" prefWidth="69.0">
+                                       <children>
+                                          <Circle fill="WHITE" radius="25.0" stroke="#1e81dd" strokeType="INSIDE" strokeWidth="4.0" />
+                                          <Label style="-fx-background-color: #FFFFFF;" text="2" textFill="#1e81dd">
+                                             <font>
+                                                <Font size="25.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </StackPane>
+                                    <StackPane prefHeight="72.0" prefWidth="69.0">
+                                       <children>
+                                          <Circle fill="WHITE" radius="25.0" stroke="#1e81dd" strokeType="INSIDE" strokeWidth="4.0" />
+                                          <Label style="-fx-background-color: #FFFFFF;" text="3" textFill="#1e81dd">
+                                             <font>
+                                                <Font size="25.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </StackPane>
+                                    <Label alignment="CENTER" prefHeight="50.0" prefWidth="613.0" text="Informacion general del proceso">
+                                       <font>
+                                          <Font size="28.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </HBox>
+                              <HBox prefHeight="7.0" prefWidth="840.0" />
+                              <HBox prefHeight="66.0" prefWidth="840.0" spacing="10.0">
+                                 <children>
+                                    <VBox prefHeight="73.0" prefWidth="238.0">
+                                       <children>
+                                          <HBox prefHeight="11.0" prefWidth="238.0">
+                                             <children>
+                                                <Label text="No proceso: ">
+                                                   <font>
+                                                      <Font size="17.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label fx:id="lbErrorNoProceso" text=" (required)" textFill="#bc0909" visible="false">
+                                                   <font>
+                                                      <Font size="17.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                          </HBox>
+                                          <TextField fx:id="txtNoProceso" prefHeight="38.0" />
+                                       </children>
+                                    </VBox>
+                                    <VBox prefHeight="93.0" prefWidth="208.0">
+                                       <children>
+                                          <HBox prefHeight="0.0" prefWidth="208.0">
+                                             <children>
+                                                <Label text="Fecha apertura: ">
+                                                   <font>
+                                                      <Font size="17.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label fx:id="lbErrorFechaApertura" prefHeight="26.0" prefWidth="87.0" text=" (required)" textFill="#bc0909" visible="false">
+                                                   <font>
+                                                      <Font size="17.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                          </HBox>
+                                          <DatePicker fx:id="dpFechaApertura" onAction="#clickAperturaProceso" prefHeight="38.0" prefWidth="310.0" />
+                                       </children>
+                                    </VBox>
+                                    <VBox prefHeight="93.0" prefWidth="208.0">
+                                       <children>
+                                          <HBox prefHeight="0.0" prefWidth="208.0">
+                                             <children>
+                                                <Label text="Fecha inicio: ">
+                                                   <font>
+                                                      <Font size="17.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label fx:id="lbErrorFechaInicio" text=" (required)" textFill="#bc0909" visible="false">
+                                                   <font>
+                                                      <Font size="17.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                          </HBox>
+                                          <DatePicker fx:id="dpFechaInicio" prefHeight="38.0" prefWidth="310.0" />
+                                       </children>
+                                    </VBox>
+                                    <VBox prefHeight="66.0" prefWidth="157.0">
+                                       <children>
+                                          <HBox prefHeight="11.0" prefWidth="157.0">
+                                             <children>
+                                                <Label text="Vigencia: ">
+                                                   <font>
+                                                      <Font size="17.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label fx:id="lbErrorVigencia" text=" (required)" textFill="#bc0909" visible="false">
+                                                   <font>
+                                                      <Font size="17.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                          </HBox>
+                                          <TextField fx:id="txtVigencia" prefHeight="38.0" prefWidth="112.0" />
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </HBox>
+                              <HBox prefHeight="66.0" prefWidth="840.0" spacing="10.0">
+                                 <children>
+                                    <VBox prefHeight="73.0" prefWidth="238.0">
+                                       <children>
+                                          <HBox prefHeight="5.0" prefWidth="233.0">
+                                             <children>
+                                                <Label text="No contrato: ">
+                                                   <font>
+                                                      <Font size="17.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label fx:id="lbErrorNoContrato" prefHeight="26.0" prefWidth="133.0" text=" (required)" textFill="#bc0909" visible="false">
+                                                   <font>
+                                                      <Font size="17.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                          </HBox>
+                                          <TextField fx:id="txtNoContrato" prefHeight="38.0" />
+                                       </children>
+                                    </VBox>
+                                    <VBox prefHeight="73.0" prefWidth="603.0">
+                                       <children>
+                                          <HBox prefHeight="11.0" prefWidth="598.0">
+                                             <children>
+                                                <Label text="Tipo contrato:">
+                                                   <font>
+                                                      <Font size="17.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label fx:id="lbErrorTipoContrato" prefHeight="26.0" prefWidth="171.0" text=" (required)" textFill="#bc0909" visible="false">
+                                                   <font>
+                                                      <Font size="17.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                          </HBox>
+                                          <ComboBox fx:id="cmbTipoContrato" onAction="#eventClickTipoContrato" prefHeight="38.0" prefWidth="606.0" />
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </HBox>
+                              <HBox prefHeight="67.0" prefWidth="840.0" spacing="10.0">
+                                 <children>
+                                    <VBox prefHeight="73.0" prefWidth="576.0">
+                                       <children>
+                                          <HBox prefHeight="13.0" prefWidth="402.0">
+                                             <children>
+                                                <Label text="Modalidad:">
+                                                   <font>
+                                                      <Font size="17.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label fx:id="lbErrorModalidad" prefHeight="26.0" prefWidth="171.0" text=" (required)" textFill="#bc0909" visible="false">
+                                                   <font>
+                                                      <Font size="17.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                          </HBox>
+                                          <ComboBox fx:id="cmbModalidad" onAction="#eventoClickModalidad" prefHeight="38.0" prefWidth="606.0" />
+                                       </children>
+                                    </VBox>
+                                    <VBox prefHeight="73.0" prefWidth="603.0">
+                                       <children>
+                                          <HBox prefHeight="0.0" prefWidth="429.0">
+                                             <children>
+                                                <Label text="Submodalidad:">
+                                                   <font>
+                                                      <Font size="17.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label fx:id="lbErrorSubmodalidad" prefHeight="26.0" prefWidth="171.0" text=" (required)" textFill="#bc0909" visible="false">
+                                                   <font>
+                                                      <Font size="17.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                          </HBox>
+                                          <ComboBox fx:id="cmbSubmodalidad" onAction="#eventoClickSubmodaldiad" prefHeight="38.0" prefWidth="606.0" />
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </HBox>
+                              <HBox prefHeight="87.0" prefWidth="840.0" spacing="10.0">
+                                 <children>
+                                    <VBox prefHeight="112.0" prefWidth="840.0">
+                                       <children>
+                                          <HBox prefHeight="0.0" prefWidth="840.0">
+                                             <children>
+                                                <Label text="Objeto de contratacion:">
+                                                   <font>
+                                                      <Font size="17.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label fx:id="lbErrorObjeto" prefHeight="26.0" prefWidth="171.0" text=" (required)" textFill="#bc0909" visible="false">
+                                                   <font>
+                                                      <Font size="17.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                          </HBox>
+                                          <TextArea fx:id="txtObjetoContrato" prefHeight="59.0" prefWidth="840.0" wrapText="true" />
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </HBox>
+                              <HBox prefHeight="67.0" prefWidth="840.0" spacing="10.0">
+                                 <children>
+                                    <VBox prefHeight="73.0" prefWidth="238.0">
+                                       <children>
+                                          <HBox prefHeight="4.0" prefWidth="233.0">
+                                             <children>
+                                                <Label prefHeight="26.0" prefWidth="98.0" text="Cuantia: ">
+                                                   <font>
+                                                      <Font size="17.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label fx:id="lbErrorMonto" prefHeight="26.0" prefWidth="171.0" text=" (required)" textFill="#bc0909" visible="false">
+                                                   <font>
+                                                      <Font size="17.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                          </HBox>
+                                          <TextField fx:id="txtMontoContrato" prefHeight="38.0" />
+                                       </children>
+                                    </VBox>
+                                    <VBox prefHeight="73.0" prefWidth="603.0">
+                                       <children>
+                                          <HBox prefHeight="6.0" prefWidth="598.0">
+                                             <children>
+                                                <Label text="Direccion seccional:">
+                                                   <font>
+                                                      <Font size="17.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label fx:id="lbErrorDireccion" prefHeight="26.0" prefWidth="171.0" text=" (required)" textFill="#bc0909" visible="false">
+                                                   <font>
+                                                      <Font size="17.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                          </HBox>
+                                          <ComboBox fx:id="cmbDeaj" onAction="#eventoClickDeaj" prefHeight="38.0" prefWidth="606.0" />
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </HBox>
+                              <HBox prefHeight="67.0" prefWidth="840.0" spacing="10.0">
+                                 <children>
+                                    <VBox prefHeight="73.0" prefWidth="158.0">
+                                       <children>
+                                          <Label text="Duracion: ">
+                                             <font>
+                                                <Font size="17.0" />
+                                             </font>
+                                          </Label>
+                                          <Spinner fx:id="spinnerDuracion" prefHeight="38.0" />
+                                       </children>
+                                    </VBox>
+                                    <RadioButton fx:id="rbMeses" mnemonicParsing="false" prefHeight="96.0" prefWidth="87.0" selected="true" text="meses">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </RadioButton>
+                                    <RadioButton fx:id="rbAnios" mnemonicParsing="false" prefHeight="96.0" prefWidth="87.0" text="años">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </RadioButton>
+                                 </children>
+                              </HBox>
+                              <HBox prefHeight="133.0" prefWidth="840.0" spacing="10.0">
+                                 <children>
+                                    <VBox prefHeight="167.0" prefWidth="840.0">
+                                       <children>
+                                          <HBox prefHeight="9.0" prefWidth="840.0">
+                                             <children>
+                                                <Label text="Lugar de ejecucion:">
+                                                   <font>
+                                                      <Font size="17.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label fx:id="lbErrorLugar" prefHeight="26.0" prefWidth="171.0" text=" (required)" textFill="#bc0909" visible="false">
+                                                   <font>
+                                                      <Font size="17.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                          </HBox>
+                                          <HBox prefHeight="46.0" prefWidth="840.0" spacing="5.0">
+                                             <children>
+                                                <ComboBox fx:id="cmbDpto" onAction="#eventClickDpto" prefHeight="38.0" prefWidth="197.0" promptText="Dpto" />
+                                                <ComboBox fx:id="cmbCiudad" onAction="#eventoClickCiudad" prefHeight="38.0" prefWidth="207.0" promptText="Ciudad" />
+                                                <TextField fx:id="txtDireccion" prefHeight="38.0" prefWidth="379.0" promptText="Direccion" />
+                                                <Button fx:id="btnAddLugarEjecucion" mnemonicParsing="false" onAction="#eventClickAddLugarEjecucion" prefHeight="38.0" prefWidth="52.0" text="+" />
+                                             </children>
+                                          </HBox>
+                                          <ListView fx:id="listLugarEjecucion" onMouseClicked="#eventoClickListLugares" prefHeight="59.0" prefWidth="840.0" />
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </HBox>
+                              <HBox prefHeight="67.0" prefWidth="840.0" spacing="10.0">
+                                 <children>
+                                    <VBox prefHeight="93.0" prefWidth="840.0">
+                                       <children>
+                                          <HBox prefHeight="0.0" prefWidth="840.0">
+                                             <children>
+                                                <Label text="Enlace secop:">
+                                                   <font>
+                                                      <Font size="17.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label fx:id="lbErrorEnlace" prefHeight="26.0" prefWidth="171.0" text=" (required)" textFill="#bc0909" visible="false">
+                                                   <font>
+                                                      <Font size="17.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                          </HBox>
+                                          <TextField fx:id="txtEnlaceSecop" prefHeight="38.0" promptText="http(s)://" />
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+                  <Pane prefHeight="56.0" prefWidth="871.0">
+                     <children>
+                        <HBox alignment="TOP_RIGHT" prefHeight="45.0" prefWidth="843.0" spacing="10.0">
+                           <children>
+                              <Button fx:id="btnGuardar" mnemonicParsing="false" onAction="#guardarGeneral" prefHeight="45.0" prefWidth="139.0" style="-fx-background-color: #05993D;" text="Guardar" textFill="#fcf9f9">
+                                 <font>
+                                    <Font size="17.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="btnLimpiar" mnemonicParsing="false" onAction="#clickBtnLimpiar" prefHeight="45.0" prefWidth="140.0" style="-fx-background-color: #FBC432;" text="Limpiar" textFill="#fcf9f9">
+                                 <font>
+                                    <Font size="17.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="btnCancelar" mnemonicParsing="false" onAction="#clickBtnCancelar" prefHeight="45.0" prefWidth="139.0" style="-fx-background-color: #F7453D;" text="Cancelar" textFill="#fcf9f9">
+                                 <font>
+                                    <Font size="17.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                        </HBox>
+                     </children>
+                  </Pane>
+               </children>
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+            </VBox>
+         </children>
+      </StackPane>
+   </children>
+</HBox>

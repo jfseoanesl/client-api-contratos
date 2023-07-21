@@ -19,7 +19,7 @@ public class TipoContratoDto {
     private boolean eliminado;
 
     public TipoContratoDto() {
-        this.listContratos = new ArrayList();
+        //this.listContratos = new ArrayList();
         this.eliminado = false;
     }
 
@@ -61,14 +61,15 @@ public class TipoContratoDto {
      * @return the listContratos
      */
     public List<ContratoDto> getListContratos() {
-        return listContratos;
+       // return listContratos;
+       return null;
     }
 
     /**
      * @param listContratos the listContratos to set
      */
     public void setListContratos(List<ContratoDto> listContratos) {
-        this.listContratos = listContratos;
+//        this.listContratos = listContratos;
     }
 
     /**
@@ -101,6 +102,6 @@ public class TipoContratoDto {
 
     @Override
     public String toString() {
-        return "TipoContratoDto{" + "id=" + id + ", descripcion=" + descripcion + ", listContratos=" + listContratos + ", crateByuser=" + crateByuser + ", eliminado=" + eliminado + '}';
+        return "TipoContratoDto{" + "id=" + id + ", descripcion=" + descripcion +  ", crateByuser=" + crateByuser + ", eliminado=" + eliminado + '}';
     }
 }

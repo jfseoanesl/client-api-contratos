@@ -9,7 +9,6 @@ import co.gov.deajvpar.gestcontractclient.fx.dtos.*;
 import co.gov.deajvpar.gestcontractclient.fx.dtos.table.*;
 import co.gov.deajvpar.gestcontractclient.fx.logic.GestionRoles;
 import co.gov.deajvpar.gestcontractclient.fx.utility.*;
-import com.mashape.unirest.http.exceptions.UnirestException;
 import java.net.URL;
 import java.util.List;
 import java.util.Optional;
@@ -74,8 +73,6 @@ public class PanelRolesController implements Initializable, IFormController {
     @FXML
     private VBox panelListRoles, panelCrearRol;
 
-    @FXML
-    private Tab tabRoles;
     @FXML
     private StackPane stackPaneRoles;
     @FXML

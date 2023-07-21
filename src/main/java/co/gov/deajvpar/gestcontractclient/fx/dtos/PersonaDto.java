@@ -103,7 +103,7 @@ public class PersonaDto {
      * @return the sNombre
      */
     public String getsNombre() {
-        return sNombre;
+        return sNombre!=null?sNombre:"";
     }
 
     /**
@@ -131,7 +131,7 @@ public class PersonaDto {
      * @return the sApellido
      */
     public String getsApellido() {
-        return sApellido;
+        return sApellido!=null?sApellido:"";
     }
 
     /**
@@ -202,5 +202,17 @@ public class PersonaDto {
         return "PersonaDto{" + "idPersona=" + idPersona + ", tipoDocumento=" + tipoDocumento + ", noDocumento=" + noDocumento + ", listContratosSuscritos=" + listContratosSuscritos + ", pNombre=" + pNombre + ", sNombre=" + sNombre + ", pApellido=" + pApellido + ", sApellido=" + sApellido + ", tipoPersona=" + tipoPersona + ", genero=" + genero + ", fechaNacimiento=" + fechaNacimiento + ", nombreEmpresa=" + nombreEmpresa + '}';
     }
     
+    
+    public String getNombrePersona(){
+        String name="";
+        
+        if(TipoPersona.valueOf(this.tipoPersona)==TipoPersona.NATURAL){
+            return this.pNombre + " " + this.sNombre +  " " + this.pApellido + " " + this.sApellido;
+        }
+        else{
+            return this.nombreEmpresa;
+        }
+    
+    }
     
 }

@@ -180,5 +180,14 @@ public class UserDto {
         this.password = password;
     }
     
+    public String getDataSupervisor(){
+     
+        return this.datosPersona.getNoDocumento() + " - " +
+                this.datosPersona.getpNombre() + " "+
+                this.datosPersona.getsNombre() + " "+
+                this.datosPersona.getpApellido() + " "+
+                this.datosPersona.getsApellido() + " ";
+        
+    }
     
 }

@@ -9,6 +9,7 @@ co\gov\deajvpar\gestcontractclient\fx\data\CrudApiSetupAlerta.class
 co\gov\deajvpar\gestcontractclient\fx\data\CrudApiTipoDocumento.class
 co\gov\deajvpar\gestcontractclient\fx\controller\PanelUsuariosController.class
 co\gov\deajvpar\gestcontractclient\fx\data\CrudApiRoles.class
+co\gov\deajvpar\gestcontractclient\fx\logic\GestionFormPrincipal.class
 co\gov\deajvpar\gestcontractclient\fx\dtos\table\ModalidadTableDto.class
 co\gov\deajvpar\gestcontractclient\fx\data\CrudApiSubModalidad.class
 co\gov\deajvpar\gestcontractclient\fx\dtos\UsuarioDto.class
@@ -17,6 +18,7 @@ co\gov\deajvpar\gestcontractclient\fx\controller\PanelSetupAlertaController.clas
 co\gov\deajvpar\gestcontractclient\fx\controller\PanelDireccionEjecutivaController.class
 co\gov\deajvpar\gestcontractclient\fx\dtos\ModuloDto.class
 co\gov\deajvpar\gestcontractclient\fx\logic\GestionTipoContrato.class
+co\gov\deajvpar\gestcontractclient\fx\logic\GestionApp.class
 co\gov\deajvpar\gestcontractclient\fx\utility\Utility.class
 co\gov\deajvpar\gestcontractclient\fx\dtos\UserDto.class
 co\gov\deajvpar\gestcontractclient\fx\logic\GestionDpto.class
@@ -58,6 +60,7 @@ co\gov\deajvpar\gestcontractclient\fx\dtos\CiudadDto.class
 co\gov\deajvpar\gestcontractclient\fx\logic\GestionUsuarios.class
 co\gov\deajvpar\gestcontractclient\fx\dtos\TipoPersona.class
 co\gov\deajvpar\gestcontractclient\fx\dtos\TipoDocumentoDto.class
+co\gov\deajvpar\gestcontractclient\fx\logic\GestionInicializar.class
 co\gov\deajvpar\gestcontractclient\fx\dtos\PrivilegioDto.class
 co\gov\deajvpar\gestcontractclient\fx\dtos\PermisoUserDto.class
 co\gov\deajvpar\gestcontractclient\fx\logic\GestionTipoDocumento.class
@@ -68,6 +71,7 @@ co\gov\deajvpar\gestcontractclient\fx\dtos\InformeSupervisorDto.class
 co\gov\deajvpar\gestcontractclient\fx\logic\GestionDeaj.class
 co\gov\deajvpar\gestcontractclient\fx\data\CrudApiModalidad.class
 co\gov\deajvpar\gestcontractclient\fx\dtos\table\TipoContratoDtoTable.class
+co\gov\deajvpar\gestcontractclient\fx\logic\GestionLogin.class
 co\gov\deajvpar\gestcontractclient\fx\dtos\InicializarDto.class
 co\gov\deajvpar\gestcontractclient\fx\utility\MyGsonMapper.class
 co\gov\deajvpar\gestcontractclient\fx\utility\MyHttpApi.class

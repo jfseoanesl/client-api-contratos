@@ -15,6 +15,7 @@ public class DireccionSeccionalDto {
     private Long id;
     private String descripcionSeccional;
     private List<DptoDto> listDptoCoordinados;
+    private List<ContratoDto> listContratos;
     private UsuarioDto createdByUser;
     private boolean eliminado;
     private SetupAlertaDto setupAlerta;
@@ -54,14 +55,14 @@ public class DireccionSeccionalDto {
      * @return the idDireccion
      */
     public Long getIdDireccion() {
-        return id;
+        return getId();
     }
 
     /**
      * @param idDireccion the idDireccion to set
      */
     public void setIdDireccion(Long idDireccion) {
-        this.id = idDireccion;
+        this.setId(idDireccion);
     }
 
     /**
@@ -133,4 +134,34 @@ public class DireccionSeccionalDto {
     public void setSetupAlerta(SetupAlertaDto setupAlerta) {
         this.setupAlerta = setupAlerta;
     }
+
+    /**
+     * @return the id
+     */
+    public Long getId() {
+        return id;
+    }
+
+    /**
+     * @param id the id to set
+     */
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    /**
+     * @return the listContratos
+     */
+    public List<ContratoDto> getListContratos() {
+        return listContratos;
+    }
+
+    /**
+     * @param listContratos the listContratos to set
+     */
+    public void setListContratos(List<ContratoDto> listContratos) {
+        this.listContratos = listContratos;
+    }
+    
+    
 }
