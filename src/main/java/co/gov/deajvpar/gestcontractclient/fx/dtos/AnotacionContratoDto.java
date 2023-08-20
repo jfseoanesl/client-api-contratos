@@ -21,6 +21,13 @@ public class AnotacionContratoDto {
     public AnotacionContratoDto() {
     }
 
+    public AnotacionContratoDto(LocalDate fecha, String descripcion, UsuarioDto createByUser, ContratoDto contrato) {
+        this.fecha = fecha;
+        this.descripcion = descripcion;
+        this.createByUser = createByUser;
+        this.contrato = contrato;
+    }
+    
     /**
      * @return the id
      */
@@ -89,6 +96,11 @@ public class AnotacionContratoDto {
      */
     public void setContrato(ContratoDto contrato) {
         this.contrato = contrato;
+    }
+
+    @Override
+    public String toString() {
+        return "AnotacionContratoDto{" + "id=" + id + ", fecha=" + fecha + ", descripcion=" + descripcion + ", createByUser=" + createByUser + ", contrato=" + contrato + '}';
     }
 
     

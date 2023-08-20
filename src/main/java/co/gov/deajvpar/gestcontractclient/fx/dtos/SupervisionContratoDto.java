@@ -12,7 +12,7 @@ import java.time.LocalDate;
  */
 public class SupervisionContratoDto {
     
-    private Long idContrato, idSupervisor;
+    private Long idContrato, idSupervisor,idUserCreated;
     private LocalDate fechaAsignacion, fechaInicioEjecucion;
 
     public SupervisionContratoDto() {
@@ -80,6 +80,20 @@ public class SupervisionContratoDto {
      */
     public void setFechaInicioEjecucion(LocalDate fechaInicioEjecucion) {
         this.fechaInicioEjecucion = fechaInicioEjecucion;
+    }
+
+    /**
+     * @return the idUserCreated
+     */
+    public Long getIdUserCreated() {
+        return idUserCreated;
+    }
+
+    /**
+     * @param idUserCreated the idUserCreated to set
+     */
+    public void setIdUserCreated(Long idUserCreated) {
+        this.idUserCreated = idUserCreated;
     }
     
     

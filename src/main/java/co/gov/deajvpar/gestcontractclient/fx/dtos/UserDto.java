@@ -182,11 +182,12 @@ public class UserDto {
     
     public String getDataSupervisor(){
      
-        return this.datosPersona.getNoDocumento() + " - " +
-                this.datosPersona.getpNombre() + " "+
+        return  this.datosPersona.getpNombre() + " "+
                 this.datosPersona.getsNombre() + " "+
                 this.datosPersona.getpApellido() + " "+
-                this.datosPersona.getsApellido() + " ";
+                this.datosPersona.getsApellido() + " ( " +
+                this.datosPersona.getTipoDocumento().getDescripcion()+": "+
+                this.datosPersona.getNoDocumento() + " )";
         
     }
     

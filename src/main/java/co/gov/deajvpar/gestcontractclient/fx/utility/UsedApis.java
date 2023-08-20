@@ -11,8 +11,10 @@ package co.gov.deajvpar.gestcontractclient.fx.utility;
  */
 public interface UsedApis {
      
-     //String API_HOME = "http://34.29.79.246:8080";
-     String API_HOME = "http://localhost:8080";
+     //String API_HOME = "http://104.154.195.133:8080";
+     //String API_HOME ="https://api-deaj-uddrvivpvq-uc.a.run.app/";
+     String API_HOME ="https://api-deaj-interno-uddrvivpvq-uc.a.run.app/";
+     //String API_HOME = "http://localhost:8080";
      String API_HOME_INITIALIZE = API_HOME+"/initialize";
      
      String API_LOGIN = API_HOME + "/initLogin";
@@ -93,6 +95,12 @@ public interface UsedApis {
      String API_CONTRATO_REPORTING_BYMODALIDAD=API_CONTRATO +"/reporting/modalidad";
      String API_CONTRATO_REPORTING_BYESTADO=API_CONTRATO +"/reporting/estado";
      String API_CONTRATO_REPORTING_BYVIGENCIA=API_CONTRATO +"/reporting/vigencia";
+     
+     String API_ANOTACION = API_HOME + "/anotacion";
+     String API_ANOTACION_SAVE = API_ANOTACION + "/save";
+     String API_ANOTACION_EDIT = API_ANOTACION + "/edit";
+     String API_ANOTACION_LIST = API_ANOTACION + "/list";
+     String API_ANOTACION_DELETE = API_ANOTACION + "/delete";
      
      String API_DOG_CEO="https://dog.ceo/api/breeds/image/random";
      String API_DPTO_CIUDAD = "https://www.datos.gov.co/resource/xdk5-pm3f.json";

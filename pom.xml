@@ -11,6 +11,12 @@
     </properties>
     <dependencies>
         <dependency>
+            <groupId>org.controlsfx</groupId>
+            <artifactId>controlsfx</artifactId>
+            <version>11.1.2</version>
+        </dependency>
+
+        <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-controls</artifactId>
             <version>20</version>
@@ -57,8 +63,13 @@
                 <version>0.0.8</version>
                 <configuration>
                     <mainClass>co.gov.deajvpar.gestcontractclient.fx.MainLauncher</mainClass>
+                    <options>
+                        <option>--add-exports</option>
+                        <option>javafx.base/com.sun.javafx.event=ALL-UNNAMED</option>
+                    </options>
                 </configuration>
                 <executions>
+                    
                     <execution>
                         <!-- Default configuration for running -->
                         <!-- Usage: mvn clean javafx:run -->
@@ -72,8 +83,10 @@
                             <options>
                                 <option>-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=localhost:8000</option>
                             </options>
+                            
                         </configuration>
                     </execution>
+                    
                     <execution>
                         <!-- Configuration for automatic IDE debugging -->
                         <id>ide-debug</id>
@@ -133,6 +146,7 @@
                     </archive>
                 </configuration>
             </plugin>
+           
         </plugins>
     </build>
 </project>

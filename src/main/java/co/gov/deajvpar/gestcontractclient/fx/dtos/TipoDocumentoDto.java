@@ -104,6 +104,11 @@ public class TipoDocumentoDto {
         this.eliminado = eliminado;
     }
 
+    @Override
+    public String toString() {
+        return  descripcion ;
+    }
+
     
     
 }

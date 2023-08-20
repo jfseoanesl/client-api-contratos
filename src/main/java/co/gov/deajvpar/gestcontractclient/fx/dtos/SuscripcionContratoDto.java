@@ -16,6 +16,8 @@ public class SuscripcionContratoDto {
     private PersonaDto contratista;
     private LocalDate fechaAdjudicacion;
     private LocalDate fechaSuscripcion;
+    private Long userCreateId;
+
 
     public SuscripcionContratoDto() {
     }
@@ -88,6 +90,20 @@ public class SuscripcionContratoDto {
     @Override
     public String toString() {
         return "SuscripcionContratoDto{" + "contratoId=" + contratoId + ", contratista=" + contratista + ", fechaAdjudicacion=" + fechaAdjudicacion + ", fechaSuscripcion=" + fechaSuscripcion + '}';
+    }
+
+    /**
+     * @return the userCreateId
+     */
+    public Long getUserCreateId() {
+        return userCreateId;
+    }
+
+    /**
+     * @param userCreateId the userCreateId to set
+     */
+    public void setUserCreateId(Long userCreateId) {
+        this.userCreateId = userCreateId;
     }
     
     

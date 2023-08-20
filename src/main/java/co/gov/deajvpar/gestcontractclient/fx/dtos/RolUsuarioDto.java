@@ -110,7 +110,7 @@ public class RolUsuarioDto {
 
     @Override
     public String toString() {
-        return "RolUsuarioDto{" + "id=" + id + ", nombreRol=" + nombreRol + ", tipoUsuario=" + tipoUsuario + ", listPermisosUsuario=" + listPermisosUsuario + ", cratedByUser=" + cratedByUser + ", eliminado=" + eliminado + '}';
+        return this.nombreRol ;
     }
 
     /**

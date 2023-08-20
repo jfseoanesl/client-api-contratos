@@ -59,7 +59,7 @@
                                  <children>
                                     <Label text="Etapa contractual:" visible="false" />
                                     <ComboBox fx:id="cmpEtapaContrato" onAction="#clickComboEtapas" prefHeight="38.0" prefWidth="150.0" />
-                                    <ListView fx:id="listContratos" onInputMethodTextChanged="#listvChange" onMouseClicked="#clickListView" onSwipeDown="#moveDown" onSwipeUp="#moveUp" prefHeight="600.0" prefWidth="150.0" style="-fx-background-color: #E5E2E6;" VBox.vgrow="ALWAYS" />
+                                    <ListView fx:id="listContratos" onMouseClicked="#clickListView" prefHeight="600.0" prefWidth="150.0" style="-fx-background-color: #E5E2E6;" VBox.vgrow="ALWAYS" />
                                  </children>
                               </VBox>
                            </children>

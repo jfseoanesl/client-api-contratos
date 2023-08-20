@@ -16,6 +16,7 @@ C:\CursoSpring\Proyecto Api Deaj Vpar\Cliente GestContratDeaj-Fx\GestContractCli
 C:\CursoSpring\Proyecto Api Deaj Vpar\Cliente GestContratDeaj-Fx\GestContractClient-fx\src\main\java\co\gov\deajvpar\gestcontractclient\fx\dtos\ContratoDto.java
 C:\CursoSpring\Proyecto Api Deaj Vpar\Cliente GestContratDeaj-Fx\GestContractClient-fx\src\main\java\co\gov\deajvpar\gestcontractclient\fx\logic\GestionSupervisarContrato.java
 C:\CursoSpring\Proyecto Api Deaj Vpar\Cliente GestContratDeaj-Fx\GestContractClient-fx\src\main\java\co\gov\deajvpar\gestcontractclient\fx\controller\IFormController.java
+C:\CursoSpring\Proyecto Api Deaj Vpar\Cliente GestContratDeaj-Fx\GestContractClient-fx\src\main\java\co\gov\deajvpar\gestcontractclient\fx\logic\GestionSupervisor.java
 C:\CursoSpring\Proyecto Api Deaj Vpar\Cliente GestContratDeaj-Fx\GestContractClient-fx\src\main\java\co\gov\deajvpar\gestcontractclient\fx\dtos\BuscarPersonaDto.java
 C:\CursoSpring\Proyecto Api Deaj Vpar\Cliente GestContratDeaj-Fx\GestContractClient-fx\src\main\java\co\gov\deajvpar\gestcontractclient\fx\logic\GestionLogin.java
 C:\CursoSpring\Proyecto Api Deaj Vpar\Cliente GestContratDeaj-Fx\GestContractClient-fx\src\main\java\co\gov\deajvpar\gestcontractclient\fx\controller\FormPrincipalController.java
@@ -24,10 +25,12 @@ C:\CursoSpring\Proyecto Api Deaj Vpar\Cliente GestContratDeaj-Fx\GestContractCli
 C:\CursoSpring\Proyecto Api Deaj Vpar\Cliente GestContratDeaj-Fx\GestContractClient-fx\src\main\java\co\gov\deajvpar\gestcontractclient\fx\dtos\PermisoUserDto.java
 C:\CursoSpring\Proyecto Api Deaj Vpar\Cliente GestContratDeaj-Fx\GestContractClient-fx\src\main\java\co\gov\deajvpar\gestcontractclient\fx\dtos\table\ModalidadTableDto.java
 C:\CursoSpring\Proyecto Api Deaj Vpar\Cliente GestContratDeaj-Fx\GestContractClient-fx\src\main\java\co\gov\deajvpar\gestcontractclient\fx\logic\GestionFormPrincipal.java
+C:\CursoSpring\Proyecto Api Deaj Vpar\Cliente GestContratDeaj-Fx\GestContractClient-fx\src\main\java\co\gov\deajvpar\gestcontractclient\fx\controller\PanelSupervisoresController.java
 C:\CursoSpring\Proyecto Api Deaj Vpar\Cliente GestContratDeaj-Fx\GestContractClient-fx\src\main\java\co\gov\deajvpar\gestcontractclient\fx\dtos\DptoDto.java
 C:\CursoSpring\Proyecto Api Deaj Vpar\Cliente GestContratDeaj-Fx\GestContractClient-fx\src\main\java\co\gov\deajvpar\gestcontractclient\fx\utility\MyScreen.java
 C:\CursoSpring\Proyecto Api Deaj Vpar\Cliente GestContratDeaj-Fx\GestContractClient-fx\src\main\java\co\gov\deajvpar\gestcontractclient\fx\data\ICrudGeneric.java
 C:\CursoSpring\Proyecto Api Deaj Vpar\Cliente GestContratDeaj-Fx\GestContractClient-fx\src\main\java\co\gov\deajvpar\gestcontractclient\fx\logic\GestionCrearContrato.java
+C:\CursoSpring\Proyecto Api Deaj Vpar\Cliente GestContratDeaj-Fx\GestContractClient-fx\src\main\java\co\gov\deajvpar\gestcontractclient\fx\controller\PanelNovedadesController.java
 C:\CursoSpring\Proyecto Api Deaj Vpar\Cliente GestContratDeaj-Fx\GestContractClient-fx\src\main\java\co\gov\deajvpar\gestcontractclient\fx\controller\PanelRegistroSupervisorContratoController.java
 C:\CursoSpring\Proyecto Api Deaj Vpar\Cliente GestContratDeaj-Fx\GestContractClient-fx\src\main\java\co\gov\deajvpar\gestcontractclient\fx\data\CrudApiSetupAlerta.java
 C:\CursoSpring\Proyecto Api Deaj Vpar\Cliente GestContratDeaj-Fx\GestContractClient-fx\src\main\java\co\gov\deajvpar\gestcontractclient\fx\dtos\table\TipoContratoDtoTable.java
@@ -70,11 +73,14 @@ C:\CursoSpring\Proyecto Api Deaj Vpar\Cliente GestContratDeaj-Fx\GestContractCli
 C:\CursoSpring\Proyecto Api Deaj Vpar\Cliente GestContratDeaj-Fx\GestContractClient-fx\src\main\java\co\gov\deajvpar\gestcontractclient\fx\logic\GestionDashBoarContrato.java
 C:\CursoSpring\Proyecto Api Deaj Vpar\Cliente GestContratDeaj-Fx\GestContractClient-fx\src\main\java\co\gov\deajvpar\gestcontractclient\fx\logic\GestionInicializar.java
 C:\CursoSpring\Proyecto Api Deaj Vpar\Cliente GestContratDeaj-Fx\GestContractClient-fx\src\main\java\co\gov\deajvpar\gestcontractclient\fx\dtos\PersonaDto.java
+C:\CursoSpring\Proyecto Api Deaj Vpar\Cliente GestContratDeaj-Fx\GestContractClient-fx\src\main\java\co\gov\deajvpar\gestcontractclient\fx\data\CrudApiAnotacion.java
 C:\CursoSpring\Proyecto Api Deaj Vpar\Cliente GestContratDeaj-Fx\GestContractClient-fx\src\main\java\co\gov\deajvpar\gestcontractclient\fx\logic\GestionContrato.java
 C:\CursoSpring\Proyecto Api Deaj Vpar\Cliente GestContratDeaj-Fx\GestContractClient-fx\src\main\java\co\gov\deajvpar\gestcontractclient\fx\dtos\LoginDto.java
 C:\CursoSpring\Proyecto Api Deaj Vpar\Cliente GestContratDeaj-Fx\GestContractClient-fx\src\main\java\co\gov\deajvpar\gestcontractclient\fx\dtos\SupervisionContratoDto.java
+C:\CursoSpring\Proyecto Api Deaj Vpar\Cliente GestContratDeaj-Fx\GestContractClient-fx\src\main\java\co\gov\deajvpar\gestcontractclient\fx\utility\ComboBoxAutoComplete.java
 C:\CursoSpring\Proyecto Api Deaj Vpar\Cliente GestContratDeaj-Fx\GestContractClient-fx\src\main\java\co\gov\deajvpar\gestcontractclient\fx\dtos\EstadoContratoDto.java
 C:\CursoSpring\Proyecto Api Deaj Vpar\Cliente GestContratDeaj-Fx\GestContractClient-fx\src\main\java\co\gov\deajvpar\gestcontractclient\fx\dtos\UserDto.java
+C:\CursoSpring\Proyecto Api Deaj Vpar\Cliente GestContratDeaj-Fx\GestContractClient-fx\src\main\java\co\gov\deajvpar\gestcontractclient\fx\logic\GestionNovedades.java
 C:\CursoSpring\Proyecto Api Deaj Vpar\Cliente GestContratDeaj-Fx\GestContractClient-fx\src\main\java\co\gov\deajvpar\gestcontractclient\fx\controller\PanelSetupAlertaController.java
 C:\CursoSpring\Proyecto Api Deaj Vpar\Cliente GestContratDeaj-Fx\GestContractClient-fx\src\main\java\co\gov\deajvpar\gestcontractclient\fx\controller\PanelModalidadContratoController.java
 C:\CursoSpring\Proyecto Api Deaj Vpar\Cliente GestContratDeaj-Fx\GestContractClient-fx\src\main\java\co\gov\deajvpar\gestcontractclient\fx\utility\MyGsonMapper.java

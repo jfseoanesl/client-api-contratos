@@ -39,6 +39,7 @@ public class GestionSupervisarContrato {
 
         if (this.getContrato() != null && this.getContrato().getId() != null && this.getSupervisor() != null) {
             SupervisionContratoDto supervision = new SupervisionContratoDto(this.getContrato().getId(), this.getSupervisor().getId(), fechaDesignacion, fechaInicioEjecucion);
+            supervision.setIdUserCreated(this.sesion.getUser().getId());
             this.setContrato(this.apiData.supervisarContrato(supervision));
         }
 
@@ -55,7 +56,7 @@ public class GestionSupervisarContrato {
 
     public List<UserDto> getListSupervisores() {
         UserDto dto = new UserDto();
-        dto.setDireccionSeccional(this.sesion.getUserDeaj());
+        dto.setDireccionSeccional(this.contrato.getDireccion());
         this.supervisorList = this.apiSupervisor.getAll(dto);
         return this.supervisorList;
     }

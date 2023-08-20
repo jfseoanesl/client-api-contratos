@@ -38,6 +38,8 @@ public class GestionFormPrincipal {
     public static final String FXML_FORM_MODULE_CONTRATOS_CREAR = "PanelCrearContratos";
     public static final String FXML_FORM_MODULE_CONTRATOS_SUSCRIBIR = "PanelSuscribirContrato";
     public static final String FXML_FORM_MODULE_CONTRATOS_SUPERVISOR = "PanelRegistroSupervisorContrato";
+    public static final String FXML_FORM_MODULE_CONTRATOS_GESTION_SUPERVISOR = "PanelSupervisores";
+    public static final String FXML_FORM_MODULE_CONTRATOS_GESTION_NOVEDADES = "PanelNovedades";
     
     public final String menuTitlesAndIcon[][] = {
         {"Configuracion sistema", "configuracion.png", ModuloDto.CONFIGURACION.getName()},
@@ -171,6 +173,12 @@ public class GestionFormPrincipal {
                     break;
                 case 20:
                     this.setModulo(ModuloDto.CONTRATOS, root,  this.FXML_FORM_MODULE_CONTRATOS_CREAR);
+                    break;
+                case 21:
+                    this.setModulo(ModuloDto.CONTRATOS, root,  this.FXML_FORM_MODULE_CONTRATOS_GESTION_SUPERVISOR);
+                    break;  
+                case 22:
+                    this.setModulo(ModuloDto.CONTRATOS, root,  this.FXML_FORM_MODULE_CONTRATOS_GESTION_NOVEDADES);
                     break;
                 case -1:
                     int menu = this.getCodigoMenu(value);

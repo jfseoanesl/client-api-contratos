@@ -51,6 +51,7 @@ public class ContratoDto {
     private List<InformeSupervisorDto> listInformesSupervicion;
     private List<AnotacionContratoDto> listAnotacionesContrato;
     private boolean eliminado;
+    private Long idUserCreated;
 
     public ContratoDto() {
         this.estadoContrato = EstadoContratoDto.PLANEACION;
@@ -593,6 +594,25 @@ public class ContratoDto {
             }
         }
         return lugar;
+    }
+
+    @Override
+    public String toString() {
+        return "No contrato: " + noContrato + " - No Proceso: " + noProceso + " - Vigencia: " + aInicioVigencia ;
+    }
+
+    /**
+     * @return the idUserCreated
+     */
+    public Long getIdUserCreated() {
+        return idUserCreated;
+    }
+
+    /**
+     * @param idUserCreated the idUserCreated to set
+     */
+    public void setIdUserCreated(Long idUserCreated) {
+        this.idUserCreated = idUserCreated;
     }
     
     

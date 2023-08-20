@@ -168,20 +168,7 @@ public class DashBoardContratosController implements Initializable, IFormControl
 
     }
 
-    @FXML
-    public void moveUp(SwipeEvent e) {
-        this.limpiarFormulario();
-    }
-
-    @FXML
-    public void moveDown(SwipeEvent e) {
-        this.limpiarFormulario();
-    }
-
-    @FXML
-    public void listvChange() {
-        this.limpiarFormulario();
-    }
+   
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {

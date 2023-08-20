@@ -47,6 +47,7 @@ public class GestionSuscribirContrato {
             this.getPersona().setFechaNacimiento(nacimiento);
             this.getPersona().setNombreEmpresa(razonSocial);
             SuscripcionContratoDto suscripcionDto = new SuscripcionContratoDto(this.contrato.getId(), this.getPersona(), adjudicacion, suscripcion);
+            suscripcionDto.setUserCreateId(this.sesion.getUser().getId());
             this.contrato = this.apiData.suscribirContrato(suscripcionDto);
         }
 

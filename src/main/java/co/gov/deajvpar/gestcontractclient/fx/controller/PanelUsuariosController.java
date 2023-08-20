@@ -189,6 +189,27 @@ public class PanelUsuariosController implements Initializable, IFormController {
 
     @FXML
     private void actionEventBotonEliminarUsuario(ActionEvent e) {
+         UsuarioTableDto selected = this.tablaUsuarios.getSelectionModel().getSelectedItem();
+       
+        if (selected != null) {
+
+            Optional<ButtonType> result = MyScreen.confirmMessage(null, "Confirmacion", "Esta seguro de realizar la eliminacion?");
+            if (result.get() == ButtonType.OK) {
+
+                try {
+                    UserDto user = new UserDto();
+                    user.setId(selected.getId());
+                    this.logicUsuarios.delete(user);
+                    MyScreen.exitMessage();
+                    this.loadDatatTableUsuarios();
+
+                } catch (HttpResponseException ex) {
+                    MyScreen.errorMessage(ex.getCausa(), ex.getMessage());
+                }
+
+            }
+
+        }
 
     }
 
@@ -351,6 +372,8 @@ public class PanelUsuariosController implements Initializable, IFormController {
 
         this.txtBuscarUsuario.setDisable(!view);
         this.tablaUsuarios.setDisable(!view);
+       
+        this.btnBuscarPersona.setDisable(!create);
     }
 
     private void setDatosCmbTipoUser(ComboBox cmb) {

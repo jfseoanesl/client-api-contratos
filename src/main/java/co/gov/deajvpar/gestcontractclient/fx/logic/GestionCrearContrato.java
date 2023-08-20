@@ -54,6 +54,7 @@ public class GestionCrearContrato implements ICrudGeneric<ContratoDto> {
 
     @Override
     public ContratoDto save(ContratoDto obj) {
+        obj.setIdUserCreated(this.sesion.getUser().getId());
         return this.apiData.save(obj);
     }
 

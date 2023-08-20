@@ -162,6 +162,13 @@ public class DireccionSeccionalDto {
     public void setListContratos(List<ContratoDto> listContratos) {
         this.listContratos = listContratos;
     }
+
+    @Override
+    public String toString() {
+        return descripcionSeccional + " ("+this.id+")";
+    }
+    
+    
     
     
 }
