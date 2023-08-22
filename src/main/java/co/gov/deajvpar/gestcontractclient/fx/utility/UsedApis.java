@@ -12,8 +12,8 @@ package co.gov.deajvpar.gestcontractclient.fx.utility;
 public interface UsedApis {
      
      //String API_HOME = "http://104.154.195.133:8080";
-     //String API_HOME ="https://api-deaj-uddrvivpvq-uc.a.run.app/";
-     String API_HOME ="https://api-deaj-interno-uddrvivpvq-uc.a.run.app/";
+     //String API_HOME ="https://api-deaj-uddrvivpvq-uc.a.run.app/"; // cloud run - external
+     String API_HOME ="https://api-deaj-interno-uddrvivpvq-uc.a.run.app/"; // cloud run - internal
      //String API_HOME = "http://localhost:8080";
      String API_HOME_INITIALIZE = API_HOME+"/initialize";
      
